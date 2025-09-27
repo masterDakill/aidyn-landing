@@ -1,18 +1,25 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { Brain, Zap, TrendingUp, ChevronDown, Sparkles, ArrowRight, Droplets, Wifi, Radio, BarChart3, Network } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import DynamicImageGallery from './ImageManager/DynamicImageGallery'
+import Scene3DSimple from './3D/Scene3DSimple'
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
+  const [show3D, setShow3D] = useState(false)
+  const [currentImageId, setCurrentImageId] = useState('serena-care')
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 300], [0, -50])
   const opacity = useTransform(scrollY, [0, 200], [1, 0.8])
 
   useEffect(() => {
     setMounted(true)
+    // Activer 3D après 3 secondes
+    const timer = setTimeout(() => setShow3D(true), 3000)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -255,7 +262,7 @@ export default function Hero() {
             ))}
           </motion.div>
 
-          {/* Hero Image/Visual */}
+          {/* Hero Image/Visual avec integration 3D/AR */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -263,12 +270,71 @@ export default function Hero() {
             className="relative max-w-4xl mx-auto"
           >
             <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
-              <img
-                src="/images/Section_SerenaCare_AIDYN.png"
-                alt="SerenaCare - Système d'appel intelligent pour RPA Québec"
-                className="w-full h-auto object-contain"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-600/10 to-transparent rounded-3xl"></div>
+              {/* Toggle entre 2D et 3D */}
+              <div className="absolute top-4 left-4 z-10 flex gap-2">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShow3D(false)}
+                  className={`px-3 py-1 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    !show3D
+                      ? 'bg-primary-600 text-white shadow-glow'
+                      : 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30'
+                  }`}
+                >
+                  2D
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShow3D(true)}
+                  className={`px-3 py-1 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    show3D
+                      ? 'bg-primary-600 text-white shadow-glow'
+                      : 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30'
+                  }`}
+                >
+                  3D
+                </motion.button>
+              </div>
+
+              <AnimatePresence mode="wait">
+                {show3D ? (
+                  <motion.div
+                    key="3d"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.5 }}
+                    className="h-96"
+                  >
+                    <Scene3DSimple
+                      className="w-full h-full"
+                      interactive={true}
+                      showLogo={true}
+                      theme="light"
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="2d"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <DynamicImageGallery
+                      currentImageId={currentImageId}
+                      onImageChange={setCurrentImageId}
+                      category="product"
+                      showControls={true}
+                      className="w-full"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-600/10 to-transparent rounded-3xl pointer-events-none"></div>
             </div>
 
             {/* Floating elements around the image */}
