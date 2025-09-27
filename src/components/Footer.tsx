@@ -146,13 +146,13 @@ export default function Footer() {
               © 2024 AIDYN Technologies. Tous droits réservés.
             </div>
             <div className="flex items-center gap-6 text-sm">
-              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="#contact" className="text-gray-400 hover:text-white transition-colors">
                 Politique de confidentialité
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="#contact" className="text-gray-400 hover:text-white transition-colors">
                 Conditions d'utilisation
               </Link>
-              <Link href="/legal" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="#contact" className="text-gray-400 hover:text-white transition-colors">
                 Mentions légales
               </Link>
             </div>

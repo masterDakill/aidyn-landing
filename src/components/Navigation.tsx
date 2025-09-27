@@ -19,12 +19,12 @@ export default function Navigation() {
   }, [])
 
   const navItems = [
-    { href: '#rpa-solution', label: 'Solution RPA (Phase 1)' },
-    { href: '#features', label: 'Fonctionnalités' },
-    { href: '#integrations', label: 'Intégrations' },
-    { href: '#proof-kpi', label: 'Preuve & KPI' },
-    { href: '#grants', label: 'Subventions' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#rpa-solution', label: 'Solution RPA', description: 'Phase 1 disponible' },
+    { href: '#features', label: 'Fonctionnalités', description: 'Technologies IP67' },
+    { href: '#integrations', label: 'Intégrations', description: 'Réseau & conformité' },
+    { href: '#proof-kpi', label: 'Preuves & KPI', description: 'Résultats mesurables' },
+    { href: '#grants', label: 'Subventions', description: 'Québec & Canada' },
+    { href: '#contact', label: 'Contact', description: 'Démarrer projet' },
   ]
 
   return (
@@ -42,10 +42,10 @@ export default function Navigation() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-8 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-6 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/90 backdrop-blur-xl border-b border-gray-200/50 shadow-lg'
-            : 'bg-transparent'
+            ? 'bg-white/95 backdrop-blur-xl border border-gray-200/30 shadow-2xl rounded-2xl mx-4'
+            : 'bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl mx-4'
         }`}
       >
         <div className="container-max px-6 py-4">
@@ -85,10 +85,13 @@ export default function Navigation() {
                 >
                   <Link
                     href={item.href}
-                    className="nav-link"
+                    className="group relative nav-link"
                     onClick={() => setIsOpen(false)}
                   >
-                    {item.label}
+                    <span>{item.label}</span>
+                    <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10">
+                      {item.description}
+                    </div>
                   </Link>
                 </motion.div>
               ))}
@@ -174,7 +177,10 @@ export default function Navigation() {
                         onClick={() => setIsOpen(false)}
                         className="block py-3 px-4 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-200"
                       >
-                        {item.label}
+                        <div className="flex flex-col">
+                          <span className="font-semibold">{item.label}</span>
+                          <span className="text-sm text-gray-500">{item.description}</span>
+                        </div>
                       </Link>
                     </motion.div>
                   ))}

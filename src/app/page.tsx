@@ -40,7 +40,9 @@ export default function HomePage() {
         <section id="about">
           <About />
         </section>
-        <Roadmap />
+        <section id="roadmap">
+          <Roadmap />
+        </section>
         <section id="contact">
           <Contact />
         </section>

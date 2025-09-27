@@ -182,9 +182,16 @@ export default function Hero() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Link href="#grants" className="inline-flex items-center bg-white/80 backdrop-blur-sm border-2 border-gray-200 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:border-primary-300 hover:text-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl">
-                <TrendingUp className="w-5 h-5 mr-2" />
-                Dossier de subvention (PDF)
+              <Link href="#grants" className="group inline-flex items-center bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 text-blue-700 px-8 py-4 rounded-xl font-semibold text-lg hover:from-blue-100 hover:to-indigo-100 hover:border-blue-300 hover:text-blue-800 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20">
+                <TrendingUp className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                Dossier de subvention Québec
+                <motion.div
+                  animate={{ x: [0, 3, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="ml-2 opacity-60"
+                >
+                  🇨🇦
+                </motion.div>
               </Link>
             </motion.div>
           </motion.div>
@@ -209,7 +216,7 @@ export default function Hero() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.9 + index * 0.1, duration: 0.4 }}
                 whileHover={{ scale: 1.1 }}
-                className="flex flex-col items-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/30 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="flex flex-col items-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/30 shadow-modern hover:shadow-modern-lg transition-all duration-300"
               >
                 <item.icon className={`w-8 h-8 ${item.color} mb-2`} />
                 <span className="text-sm font-semibold text-gray-700 text-center">{item.label}</span>
@@ -235,7 +242,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ delay: 0.9 + stat.delay, duration: 0.5 }}
                 whileHover={{ scale: 1.05 }}
-                className="text-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="text-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 shadow-modern-lg hover:shadow-modern-xl shadow-glow-hover transition-all duration-300"
               >
                 <motion.div
                   className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-600 to-blue-600 bg-clip-text text-transparent mb-3"
