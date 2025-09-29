@@ -2,6 +2,11 @@ import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 import RpaSolution from '@/components/RpaSolution'
 import Features from '@/components/Features'
+import LiveStats from '@/components/Interactive/LiveStats'
+import RPASimulator from '@/components/Interactive/RPASimulator'
+import InteractiveTestimonials from '@/components/Interactive/InteractiveTestimonials'
+import InteractiveOnboarding from '@/components/Interactive/InteractiveOnboarding'
+import FloatingEngagement from '@/components/Interactive/FloatingEngagement'
 import Integrations from '@/components/Integrations'
 import ProofKpi from '@/components/ProofKpi'
 import Grants from '@/components/Grants'
@@ -25,11 +30,23 @@ export default function HomePage() {
         <section id="features">
           <Features />
         </section>
+        <section id="live-stats">
+          <LiveStats />
+        </section>
+        <section id="simulator">
+          <RPASimulator />
+        </section>
         <section id="integrations">
           <Integrations />
         </section>
+        <section id="testimonials">
+          <InteractiveTestimonials />
+        </section>
         <section id="proof-kpi">
           <ProofKpi />
+        </section>
+        <section id="onboarding">
+          <InteractiveOnboarding />
         </section>
         <section id="grants">
           <Grants />
@@ -48,6 +65,7 @@ export default function HomePage() {
         </section>
         <Footer />
       </main>
+      <FloatingEngagement />
     </>
   )
 }
