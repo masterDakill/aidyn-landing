@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Brain, Zap, ArrowRight } from 'lucide-react'
+import { Menu, X, Zap, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -56,10 +57,13 @@ export default function Navigation() {
               className="flex items-center space-x-3"
             >
               <div className="relative">
-                <img
+                <Image
                   src="/images/Identit_de_Marque_Complte_AIDYN_Technologies.png"
                   alt="AIDYN Technologies Logo"
+                  width={160}
+                  height={40}
                   className="h-10 w-auto object-contain"
+                  priority
                 />
                 <motion.div
                   animate={{ scale: [1, 1.2, 1] }}

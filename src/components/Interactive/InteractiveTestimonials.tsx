@@ -1,10 +1,10 @@
 'use client'
 
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
 import {
   Star, Quote, ChevronLeft, ChevronRight, MapPin, Clock,
-  Award, TrendingUp, Users, Heart, Shield, Zap
+  Award, TrendingUp, Users, Heart, Shield
 } from 'lucide-react'
 
 interface Testimonial {
@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
     location: 'Québec, QC',
     avatar: '👩‍⚕️',
     rating: 5,
-    quote: "AIDYN a transformé notre approche des urgences. Le temps de réponse est passé de 8 minutes à moins de 2 minutes. C'est révolutionnaire pour la sécurité de nos résidents.",
+    quote: "AIDYN a transformé notre approche des urgences. Le temps de réponse est passé de 8 minutes à moins de 2 minutes. C’est révolutionnaire pour la sécurité de nos résidents.",
     results: [
       { metric: 'Temps de réponse', value: '1.8 min', improvement: '-75%' },
       { metric: 'Satisfaction', value: '98%', improvement: '+23%' },
@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     location: 'Sherbrooke, QC',
     avatar: '👨‍💼',
     rating: 5,
-    quote: "L'investissement s'est amorti en 8 mois. Les économies sur les coûts opérationnels et l'amélioration de la qualité de service sont remarquables.",
+    quote: "L’investissement s’est amorti en 8 mois. Les économies sur les coûts opérationnels et l’amélioration de la qualité de service sont remarquables.",
     results: [
       { metric: 'ROI', value: '340%', improvement: '+240%' },
       { metric: 'Coûts', value: '-$280K', improvement: '-32%' },
@@ -102,7 +102,6 @@ const metrics = [
 
 function TestimonialCard({ testimonial, isActive }: { testimonial: Testimonial, isActive: boolean }) {
   const [isFlipped, setIsFlipped] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const cardRef = useRef<HTMLDivElement>(null)
 
   const mouseX = useMotionValue(0)
@@ -172,7 +171,7 @@ function TestimonialCard({ testimonial, isActive }: { testimonial: Testimonial, 
             <div className="flex-1 relative">
               <Quote className="absolute -top-2 -left-2 w-8 h-8 text-primary-200" />
               <p className="text-gray-700 leading-relaxed italic pl-6">
-                "{testimonial.quote}"
+                “{testimonial.quote}”
               </p>
             </div>
 

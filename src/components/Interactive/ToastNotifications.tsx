@@ -1,10 +1,18 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect, createContext, useContext, ReactNode } from 'react'
+import {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+  type ReactNode,
+  type ComponentType
+} from 'react'
+import type { SVGProps } from 'react'
 import {
   CheckCircle, AlertCircle, Info, X, Clock, Users, TrendingUp,
-  Star, Award, Zap, Phone, Calendar, Download
+  Star, Phone, Calendar, Download
 } from 'lucide-react'
 
 interface Toast {
@@ -13,7 +21,7 @@ interface Toast {
   title: string
   message: string
   duration?: number
-  icon?: React.ComponentType<any>
+  icon?: ComponentType<SVGProps<SVGSVGElement>>
   action?: {
     label: string
     onClick: () => void
@@ -173,7 +181,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       {
         type: 'success' as const,
         title: '⚡ Performance exceptionnelle',
-        message: 'Nos clients voient 75% d\'amélioration du temps de réponse!',
+        message: 'Nos clients voient 75% d’amélioration du temps de réponse!',
         icon: TrendingUp,
         duration: 5000,
         action: {
@@ -184,7 +192,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       {
         type: 'info' as const,
         title: '🎯 Témoignage client',
-        message: '"AIDYN a révolutionné notre approche des urgences" - Dr. Bouchard',
+        message: '“AIDYN a révolutionné notre approche des urgences” - Dr. Bouchard',
         icon: Star,
         duration: 7000,
         action: {

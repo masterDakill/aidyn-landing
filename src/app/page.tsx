@@ -15,6 +15,7 @@ import About from '@/components/About'
 import Roadmap from '@/components/Roadmap'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import PhaseOne from '@/components/PhaseOne'
 
 export default function HomePage() {
   return (
@@ -29,6 +30,9 @@ export default function HomePage() {
         </section>
         <section id="features">
           <Features />
+        </section>
+        <section id="phase-1">
+          <PhaseOne />
         </section>
         <section id="live-stats">
           <LiveStats />

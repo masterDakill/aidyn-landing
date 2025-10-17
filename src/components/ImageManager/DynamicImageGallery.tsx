@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Grid, Maximize2, X, Edit3, Image as ImageIcon } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Grid, X, Edit3, Image as ImageIcon } from 'lucide-react'
 import Image from 'next/image'
 
 interface ImageAsset {
