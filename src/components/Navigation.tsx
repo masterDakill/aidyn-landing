@@ -1,9 +1,21 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Brain, Zap, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import clsx from 'clsx'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, ArrowRight } from 'lucide-react'
+
+import Logo from './Logo'
+
+const navItems = [
+  { href: '#rpa-solution', label: 'Solution RPA', description: 'Kit edge + cloud' },
+  { href: '#features', label: 'Fonctionnalités', description: 'Détection multimodale' },
+  { href: '#phase-1', label: 'Phase 1', description: '2025 – Pilote Auberge Boischatel' },
+  { href: '#integrations', label: 'Intégrations', description: 'Twilio · Slack · EHR' },
+  { href: '#proof-kpi', label: 'Preuves & KPI', description: 'Objectifs ≥95 %' },
+  { href: '#contact', label: 'Contact', description: 'Rencontrer l’équipe' }
+]
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -11,201 +23,115 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      setScrolled(window.scrollY > 40)
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navItems = [
-    { href: '#rpa-solution', label: 'Solution RPA', description: 'Phase 1 disponible' },
-    { href: '#features', label: 'Fonctionnalités', description: 'Technologies IP67' },
-    { href: '#integrations', label: 'Intégrations', description: 'Réseau & conformité' },
-    { href: '#proof-kpi', label: 'Preuves & KPI', description: 'Résultats mesurables' },
-    { href: '#grants', label: 'Subventions', description: 'Québec & Canada' },
-    { href: '#contact', label: 'Contact', description: 'Démarrer projet' },
-  ]
+  const containerClasses = clsx(
+    'mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border px-4 py-3 shadow-lg transition-all duration-300 sm:px-6',
+    scrolled
+      ? 'border-white/70 bg-white/95 text-slate-900 shadow-xl backdrop-blur-xl'
+      : 'border-white/15 bg-slate-950/60 text-white shadow-black/20 backdrop-blur-lg'
+  )
+
+  const linkClasses = clsx(
+    'text-sm font-semibold transition-colors duration-200',
+    scrolled ? 'text-slate-600 hover:text-slate-900' : 'text-slate-200 hover:text-white'
+  )
+
+  const descriptionClasses = clsx('text-xs font-medium', scrolled ? 'text-slate-400' : 'text-slate-400/80')
 
   return (
-    <div>
-      {/* Bandeau FR-CA */}
-      <div className="bg-primary-700 text-white py-1 text-center text-sm">
-        <span className="inline-flex items-center space-x-2">
-          <span>🇨🇦</span>
-          <span>Solution dédiée aux RPA du Québec</span>
-          <span>•</span>
-          <span>Conformité provinciale</span>
-        </span>
+    <header className="fixed inset-x-0 top-0 z-50 flex flex-col items-center gap-2 px-4 pt-3 sm:pt-4">
+      <div className="flex w-full justify-center">
+        <div className="flex items-center gap-2 rounded-full bg-slate-950/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-slate-200 shadow-lg backdrop-blur">
+          <span>Phase 1</span>
+          <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          <span>Auberge Boischatel 2025–2026</span>
+        </div>
       </div>
 
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-6 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white/95 backdrop-blur-xl border border-gray-200/30 shadow-2xl rounded-2xl mx-4'
-            : 'bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl mx-4'
-        }`}
-      >
-        <div className="container-max px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center space-x-3"
-            >
-              <div className="relative">
-                <img
-                  src="/images/Identit_de_Marque_Complte_AIDYN_Technologies.png"
-                  alt="AIDYN Technologies Logo"
-                  className="h-10 w-auto object-contain"
-                />
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
-                >
-                  <div className="w-full h-full bg-green-400 rounded-full animate-ping"></div>
-                </motion.div>
-              </div>
-              <span className="text-xl font-bold text-gray-900">
-                AIDYN <span className="text-primary-600">Technologies</span>
-              </span>
-            </motion.div>
+      <motion.nav initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="w-full px-0">
+        <div className={containerClasses}>
+          <Link href="#hero" className="inline-flex items-center gap-3" onClick={() => setIsOpen(false)}>
+            <Logo variant={scrolled ? 'light' : 'dark'} className="hidden sm:inline-flex" />
+            <Logo variant={scrolled ? 'light' : 'dark'} compact className="sm:hidden" />
+          </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              {navItems.map((item, index) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    href={item.href}
-                    className="group relative nav-link"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <span>{item.label}</span>
-                    <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10">
-                      {item.description}
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* CTA Button */}
-            <div className="hidden md:flex">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Link
-                  href="#contact"
-                  className="group inline-flex items-center bg-gradient-to-r from-primary-600 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <Zap className="w-4 h-4 mr-2" />
-                  Commencer
-                  <motion.div
-                    animate={{ x: [0, 3, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </motion.div>
-                </Link>
-              </motion.div>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <AnimatePresence mode="wait">
-                {isOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: 0 }}
-                    animate={{ rotate: 180 }}
-                    exit={{ rotate: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="w-6 h-6 text-gray-700" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 180 }}
-                    animate={{ rotate: 0 }}
-                    exit={{ rotate: 180 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="w-6 h-6 text-gray-700" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
+          <div className="hidden items-center gap-8 lg:flex">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href} className="group flex flex-col gap-0.5" onClick={() => setIsOpen(false)}>
+                <span className={linkClasses}>{item.label}</span>
+                <span className={clsx(descriptionClasses, 'transition-colors duration-200 group-hover:text-emerald-400')}>
+                  {item.description}
+                </span>
+              </Link>
+            ))}
           </div>
 
-          {/* Mobile Navigation */}
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="md:hidden mt-4 overflow-hidden"
-              >
-                <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-gray-200/50 shadow-xl p-6 space-y-4">
-                  {navItems.map((item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className="block py-3 px-4 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-200"
-                      >
-                        <div className="flex flex-col">
-                          <span className="font-semibold">{item.label}</span>
-                          <span className="text-sm text-gray-500">{item.description}</span>
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
+          <div className="hidden lg:flex">
+            <Link
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-900/20 transition-transform duration-200 hover:translate-y-[-1px] hover:shadow-xl"
+            >
+              Planifier une démo
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="pt-4 border-t border-gray-200"
-                  >
-                    <Link
-                      href="#contact"
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center justify-center bg-gradient-to-r from-primary-600 to-blue-600 text-white py-3 px-6 rounded-xl font-semibold shadow-lg w-full"
-                    >
-                      <Zap className="w-4 h-4 mr-2" />
-                      Commencer votre projet
-                    </Link>
-                  </motion.div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <button
+            type="button"
+            onClick={() => setIsOpen((value) => !value)}
+            className="inline-flex items-center justify-center rounded-xl border border-white/15 p-2 text-slate-200 transition-colors duration-200 hover:border-white/40 hover:text-white lg:hidden"
+            aria-label={isOpen ? 'Fermer la navigation' : 'Ouvrir la navigation'}
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25 }}
+              className={clsx(
+                'mx-auto mt-3 w-full max-w-6xl overflow-hidden rounded-2xl border px-4 py-4 shadow-xl sm:px-6',
+                scrolled
+                  ? 'border-white/70 bg-white/95 text-slate-900 backdrop-blur-xl'
+                  : 'border-white/15 bg-slate-950/80 text-white backdrop-blur-lg'
+              )}
+            >
+              <nav className="flex flex-col gap-2">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="rounded-xl px-4 py-3 text-base font-semibold transition-colors duration-200 hover:bg-slate-900/80 hover:text-white"
+                  >
+                    <span className="block">{item.label}</span>
+                    <span className="block text-sm text-slate-400">{item.description}</span>
+                  </Link>
+                ))}
+
+                <Link
+                  href="#contact"
+                  onClick={() => setIsOpen(false)}
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 shadow-lg"
+                >
+                  Planifier une démo
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
-    </div>
+    </header>
   )
 }

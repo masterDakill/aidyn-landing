@@ -1,53 +1,45 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { 
-  Bot, 
-  BarChart3, 
-  Shield, 
-  Zap, 
-  Database, 
-  Smartphone,
-  ArrowRight 
-} from 'lucide-react'
+import { AlertTriangle, Bot, Layers, Radar, Shield, Waves } from 'lucide-react'
 
-const features = [
+const featureBlocks = [
+  {
+    icon: Radar,
+    title: 'Détection de chutes & immobilité',
+    description: 'Modèles YOLOv8 pose et logique d’urgence pour déclencher une assistance immédiate.',
+    accent: 'from-cyan-500 to-sky-600'
+  },
+  {
+    icon: Waves,
+    title: 'Analyse audio de détresse',
+    description: 'Modèle Whisper optimisé edge pour reconnaître cris et appels à l’aide en moins de 5 secondes.',
+    accent: 'from-blue-500 to-indigo-600'
+  },
   {
     icon: Shield,
-    title: 'IP67 Waterproof',
-    description: 'Sécurité maximale - Usage sécuritaire dans la douche et le bain. Résistance totale à l\'eau et à l\'humidité.',
-    color: 'from-blue-500 to-purple-600'
+    title: 'Protection des données',
+    description: 'Chiffrement, anonymisation et journalisation des accès pour respecter vie privée et conformité.',
+    accent: 'from-emerald-500 to-teal-600'
   },
   {
-    icon: Zap,
-    title: 'Double connectivité Wi-Fi + RF 433 MHz',
-    description: 'Fiabilité 24/7 - Redondance en cas de panne réseau. Fonctionnement garanti même sans Internet.',
-    color: 'from-green-500 to-teal-600'
+    icon: AlertTriangle,
+    title: 'Escalade intelligente',
+    description: 'Alertes temps réel via SMS, Slack et tableau de bord avec scénarios personnalisables par établissement.',
+    accent: 'from-purple-500 to-fuchsia-600'
   },
   {
-    icon: Database,
-    title: 'MQTT Compatible',
-    description: 'Interopérabilité - Intégration facile aux systèmes existants et supervision centralisée.',
-    color: 'from-orange-500 to-red-600'
-  },
-  {
-    icon: BarChart3,
-    title: 'Tableau de bord temps réel',
-    description: 'Visibilité totale - Alertes instantanées, logs complets, statut des appareils en permanence.',
-    color: 'from-purple-500 to-pink-600'
+    icon: Layers,
+    title: 'Architecture hybride edge/cloud',
+    description: 'Modules Jetson pour le traitement local, FastAPI + PostgreSQL/Redis pour la centralisation sécurisée.',
+    accent: 'from-slate-500 to-slate-700'
   },
   {
     icon: Bot,
-    title: 'Intégration réseau RPA',
-    description: 'Conformité réseau - VLAN VoIP, QoS/DSCP optimisé, isolation invités/IoT selon les normes.',
-    color: 'from-indigo-500 to-blue-600'
-  },
-  {
-    icon: Smartphone,
-    title: 'Technologies futures (Phase 2)',
-    description: 'En développement - Assistant IA vocal, analyse prédictive, interfaces multimédia avancées.',
-    color: 'from-yellow-500 to-orange-600'
-  },
+    title: 'Préparation Phase 2',
+    description: 'Base technique prête pour assistant vocal, analytics avancée et certifications CE/RoHS.',
+    accent: 'from-amber-500 to-orange-600'
+  }
 ]
 
 export default function Features() {
@@ -55,123 +47,36 @@ export default function Features() {
     <section id="features" className="section-padding bg-white">
       <div className="container-max">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mx-auto max-w-3xl text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Fonctionnalités
-            <span className="text-gradient"> techniques</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Technologies éprouvées pour la Phase 1 RPA avec vision d'évolution vers l'intelligence artificielle avancée.
+          <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">Fondations techniques de la Phase 1</h2>
+          <p className="mt-4 text-lg text-slate-600">
+            Chaque fonctionnalité s’aligne sur la feuille de route 2025-2026 : fiabilité terrain, conformité et évolutivité.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {featureBlocks.map((feature) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
+              key={feature.title}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.4 }}
               viewport={{ once: true }}
-              className="group relative p-8 bg-white rounded-2xl shadow-lg border border-gray-100 card-hover"
+              className="group relative rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
             >
-              {/* Gradient background on hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-              
-              <div className="relative">
-                {/* Icon */}
-                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${feature.color} mb-6`}>
-                  <feature.icon className="w-6 h-6 text-white" />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-bold mb-4 group-hover:text-primary-600 transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  {feature.description}
-                </p>
-
-                {/* Learn more link */}
-                <div className="flex items-center text-primary-600 font-medium group-hover:text-primary-700 transition-colors">
-                  <span className="mr-2">En savoir plus</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
+              <div className={`inline-flex items-center justify-center rounded-2xl bg-gradient-to-br ${feature.accent} p-3 text-white`}>
+                <feature.icon className="h-6 w-6" />
               </div>
+              <h3 className="mt-5 text-xl font-semibold text-slate-900">{feature.title}</h3>
+              <p className="mt-3 text-sm text-slate-600">{feature.description}</p>
             </motion.div>
           ))}
         </div>
-
-        {/* Data Visualization Showcase */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">
-              Visualisation de données
-              <span className="text-gradient"> avancée</span>
-            </h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Nos interfaces intuitives transforment les données complexes en insights actionables pour optimiser vos décisions d'investissement.
-            </p>
-          </div>
-
-          <div className="relative bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-8 md:p-12 overflow-hidden">
-            <img
-              src="/images/AIDYN_Data_Viz_-_Export_Transparent.png"
-              alt="AIDYN Data Visualization Dashboard"
-              className="w-full h-auto object-contain mx-auto max-w-4xl"
-            />
-
-            {/* Floating badges */}
-            <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-8 left-8 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 shadow-lg border border-white/50"
-            >
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm font-semibold text-gray-700">Données en temps réel</span>
-              </div>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute bottom-8 right-8 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 shadow-lg border border-white/50"
-            >
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-semibold text-gray-700">IA Analytics</span>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <p className="text-lg text-gray-600 mb-8">
-            Prêt à transformer votre business immobilier avec l'IA ?
-          </p>
-          <a href="#contact" className="btn-primary">
-            Planifier une démonstration
-          </a>
-        </motion.div>
       </div>
     </section>
   )

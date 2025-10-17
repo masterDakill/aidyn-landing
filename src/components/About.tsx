@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { CheckCircle, Award, Users, Calendar } from 'lucide-react'
+import { CheckCircle, Users, Calendar } from 'lucide-react'
 import Image from 'next/image'
 
 export default function About() {
@@ -23,7 +23,7 @@ export default function About() {
               </span>
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Spécialisés dans les systèmes d'appel d'urgence pour établissements RPA du Québec.
+              Spécialisés dans les systèmes d’appel d’urgence pour établissements RPA du Québec.
               Expertise technique et connaissance du marché pour des solutions fiables et conformes.
             </p>
             
@@ -32,7 +32,7 @@ export default function About() {
               <div className="flex items-start gap-4">
                 <CheckCircle className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h4 className="font-semibold mb-1">Phase 1 - Système d'appel</h4>
+                  <h4 className="font-semibold mb-1">Phase 1 - Système d’appel</h4>
                   <p className="text-gray-600">Solution complète avec boutons IP67 et surveillance 24/7</p>
                 </div>
               </div>
@@ -47,7 +47,7 @@ export default function About() {
                 <CheckCircle className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
                 <div>
                   <h4 className="font-semibold mb-1">Évolution future</h4>
-                  <p className="text-gray-600">Roadmap IA avancée et expansion vers d'autres secteurs</p>
+                  <p className="text-gray-600">Roadmap IA avancée et expansion vers d’autres secteurs</p>
                 </div>
               </div>
             </div>
@@ -79,10 +79,13 @@ export default function About() {
               viewport={{ once: true }}
               className="relative"
             >
-              <img
+              <Image
                 src="/images/AIDYN_Badges_Confiance_-_Export.png"
                 alt="AIDYN Badges de Confiance - Technologies fiables"
+                width={640}
+                height={640}
                 className="w-full max-w-md h-auto object-contain"
+                priority
               />
             </motion.div>
           </motion.div>

@@ -20,14 +20,12 @@ function SimpleFloatingBox() {
 // Composant principal de scène 3D simplifiée
 interface Scene3DSimpleProps {
   className?: string
-  interactive?: boolean
   showLogo?: boolean
   theme?: 'light' | 'dark'
 }
 
 export default function Scene3DSimple({
   className = "w-full h-96",
-  interactive = true,
   showLogo = true,
   theme = 'light'
 }: Scene3DSimpleProps) {

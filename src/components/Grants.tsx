@@ -20,20 +20,20 @@ const grantTypes = [
   {
     icon: Heart,
     title: 'Santé et Services sociaux',
-    description: 'Programmes d\'innovation pour l\'amélioration des soins en RPA',
-    amount: 'Jusqu\'à 150 000$'
+    description: 'Programmes d’innovation pour l’amélioration des soins en RPA',
+    amount: 'Jusqu’à 150 000$'
   },
   {
     icon: Lightbulb,
     title: 'Innovation technologique',
     description: 'Soutien aux solutions IA et IoT dans le secteur de la santé',
-    amount: 'Jusqu\'à 100 000$'
+    amount: 'Jusqu’à 100 000$'
   },
   {
     icon: Users,
     title: 'Amélioration des conditions',
     description: 'Financement pour la sécurité et le bien-être des résidents',
-    amount: 'Jusqu\'à 75 000$'
+    amount: 'Jusqu’à 75 000$'
   }
 ]
 
@@ -46,12 +46,12 @@ const supportServices = [
   {
     icon: Users,
     title: 'Intégration technique',
-    description: 'Accompagnement de A à Z pour l\'implémentation'
+    description: 'Accompagnement de A à Z pour l’implémentation'
   },
   {
     icon: Award,
     title: 'Évaluation post-déploiement',
-    description: 'Mesure des résultats et rapport d\'impact'
+    description: 'Mesure des résultats et rapport d’impact'
   }
 ]
 
@@ -73,11 +73,11 @@ export default function Grants() {
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Financement pour votre
-            <span className="text-gradient block">projet d'innovation</span>
+            <span className="text-gradient block">projet d’innovation</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Profitez des programmes gouvernementaux dédiés à l'innovation en santé
-            et aux technologies d'assistance pour financer votre déploiement AIDYN.
+            Profitez des programmes gouvernementaux dédiés à l’innovation en santé
+            et aux technologies d’assistance pour financer votre déploiement AIDYN.
           </p>
         </motion.div>
 
@@ -119,7 +119,7 @@ export default function Grants() {
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Notre équipe prépare un dossier complet adapté aux exigences québécoises
-              pour maximiser vos chances d'obtention.
+              pour maximiser vos chances d’obtention.
             </p>
           </div>
 
@@ -188,7 +188,7 @@ export default function Grants() {
                   <p className="text-gray-600 leading-relaxed">{service.description}</p>
                   <div className="flex items-center mt-3 text-primary-600">
                     <CheckCircle className="w-4 h-4 mr-1" />
-                    <span className="text-sm font-medium">Inclus dans l'offre</span>
+                    <span className="text-sm font-medium">Inclus dans l’offre</span>
                   </div>
                 </div>
               </motion.div>
