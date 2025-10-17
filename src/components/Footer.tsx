@@ -1,13 +1,4 @@
-import { 
-  Brain, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Linkedin, 
-  Twitter,
-  Github,
-  ExternalLink
-} from 'lucide-react'
+import { Brain, Mail, Linkedin, Twitter, Github, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Footer() {
@@ -25,7 +16,7 @@ export default function Footer() {
               <span className="text-2xl font-bold">AIDYN</span>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Solutions d'intelligence artificielle pour révolutionner 
+              Solutions d’intelligence artificielle pour révolutionner
               votre business immobilier et maximiser vos investissements.
             </p>
             <div className="flex items-center gap-4">
@@ -59,7 +50,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link href="#rpa-solution" className="text-gray-400 hover:text-white transition-colors">
-                  Phase 1 - Système d'appel
+                  Phase 1 - Système d’appel
                 </Link>
               </li>
               <li>
@@ -150,7 +141,7 @@ export default function Footer() {
                 Politique de confidentialité
               </Link>
               <Link href="#contact" className="text-gray-400 hover:text-white transition-colors">
-                Conditions d'utilisation
+                Conditions d’utilisation
               </Link>
               <Link href="#contact" className="text-gray-400 hover:text-white transition-colors">
                 Mentions légales

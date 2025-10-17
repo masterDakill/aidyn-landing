@@ -308,7 +308,7 @@ export default function RPASimulator() {
           </h2>
 
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Découvrez comment notre système gère les appels d'urgence en temps réel dans un établissement RPA
+            Découvrez comment notre système gère les appels d’urgence en temps réel dans un établissement RPA
           </p>
         </motion.div>
 

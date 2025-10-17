@@ -1,14 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Send,
-  Calendar,
-  MessageCircle
-} from 'lucide-react'
+import { Mail, Send, MessageCircle } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Contact() {
@@ -202,8 +195,8 @@ export default function Contact() {
               </div>
 
               <div className="mb-6">
-                <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                  Service d'intérêt
+                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                    Service d’intérêt
                 </label>
                 <select
                   id="service"
@@ -213,7 +206,7 @@ export default function Contact() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
                 >
                   <option value="">Sélectionnez un service</option>
-                  <option value="rpa-phase1">Phase 1 - Système d'appel RPA</option>
+                    <option value="rpa-phase1">Phase 1 - Système d’appel RPA</option>
                   <option value="integration">Intégration réseau complète</option>
                   <option value="deployment">Déploiement SerenaCare</option>
                   <option value="grants">Aide aux subventions Québec</option>

@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Grid, Maximize2, X, Edit3, Image as ImageIcon } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Grid, X, Edit3, Image as ImageIcon } from 'lucide-react'
 import Image from 'next/image'
 
 interface ImageAsset {
@@ -81,26 +81,38 @@ export default function DynamicImageGallery({
   showControls = true,
   className = ""
 }: DynamicImageGalleryProps) {
-  const [selectedImage, setSelectedImage] = useState<ImageAsset | null>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const filteredImages = useMemo(
+    () => (category ? aidynImages.filter((img) => img.category === category) : aidynImages),
+    [category]
+  )
+
+  const [selectedImage, setSelectedImage] = useState<ImageAsset | null>(() =>
+    filteredImages.length > 0 ? filteredImages[0] : null
+  )
+  const [currentIndex, setCurrentIndex] = useState(() => (filteredImages.length > 0 ? 0 : -1))
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [filter, setFilter] = useState<string>(category || 'all')
-
-  // Filtrer les images selon la catégorie
-  const filteredImages = category
-    ? aidynImages.filter(img => img.category === category)
-    : aidynImages
 
   const categories = ['all', ...Array.from(new Set(aidynImages.map(img => img.category)))]
 
   useEffect(() => {
+    if (!filteredImages.length) {
+      setSelectedImage(null)
+      setCurrentIndex(-1)
+      return
+    }
+
     if (currentImageId) {
-      const image = aidynImages.find(img => img.id === currentImageId)
+      const image = filteredImages.find((img) => img.id === currentImageId)
       if (image) {
         setSelectedImage(image)
-        setCurrentIndex(filteredImages.findIndex(img => img.id === currentImageId))
+        setCurrentIndex(filteredImages.findIndex((img) => img.id === currentImageId))
+        return
       }
     }
+
+    setSelectedImage(filteredImages[0])
+    setCurrentIndex(0)
   }, [currentImageId, filteredImages])
 
   const handleImageSelect = (image: ImageAsset) => {
@@ -112,9 +124,14 @@ export default function DynamicImageGallery({
   }
 
   const navigateImage = (direction: 'prev' | 'next') => {
-    const newIndex = direction === 'next'
-      ? (currentIndex + 1) % filteredImages.length
-      : (currentIndex - 1 + filteredImages.length) % filteredImages.length
+    if (!filteredImages.length) {
+      return
+    }
+
+    const newIndex =
+      direction === 'next'
+        ? (currentIndex + 1 + filteredImages.length) % filteredImages.length
+        : (currentIndex - 1 + filteredImages.length) % filteredImages.length
 
     handleImageSelect(filteredImages[newIndex])
   }
