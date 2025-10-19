@@ -4,9 +4,11 @@
   "private": true,
   "description": "AIDYN Technologies - Landing Page Marketing Professionnelle",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 0.0.0.0 --port 3000",
+    "dev:turbo": "next dev --turbo --hostname 0.0.0.0 --port 3000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --hostname 0.0.0.0 --port 3000",
+    "preview": "node scripts/preview.mjs",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",

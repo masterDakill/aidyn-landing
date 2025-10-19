@@ -2,13 +2,11 @@
 
 import { motion } from 'framer-motion'
 import {
-  Award,
   Clock,
   Shield,
   Activity,
   Droplets,
   Radio,
-  Wifi,
   BarChart3,
   CheckCircle,
   Building,
@@ -179,7 +177,7 @@ export default function ProofKpi() {
             </h3>
             <p className="text-xl text-primary-100 max-w-3xl mx-auto">
               Infrastructure réseau stabilisée, QoS VoIP optimisé, et roaming seamless
-              dans tout l'établissement.
+              dans tout l’établissement.
             </p>
           </div>
 
@@ -206,11 +204,11 @@ export default function ProofKpi() {
             </div>
           </div>
 
-          <div className="text-center mt-8">
-            <blockquote className="text-lg italic text-primary-100 max-w-2xl mx-auto">
-              "Le système AIDYN a transformé notre capacité de réaction.
-              Les alertes instantanées nous permettent d'intervenir immédiatement."
-            </blockquote>
+            <div className="text-center mt-8">
+              <blockquote className="text-lg italic text-primary-100 max-w-2xl mx-auto">
+                “Le système AIDYN a transformé notre capacité de réaction.
+                Les alertes instantanées nous permettent d’intervenir immédiatement.”
+              </blockquote>
             <div className="mt-4 text-primary-200">
               — Direction, Auberge Boischatel
             </div>
