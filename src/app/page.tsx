@@ -1,3 +1,23 @@
+ codex/adjust-design-according-to-provided-images-2025-10-19
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
+import RpaSolution from "@/components/RpaSolution";
+import Features from "@/components/Features";
+import VideoPitch from "@/components/VideoPitch";
+import LiveStats from "@/components/Interactive/LiveStats";
+import RPASimulator from "@/components/Interactive/RPASimulator";
+import InteractiveTestimonials from "@/components/Interactive/InteractiveTestimonials";
+import InteractiveOnboarding from "@/components/Interactive/InteractiveOnboarding";
+import FloatingEngagement from "@/components/Interactive/FloatingEngagement";
+import Integrations from "@/components/Integrations";
+import ProofKpi from "@/components/ProofKpi";
+import Grants from "@/components/Grants";
+import Services from "@/components/Services";
+import About from "@/components/About";
+import Roadmap from "@/components/Roadmap";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+importPhaseOne from "@/components/PhaseOne";
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 import RpaSolution from '@/components/RpaSolution'
@@ -16,6 +36,7 @@ import Roadmap from '@/components/Roadmap'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import PhaseOne from '@/components/PhaseOne'
+ main
 
 export default function HomePage() {
   return (
@@ -31,6 +52,12 @@ export default function HomePage() {
         <section id="features">
           <Features />
         </section>
+ codex/adjust-design-according-to-provided-images-2025-10-19
+        <section id="video-pitch">
+          <VideoPitch />
+        </section>
+
+ main
         <section id="phase-1">
           <PhaseOne />
         </section>
@@ -71,5 +98,5 @@ export default function HomePage() {
       </main>
       <FloatingEngagement />
     </>
-  )
+  );
 }
