@@ -1,48 +1,48 @@
- codex/adjust-design-according-to-provided-images-2025-10-19
-import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
-import RpaSolution from "@/components/RpaSolution";
-import Features from "@/components/Features";
-import VideoPitch from "@/components/VideoPitch";
-import LiveStats from "@/components/Interactive/LiveStats";
-import RPASimulator from "@/components/Interactive/RPASimulator";
-import InteractiveTestimonials from "@/components/Interactive/InteractiveTestimonials";
-import InteractiveOnboarding from "@/components/Interactive/InteractiveOnboarding";
-import FloatingEngagement from "@/components/Interactive/FloatingEngagement";
-import Integrations from "@/components/Integrations";
-import ProofKpi from "@/components/ProofKpi";
-import Grants from "@/components/Grants";
-import Services from "@/components/Services";
-import About from "@/components/About";
-import Roadmap from "@/components/Roadmap";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-importPhaseOne from "@/components/PhaseOne";
+import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
+
+// Critical components - loaded immediately
 import RpaSolution from '@/components/RpaSolution'
 import Features from '@/components/Features'
-import LiveStats from '@/components/Interactive/LiveStats'
-import RPASimulator from '@/components/Interactive/RPASimulator'
-import InteractiveTestimonials from '@/components/Interactive/InteractiveTestimonials'
-import InteractiveOnboarding from '@/components/Interactive/InteractiveOnboarding'
-import FloatingEngagement from '@/components/Interactive/FloatingEngagement'
-import Integrations from '@/components/Integrations'
-import ProofKpi from '@/components/ProofKpi'
-import Grants from '@/components/Grants'
-import Services from '@/components/Services'
-import About from '@/components/About'
-import Roadmap from '@/components/Roadmap'
-import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
 import PhaseOne from '@/components/PhaseOne'
- main
+
+// Below-the-fold components - lazy loaded with dynamic imports
+const VideoPitch = dynamic(() => import('@/components/VideoPitch'), {
+  loading: () => <div className="min-h-[400px] flex items-center justify-center">Chargement...</div>,
+})
+
+const LiveStats = dynamic(() => import('@/components/Interactive/LiveStats'), {
+  loading: () => <div className="min-h-[300px]" />,
+})
+
+const RPASimulator = dynamic(() => import('@/components/Interactive/RPASimulator'), {
+  loading: () => <div className="min-h-[500px]" />,
+})
+
+const Integrations = dynamic(() => import('@/components/Integrations'))
+const InteractiveTestimonials = dynamic(() => import('@/components/Interactive/InteractiveTestimonials'))
+const ProofKpi = dynamic(() => import('@/components/ProofKpi'))
+const InteractiveOnboarding = dynamic(() => import('@/components/Interactive/InteractiveOnboarding'))
+const Grants = dynamic(() => import('@/components/Grants'))
+const Services = dynamic(() => import('@/components/Services'))
+const About = dynamic(() => import('@/components/About'))
+const Roadmap = dynamic(() => import('@/components/Roadmap'))
+const Contact = dynamic(() => import('@/components/Contact'))
+const Footer = dynamic(() => import('@/components/Footer'))
+
+// Floating components - loaded with SSR disabled for better performance
+const FloatingEngagement = dynamic(
+  () => import('@/components/Interactive/FloatingEngagement'),
+  { ssr: false }
+)
 
 export default function HomePage() {
   return (
     <>
       <Navigation />
       <main className="min-h-screen pt-20">
+        {/* Critical above-the-fold content */}
         <section id="hero">
           <Hero />
         </section>
@@ -52,15 +52,14 @@ export default function HomePage() {
         <section id="features">
           <Features />
         </section>
- codex/adjust-design-according-to-provided-images-2025-10-19
         <section id="video-pitch">
           <VideoPitch />
         </section>
-
- main
         <section id="phase-1">
           <PhaseOne />
         </section>
+
+        {/* Below-the-fold content - lazy loaded */}
         <section id="live-stats">
           <LiveStats />
         </section>
@@ -98,5 +97,5 @@ export default function HomePage() {
       </main>
       <FloatingEngagement />
     </>
-  );
+  )
 }
