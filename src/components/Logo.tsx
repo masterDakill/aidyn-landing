@@ -28,11 +28,11 @@ export default function Logo({
         src={logoSrc}
         alt="AIDYN Technologies"
         width={compact ? 40 : showFullBrand ? 200 : 120}
-        height={compact ? 40 : 40}
+        height={40}
         priority
+        style={{ width: 'auto', height: '2.5rem' }}
         className={clsx(
-          'object-contain transition-opacity duration-300',
-          compact ? 'h-10 w-10' : showFullBrand ? 'h-10 w-auto' : 'h-10 w-auto'
+          'object-contain transition-opacity duration-300'
         )}
       />
       
