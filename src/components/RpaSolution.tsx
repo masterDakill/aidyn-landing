@@ -134,11 +134,11 @@ export default function RpaSolution() {
             <div className="absolute -inset-6 rounded-3xl bg-cyan-500/20 blur-3xl" />
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/40 shadow-2xl shadow-black/30">
               <Image
-                src="/images/SerenaCare_Website_Product_Section.png"
-                alt="Dispositifs SerenaCare"
+                src="/images/diagrams/serenacare-architecture.png"
+                alt="Architecture Technique SerenaCare - MQTT, Connectivité Duale, Conformité HIPAA, Intégration RFID"
                 width={1024}
                 height={768}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain p-4"
               />
             </div>
           </motion.div>
