@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    appDir: true,
     // Enable optimized package imports for better tree-shaking
     optimizePackageImports: ['framer-motion', 'lucide-react'],
   },
