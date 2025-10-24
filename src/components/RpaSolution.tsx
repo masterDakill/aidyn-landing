@@ -134,11 +134,7 @@ export default function RpaSolution() {
             <div className="absolute -inset-6 rounded-3xl bg-cyan-500/20 blur-3xl" />
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/40 shadow-2xl shadow-black/30">
               <Image
- codex/adjust-design-according-to-provided-images-2025-10-19
                 src="/images/SerenaCare_Website_Product_Section.png"
-
-                src="/SerenaCare_Website_Product_Section.png"
- main
                 alt="Dispositifs SerenaCare"
                 width={1024}
                 height={768}
