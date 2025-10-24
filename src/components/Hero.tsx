@@ -139,12 +139,12 @@ export default function Hero() {
               <div className="absolute inset-0 hidden rounded-[3rem] bg-sky-500/10 blur-3xl lg:block" />
               <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl shadow-sky-950/60">
                 <Image
-                  src="/images/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png"
-                  alt="Tableau de bord SerenaCare AI montrant les alertes et KPI Phase 1"
+                  src="/images/products/serenacare-hero.png"
+                  alt="Dispositifs SerenaCare - Réponse d'Urgence de Nouvelle Génération avec technologie IA"
                   width={1200}
                   height={900}
                   priority
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                 />
               </div>
 
