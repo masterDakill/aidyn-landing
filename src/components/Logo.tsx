@@ -19,27 +19,27 @@ export default function Logo({
   const logoSrc = '/images/brand/aidyn-logo-circle.png'
 
   return (
-    <div className={clsx('inline-flex items-center gap-3', className)}>
+    <div className={clsx('inline-flex items-center gap-2', className)}>
       <Image
         src={logoSrc}
         alt="AIDYN Technologies"
-        width={compact ? 40 : 50}
-        height={compact ? 40 : 50}
+        width={compact ? 32 : 40}
+        height={compact ? 32 : 40}
         priority
         className={clsx(
           'object-contain transition-opacity duration-300',
-          compact ? 'h-10 w-10' : 'h-12 w-12'
+          compact ? 'h-8 w-8' : 'h-10 w-10'
         )}
       />
       {!compact && (
-        <span className="text-xl font-bold text-white">
+        <span className="text-lg font-bold text-white">
           AIDYN
         </span>
       )}
       
       {/* Fallback text for SEO */}
       <span className="sr-only">
-        AIDYN Technologies - SerenaCare AI
+        AIDYN Technologies - AI Vision UniFi
       </span>
     </div>
   )

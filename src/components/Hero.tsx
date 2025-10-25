@@ -10,41 +10,41 @@ import Logo from './Logo'
 
 const stats = [
   {
-    label: 'Incidents critiques réduits',
-    value: '40 %',
-    description: 'Objectif Phase 1 vs. baseline 2024'
-  },
-  {
-    label: 'Précision attendue',
+    label: 'Précision visée',
     value: '≥ 95 %',
-    description: 'Détection IA sur le pilote Auberge Boischatel'
+    description: 'Détection IA chute sur caméras UniFi existantes'
   },
   {
-    label: 'Financement recherché',
-    value: '75 k$',
-    description: 'MAPAQ + AGE-WELL pour consolider la Phase 1'
+    label: 'Budget Phase 1',
+    value: '36-54 k$',
+    description: 'MVP avec intégration UniFi UDM Pro'
+  },
+  {
+    label: 'Timeline',
+    value: '4-6 mois',
+    description: 'Mars - Août 2025 · Pilote Auberge Boischatel'
   }
 ]
 
 const quickWins: Array<{ title: string; description: string; icon: LucideIcon }> = [
   {
-    title: 'Pilote Auberge Boischatel',
-    description: '12 caméras UniFi, 8 radars Vayyar, Jetson edge encrypté',
+    title: 'Infrastructure Existante',
+    description: 'Caméras UniFi Protect + UDM Pro déjà en place',
     icon: Building2
   },
   {
-    title: 'Infrastructure souveraine',
-    description: 'FastAPI + PostgreSQL + Redis hébergés au Québec, auditables',
+    title: 'IA Locale Jetson',
+    description: 'NVIDIA Jetson Nano/Orin pour inférence temps réel',
     icon: Cpu
   },
   {
-    title: 'Surveillance respectueuse',
-    description: 'Traitement edge, anonymisation contextuelle et traçabilité complète',
+    title: 'Traitement Edge',
+    description: 'Analyse vidéo locale, pas de cloud required',
     icon: ShieldCheck
   },
   {
-    title: 'Alertes temps réel',
-    description: 'Twilio SMS, Slack, WebSocket; latence &lt;5 s visée',
+    title: 'Dashboard Temps Réel',
+    description: 'React + FastAPI, alertes Slack/Email instantanées',
     icon: Radar
   }
 ]
@@ -69,38 +69,37 @@ export default function Hero() {
             >
               <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-slate-100">
                 <Logo compact className="hidden sm:inline-flex" />
-                <span>SerenaCare AI</span>
+                <span>PIVOT Phase 1</span>
                 <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                <span>Phase 1 · Fondation 2025</span>
+                <span>IA Caméras UniFi · 2025</span>
               </div>
 
               <div className="space-y-6">
                 <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl xl:text-6xl">
                   <span className="bg-gradient-to-r from-sky-300 via-cyan-200 to-emerald-200 bg-clip-text text-transparent">
-                    Intelligence de confiance
+                    IA détection chute
                   </span>{' '}
-                  pour sécuriser les milieux de vie aînés
+                  sur vos caméras UniFi existantes
                 </h1>
                 <p className="text-lg text-slate-200 sm:text-xl">
-                  AIDYN Technologies déploie SerenaCare AI – une plateforme intégrant vision, audio et capteurs edge pour réduire les
-                  incidents critiques en RPA. La Phase 1 solidifie l’infrastructure, les flux d’alertes et la conformité nécessaire au
-                  pilote Auberge Boischatel.
+                  AIDYN Technologies intègre l&apos;intelligence artificielle directement dans votre infrastructure UniFi UDM Pro.
+                  Détection automatique des chutes avec alertes temps réel, sans changement matériel. Pilote Auberge Boischatel 2025.
                 </p>
               </div>
 
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Link
-                  href="#phase-1"
+                  href="#rpa-solution"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 px-7 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-sky-900/30 transition-transform duration-200 hover:translate-y-[-2px] hover:shadow-xl"
                 >
-                  Découvrir la Phase 1
+                  Architecture Technique
                   <ArrowRight className="h-5 w-5" />
                 </Link>
                 <Link
                   href="#contact"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 px-7 py-4 text-base font-semibold text-slate-50 transition-colors duration-200 hover:border-white/40 hover:bg-white/5"
                 >
-                  Planifier une rencontre
+                  Planifier une démo
                   <MessageSquare className="h-5 w-5" />
                 </Link>
               </div>
@@ -140,7 +139,7 @@ export default function Hero() {
               <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl shadow-sky-950/60">
                 <Image
                   src="/images/products/serenacare-hero.png"
-                  alt="Dispositifs SerenaCare - Réponse d'Urgence de Nouvelle Génération avec technologie IA"
+                  alt="Architecture IA UniFi - Détection de Chute Temps Réel"
                   width={1200}
                   height={900}
                   priority
@@ -156,7 +155,7 @@ export default function Hero() {
               >
                 <div className="flex items-center gap-3 text-sm text-slate-200">
                   <ShieldCheck className="h-5 w-5 text-emerald-300" />
-                  <span>Infrastructure prête pour certification CE/RoHS · Uptime cible &gt;99,5 %</span>
+                  <span>Modèle YOLOv8 + Jetson Nano · MVP 4-6 mois · Budget 36-54k$ CAD</span>
                 </div>
               </motion.div>
             </motion.div>

@@ -9,11 +9,11 @@ import { Menu, X, ArrowRight } from 'lucide-react'
 import Logo from './Logo'
 
 const navItems = [
-  { href: '#rpa-solution', label: 'Solution RPA', description: 'Kit edge + cloud' },
-  { href: '#features', label: 'Fonctionnalités', description: 'Détection multimodale' },
-  { href: '#phase-1', label: 'Phase 1', description: '2025 – Pilote Auberge Boischatel' },
-  { href: '#integrations', label: 'Intégrations', description: 'Twilio · Slack · EHR' },
-  { href: '#proof-kpi', label: 'Preuves & KPI', description: 'Objectifs ≥95 %' },
+  { href: '#rpa-solution', label: 'Architecture', description: 'UniFi + Jetson IA' },
+  { href: '#features', label: 'Fonctionnalités', description: 'YOLOv8 · Dashboard React' },
+  { href: '#phase-1', label: 'Roadmap 4 mois', description: 'Mars - Juin 2025 · MVP' },
+  { href: '#services', label: 'Solutions', description: 'Santé · RPA · Immobilier' },
+  { href: '#about', label: 'À propos', description: 'AIDYN Technologies' },
   { href: '#contact', label: 'Contact', description: 'Rencontrer l’équipe' }
 ]
 
@@ -48,9 +48,9 @@ export default function Navigation() {
     <header className="fixed inset-x-0 top-0 z-50 flex flex-col items-center gap-2 px-4 pt-3 sm:pt-4">
       <div className="flex w-full justify-center">
         <div className="flex items-center gap-2 rounded-full bg-slate-950/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-slate-200 shadow-lg backdrop-blur">
-          <span>Phase 1</span>
+          <span>PIVOT Phase 1</span>
           <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-          <span>Auberge Boischatel 2025–2026</span>
+          <span>IA UniFi · Mars-Juin 2025</span>
         </div>
       </div>
 
