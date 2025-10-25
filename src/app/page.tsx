@@ -8,26 +8,8 @@ import Features from '@/components/Features'
 import PhaseOne from '@/components/PhaseOne'
 
 // Below-the-fold components - lazy loaded with dynamic imports
-const VideoPitch = dynamic(() => import('@/components/VideoPitch'), {
-  loading: () => <div className="min-h-[400px] flex items-center justify-center">Chargement...</div>,
-})
-
-const LiveStats = dynamic(() => import('@/components/Interactive/LiveStats'), {
-  loading: () => <div className="min-h-[300px]" />,
-})
-
-const RPASimulator = dynamic(() => import('@/components/Interactive/RPASimulator'), {
-  loading: () => <div className="min-h-[500px]" />,
-})
-
-const Integrations = dynamic(() => import('@/components/Integrations'))
-const InteractiveTestimonials = dynamic(() => import('@/components/Interactive/InteractiveTestimonials'))
-const ProofKpi = dynamic(() => import('@/components/ProofKpi'))
-const InteractiveOnboarding = dynamic(() => import('@/components/Interactive/InteractiveOnboarding'))
-const Grants = dynamic(() => import('@/components/Grants'))
 const Services = dynamic(() => import('@/components/Services'))
 const About = dynamic(() => import('@/components/About'))
-const Roadmap = dynamic(() => import('@/components/Roadmap'))
 const Contact = dynamic(() => import('@/components/Contact'))
 const Footer = dynamic(() => import('@/components/Footer'))
 
@@ -42,57 +24,42 @@ export default function HomePage() {
     <>
       <Navigation />
       <main className="min-h-screen pt-20">
-        {/* Critical above-the-fold content */}
+        {/* Hero Section - Introduction */}
         <section id="hero">
           <Hero />
         </section>
+
+        {/* Product Section - SerenaCare */}
         <section id="rpa-solution">
           <RpaSolution />
         </section>
+
+        {/* Features Section */}
         <section id="features">
           <Features />
         </section>
-        <section id="video-pitch">
-          <VideoPitch />
-        </section>
+
+        {/* Phase 1 Section */}
         <section id="phase-1">
           <PhaseOne />
         </section>
 
-        {/* Below-the-fold content - lazy loaded */}
-        <section id="live-stats">
-          <LiveStats />
-        </section>
-        <section id="simulator">
-          <RPASimulator />
-        </section>
-        <section id="integrations">
-          <Integrations />
-        </section>
-        <section id="testimonials">
-          <InteractiveTestimonials />
-        </section>
-        <section id="proof-kpi">
-          <ProofKpi />
-        </section>
-        <section id="onboarding">
-          <InteractiveOnboarding />
-        </section>
-        <section id="grants">
-          <Grants />
-        </section>
+        {/* Services Section */}
         <section id="services">
           <Services />
         </section>
+
+        {/* About Section */}
         <section id="about">
           <About />
         </section>
-        <section id="roadmap">
-          <Roadmap />
-        </section>
+
+        {/* Contact Section */}
         <section id="contact">
           <Contact />
         </section>
+
+        {/* Footer */}
         <Footer />
       </main>
       <FloatingEngagement />
