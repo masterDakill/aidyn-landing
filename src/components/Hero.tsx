@@ -33,18 +33,18 @@ const quickWins: Array<{ title: string; description: string; icon: LucideIcon }>
     icon: Building2
   },
   {
-    title: 'IA Locale Jetson',
-    description: 'NVIDIA Jetson Nano/Orin pour inférence temps réel',
+    title: 'IA Edge Computing',
+    description: 'Traitement intelligent local en temps réel',
     icon: Cpu
   },
   {
-    title: 'Traitement Edge',
-    description: 'Analyse vidéo locale, pas de cloud required',
+    title: 'Sécurité Maximale',
+    description: 'Analyse locale des données, confidentialité garantie',
     icon: ShieldCheck
   },
   {
-    title: 'Dashboard Temps Réel',
-    description: 'React + FastAPI, alertes Slack/Email instantanées',
+    title: 'Alertes Intelligentes',
+    description: 'Notifications instantanées multi-canaux',
     icon: Radar
   }
 ]

@@ -178,7 +178,7 @@ export default function PhaseOne() {
               </div>
               <div className="mt-4 space-y-3 text-sm text-sky-200">
                 <div className="flex justify-between">
-                  <span>Hardware (Jetson Nano/Orin):</span>
+                  <span>Hardware (Matériel edge computing):</span>
                   <span className="font-semibold">390-2,500$</span>
                 </div>
                 <div className="flex justify-between">
@@ -235,11 +235,11 @@ export default function PhaseOne() {
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
-                  <span>Jetson Nano/Orin · Inference locale edge</span>
+                  <span>Matériel edge computing · Inference locale edge</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
-                  <span>Dashboard React · Alertes Slack/Email</span>
+                  <span>Interface de gestion · Alertes automatiques</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />

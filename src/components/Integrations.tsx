@@ -61,7 +61,7 @@ const protocols = [
 const tools = [
   {
     icon: MessageSquare,
-    title: 'Slack/Teams',
+    title: 'Messagerie d&apos;équipe',
     description: 'Notifications d’urgence directes dans vos canaux'
   },
   {

@@ -10,9 +10,9 @@ const solutions = [
     subtitle: '2026 · MVP UniFi',
     description: 'Intégration IA sur caméras UniFi existantes pour détection automatique des chutes en temps réel.',
     highlights: [
-      'YOLOv8 + Jetson edge processing',
+      'IA edge computing avancée',
       'Dashboard React temps réel',
-      'Alertes Slack/Email instantanées',
+      'Système d&apos;alertes multi-canaux',
       'Budget: budget optimisé · 4-6 mois'
     ],
     accent: 'from-sky-500 to-cyan-500'

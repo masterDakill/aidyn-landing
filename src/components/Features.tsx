@@ -6,50 +6,50 @@ import { AlertTriangle, Bot, Cpu, Database, Layers, Shield, Video, Zap } from 'l
 const featureBlocks = [
   {
     icon: Video,
-    title: 'Analyse Vidéo RTSP Temps Réel',
-    description: 'Consommation des flux UniFi Protect via RTSP, preprocessing et inférence YOLOv8 à 30 FPS.',
+    title: 'Analyse Vidéo Temps Réel',
+    description: 'Traitement des flux caméras existants avec intelligence artificielle avancée.',
     accent: 'from-cyan-500 to-sky-600'
   },
   {
     icon: Cpu,
-    title: 'Inférence Edge Jetson',
-    description: 'NVIDIA Jetson Nano ou Orin pour détection locale, GPU CUDA acceleration, modèle ONNX optimisé.',
+    title: 'Traitement Edge Computing',
+    description: 'Détection locale sur matériel optimisé pour des performances maximales.',
     accent: 'from-purple-500 to-fuchsia-600'
   },
   {
     icon: Zap,
-    title: 'Alertes Instantanées (<5s)',
-    description: 'Webhooks HTTP POST vers FastAPI, notifications Slack/Email, dashboard WebSocket temps réel.',
+    title: 'Alertes Instantanées',
+    description: 'Notifications immédiates par multiples canaux lors de détection d\'incident.',
     accent: 'from-emerald-500 to-teal-600'
   },
   {
     icon: Shield,
-    title: 'Traitement Local Sécurisé',
-    description: 'Pas de cloud required, données vidéo traitées edge, anonymisation contextuelle, logs auditables.',
+    title: 'Sécurité & Confidentialité',
+    description: 'Traitement local des données, conformité réglementaire, journalisation complète.',
     accent: 'from-blue-500 to-indigo-600'
   },
   {
     icon: Database,
-    title: 'PostgreSQL + Redis Backend',
-    description: 'Stockage événements, analytics KPI, cache performance, hébergement Québec souverain.',
+    title: 'Gestion de Données Robuste',
+    description: 'Stockage sécurisé des événements et analyses avec hébergement local.',
     accent: 'from-slate-500 to-slate-700'
   },
   {
     icon: Bot,
-    title: 'Dashboard React Moderne',
-    description: 'Multi-camera grid view, timeline alertes, graphes analytics, configuration seuils par caméra.',
+    title: 'Interface Intuitive',
+    description: 'Dashboard moderne pour surveillance multi-caméra et gestion des alertes.',
     accent: 'from-amber-500 to-orange-600'
   },
   {
     icon: Layers,
-    title: 'Architecture Scalable',
-    description: 'Jetson peut gérer 1-8 caméras selon modèle (Nano vs Orin), ajout cameras trivial via config YAML.',
+    title: 'Architecture Évolutive',
+    description: 'Solution adaptable pour différentes tailles d\'installations et besoins.',
     accent: 'from-rose-500 to-pink-600'
   },
   {
     icon: AlertTriangle,
-    title: 'Gestion Faux Positifs',
-    description: 'Threshold confidence ajustable (0.85+), debounce logic, feedback loop pour amélioration continue.',
+    title: 'Fiabilité Optimisée',
+    description: 'Système intelligent pour minimiser les fausses alertes et amélioration continue.',
     accent: 'from-violet-500 to-purple-600'
   }
 ]
@@ -123,7 +123,7 @@ export default function Features() {
               <div className="text-3xl font-bold text-cyan-600">&gt;95%</div>
               <div className="mt-2 text-sm font-semibold text-slate-900">Précision Visée</div>
               <p className="mt-2 text-xs text-slate-600">
-                Détection chutes + Faux positifs &lt;5% · Latence &lt;500ms par frame
+                Haute fiabilité de détection avec faible taux d&apos;erreur
               </p>
             </div>
           </div>

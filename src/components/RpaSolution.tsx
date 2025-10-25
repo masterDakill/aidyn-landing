@@ -22,8 +22,8 @@ const corePillars = [
   },
   {
     icon: Cpu,
-    title: 'NVIDIA Jetson Edge Processing',
-    detail: 'Module Jetson Nano ou Orin pour inférence YOLOv8 locale en temps réel (<500ms latence).'
+    title: 'Traitement Edge Computing',
+    detail: 'Analyse intelligente locale en temps réel pour des performances optimales.'
   },
   {
     icon: ShieldCheck,
@@ -36,26 +36,26 @@ const architectureFlow = [
   {
     icon: Camera,
     step: '1',
-    label: 'Flux RTSP',
-    description: 'Caméras UniFi → Stream H.264'
+    label: 'Capture Vidéo',
+    description: 'Caméras existantes → Flux continu'
   },
   {
     icon: Cpu,
     step: '2',
-    label: 'Inférence IA',
-    description: 'Jetson → Modèle YOLOv8 (pose detection)'
+    label: 'Analyse IA',
+    description: 'Détection intelligente des incidents'
   },
   {
     icon: Radio,
     step: '3',
-    label: 'Webhook Alert',
-    description: 'Détection chute → HTTP POST'
+    label: 'Notification',
+    description: 'Alerte automatique immédiate'
   },
   {
     icon: Server,
     step: '4',
-    label: 'Dashboard',
-    description: 'React + FastAPI → Alertes temps réel'
+    label: 'Supervision',
+    description: 'Interface de gestion centralisée'
   }
 ]
 
@@ -64,7 +64,7 @@ const technicalSpecs = [
     icon: BadgeCheck,
     label: 'Précision détection',
     value: '>95%',
-    description: 'YOLOv8 fine-tuned sur dataset chutes'
+    description: 'IA avancée optimisée pour détection fiable'
   },
   {
     icon: Activity,
@@ -82,7 +82,7 @@ const technicalSpecs = [
     icon: ShieldCheck,
     label: 'Uptime visé',
     value: '>99.5%',
-    description: 'Jetson + UDM Pro haute disponibilité'
+    description: 'Système redondant haute disponibilité'
   }
 ]
 
@@ -108,8 +108,8 @@ export default function RpaSolution() {
 
             <p className="text-lg text-slate-300">
               Intégrez la détection de chute par intelligence artificielle directement sur vos caméras UniFi Protect.
-              Le module Jetson analyse les flux RTSP en local, sans modification du réseau, pour des alertes instantanées
-              au personnel RPA.
+              L&apos;analyse se fait localement sans modification de votre réseau, pour des alertes instantanées
+              au personnel.
             </p>
 
             <div className="grid gap-4 sm:grid-cols-3">
@@ -179,7 +179,7 @@ export default function RpaSolution() {
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/40 shadow-2xl shadow-black/30">
               <Image
                 src="/images/diagrams/serenacare-architecture.png"
-                alt="Architecture UniFi AI - Jetson Edge, RTSP Stream, Dashboard Temps Réel"
+                alt="Architecture SerenaCare - Analyse IA temps réel, Dashboard de supervision"
                 width={1024}
                 height={768}
                 className="h-full w-full object-contain p-4"
@@ -193,23 +193,23 @@ export default function RpaSolution() {
               <ul className="mt-3 space-y-2 text-xs">
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-                  <span>Frontend: React + TypeScript + TailwindCSS</span>
+                  <span>Interface web moderne et responsive</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-                  <span>Backend: FastAPI + PostgreSQL + Redis</span>
+                  <span>Backend robuste et sécurisé</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-                  <span>Edge AI: NVIDIA Jetson (Nano ou Orin Nano)</span>
+                  <span>Intelligence artificielle edge computing</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-                  <span>Modèle: YOLOv8 pose detection (ONNX format)</span>
+                  <span>Modèle IA optimisé et performant</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-                  <span>Alertes: Slack webhooks + SendGrid email</span>
+                  <span>Système d&apos;alertes multi-canaux</span>
                 </li>
               </ul>
             </div>
