@@ -12,6 +12,7 @@ const Services = dynamic(() => import('@/components/Services'))
 const About = dynamic(() => import('@/components/About'))
 const Contact = dynamic(() => import('@/components/Contact'))
 const Footer = dynamic(() => import('@/components/Footer'))
+const Innovation3D = dynamic(() => import('@/components/Innovation3D'))
 
 // Floating components - loaded with SSR disabled for better performance
 const FloatingEngagement = dynamic(
@@ -37,6 +38,11 @@ export default function HomePage() {
         {/* Features Section */}
         <section id="features">
           <Features />
+        </section>
+
+        {/* Innovation 3D Section - Technical Depth */}
+        <section id="innovation-3d">
+          <Innovation3D />
         </section>
 
         {/* Phase 1 Section */}

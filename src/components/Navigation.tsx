@@ -11,6 +11,7 @@ import Logo from './Logo'
 const navItems = [
   { href: '#rpa-solution', label: 'Architecture' },
   { href: '#features', label: 'Fonctionnalités' },
+  { href: '#innovation-3d', label: 'Innovation 3D' },
   { href: '#phase-1', label: 'Roadmap' },
   { href: '#contact', label: 'Contact' }
 ]
