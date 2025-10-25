@@ -26,7 +26,7 @@ Déploiement pilote 2026 · Aucun changement matériel requis
 - ≥ 95% précision visée
 - 36–54k$ budget Phase 1
 - Déploiement pilote 2026
-- Résidence partenaire (50 lits)
+- Auberge Boischatel (50 lits, Québec)
 
 ---
 
@@ -284,7 +284,7 @@ Alertes: Slack webhooks + SendGrid email
 
 **Budget:** 36-54k$ CAD
 **Timeline:** 4-6 mois (Mars - Août 2026)
-**Partenaire:** Résidence (50 lits)
+**Partenaire:** Auberge Boischatel (50 lits, Québec)
 
 ---
 
@@ -374,9 +374,9 @@ Alertes: Slack webhooks + SendGrid email
 - Vision: Rendre la détection de chute accessible à toutes les RPA du Québec
 
 ### Contact Interne
-📧 admin@aidyn.ai
-📞 +1 (514) 123-4567
-📅 Calendly: aidyn.ai/demo
+📧 [Contact interne seulement - voir gestionnaire accès]
+📞 [Voir répertoire interne sécurisé]
+📅 [Calendrier réunions - accès restreint]
 
 ### Conseillers & Partenaires
 - **Technique:** [À définir - Expert IA/Vision]
@@ -404,6 +404,128 @@ Alertes: Slack webhooks + SendGrid email
 - Pas de changement hardware = adoption facile
 - ROI clair: réduction coûts incidents + assurances
 - Conformité réglementaire (CNESST, RSSS)
+
+---
+
+## 🚨 12. Risques & Mitigation
+
+### Risques Techniques
+
+**1. Précision Insuffisante (<95%)**
+- **Impact:** Perte crédibilité, adoption bloquée
+- **Probabilité:** Moyenne (30%)
+- **Mitigation:**
+  - Dataset augmenté 2000+ images annotées
+  - Fine-tuning itératif avec feedback terrain
+  - A/B testing multiple architectures (YOLOv8 vs alternatives)
+  - Validation croisée avec experts gériatrie
+
+**2. Latence Edge Computing (>500ms)**
+- **Impact:** Alertes retardées, expérience dégradée
+- **Probabilité:** Faible (15%)
+- **Mitigation:**
+  - Quantization FP16/INT8 aggressive
+  - Batch processing optimisé
+  - Upgrade Jetson Nano → Orin si nécessaire
+  - Profiling performance continu
+
+**3. Faux Positifs Élevés (>5%)**
+- **Impact:** Alert fatigue personnel, abandon système
+- **Probabilité:** Moyenne (25%)
+- **Mitigation:**
+  - Seuils confidence ajustables par caméra
+  - Debouncing temporel (3-5 frames consécutives)
+  - Machine learning feedback loop
+  - Filtres contextuels (zones, horaires)
+
+### Risques Business
+
+**4. Résistance Adoption Personnel**
+- **Impact:** Pilote échec, pas de références
+- **Probabilité:** Moyenne (35%)
+- **Mitigation:**
+  - Formation intensive 2-3 sessions
+  - Support 24/7 première semaine
+  - Champion interne identifié (infirmière-chef)
+  - Documentation FR complète et visuelle
+
+**5. Conformité RGPD/Vie Privée**
+- **Impact:** Blocage légal, amendes, PR négative
+- **Probabilité:** Faible (10%)
+- **Mitigation:**
+  - Legal review avant déploiement
+  - Edge-only processing (pas de cloud)
+  - Anonymisation logs (pas de visages stockés)
+  - Consentement familles documenté
+
+**6. ROI Non Démontré**
+- **Impact:** Pas de renouvellement, expansion bloquée
+- **Probabilité:** Moyenne (30%)
+- **Mitigation:**
+  - Métriques claires définies avant pilote
+  - Tracking incidents baseline vs post-déploiement
+  - Calcul coûts évités documenté
+  - Case study détaillé avec chiffres
+
+### Risques Financement
+
+**7. Subventions Gouvernementales Refusées**
+- **Impact:** Cash flow tendu, timeline ralentie
+- **Probabilité:** Moyenne (40%)
+- **Mitigation:**
+  - Applications multiples programmes (3-4 simultanées)
+  - Anges Québec backup identifiés
+  - Prévente pilote payant (5-10k$ engagement)
+  - Bootstrap maximal premières semaines
+
+**8. Coûts Dépassement Budget**
+- **Impact:** Runway réduit, fonctionnalités coupées
+- **Probabilité:** Élevée (50%)
+- **Mitigation:**
+  - Contingence 10% déjà incluse
+  - MVP strict (pas de feature creep)
+  - Jalons paiement fournisseurs basés livrables
+  - Monitoring budget hebdomadaire
+
+### Risques Compétition
+
+**9. Concurrent Lance Produit Similaire**
+- **Impact:** First-mover advantage perdu
+- **Probabilité:** Faible (20%)
+- **Mitigation:**
+  - Exécution rapide (4-6 mois max)
+  - Partenariat exclusif résidence pilote
+  - Innovation 3D comme différenciateur
+  - Propriété intellectuelle (brevet analyse prédictive)
+
+**10. UniFi Change API/Format RTSP**
+- **Impact:** Intégration cassée, re-développement requis
+- **Probabilité:** Très faible (5%)
+- **Mitigation:**
+  - Architecture modulaire (adapter pattern)
+  - Support multi-formats vidéo (H.264, H.265)
+  - Monitoring changelog UniFi Protect
+  - Abstraction layer caméras
+
+### Tableau Synthèse Risques
+
+| Risque | Probabilité | Impact | Priorité | Mitigation Status |
+|--------|-------------|--------|----------|-------------------|
+| Précision <95% | Moyenne | Critique | 🔴 P1 | ✅ Plan complet |
+| Latence >500ms | Faible | Haute | 🟡 P2 | ✅ Plan complet |
+| Faux positifs >5% | Moyenne | Haute | 🔴 P1 | ✅ Plan complet |
+| Résistance adoption | Moyenne | Critique | 🔴 P1 | ✅ Plan complet |
+| Conformité RGPD | Faible | Critique | 🟡 P2 | ✅ Plan complet |
+| ROI non démontré | Moyenne | Haute | 🔴 P1 | ✅ Plan complet |
+| Subventions refusées | Moyenne | Moyenne | 🟡 P2 | ✅ Plan complet |
+| Dépassement budget | Élevée | Moyenne | 🟡 P2 | ✅ Plan complet |
+| Concurrent similaire | Faible | Moyenne | 🟢 P3 | ✅ Plan complet |
+| UniFi API change | Très faible | Faible | 🟢 P3 | ✅ Plan complet |
+
+**Priorités:**
+- 🔴 P1 (Critique): Monitoring hebdomadaire, mitigation proactive
+- 🟡 P2 (Haute): Monitoring mensuel, plans prêts
+- 🟢 P3 (Moyenne): Monitoring trimestriel, veille
 
 ---
 
