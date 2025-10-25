@@ -6,57 +6,83 @@ import {
   Activity,
   ArrowRight,
   BadgeCheck,
-  Droplets,
+  Camera,
+  Cpu,
+  Database,
   Radio,
-  ShieldCheck,
-  SignalHigh,
-  Waves,
-  Wifi
+  Server,
+  ShieldCheck
 } from 'lucide-react'
 
 const corePillars = [
   {
-    icon: BadgeCheck,
-    title: 'Détection critique multimodale',
-    detail: 'Chute, immobilité et errance nocturne combinant vision, audio et capteurs contextuels.'
+    icon: Camera,
+    title: 'Caméras UniFi Protect Existantes',
+    detail: 'Utilisation de votre infrastructure UDM Pro actuelle, sans ajout de matériel caméra.'
+  },
+  {
+    icon: Cpu,
+    title: 'NVIDIA Jetson Edge Processing',
+    detail: 'Module Jetson Nano ou Orin pour inférence YOLOv8 locale en temps réel (<500ms latence).'
   },
   {
     icon: ShieldCheck,
-    title: 'Respect de la vie privée',
-    detail: 'Traitement edge, déclenchement contextuel, anonymisation et traçabilité des accès.'
-  },
-  {
-    icon: Activity,
-    title: 'Alertes orchestrées',
-    detail: 'Escalade SMS, Slack et WebSocket avec journalisation conforme HIPAA/CE/RoHS.'
+    title: 'Traitement Local Sécurisé',
+    detail: 'Analyse vidéo edge sans cloud, respect de la vie privée, conformité HIPAA/GDPR.'
   }
 ]
 
-const deviceHighlights = [
+const architectureFlow = [
   {
-    icon: Droplets,
-    label: 'IP67 étanche',
-    description: 'Utilisation sous la douche et en salle de bain.'
+    icon: Camera,
+    step: '1',
+    label: 'Flux RTSP',
+    description: 'Caméras UniFi → Stream H.264'
   },
   {
-    icon: Wifi,
-    label: 'Wi-Fi + MQTT',
-    description: 'Connectivité cloud sécurisée et supervision centralisée.'
+    icon: Cpu,
+    step: '2',
+    label: 'Inférence IA',
+    description: 'Jetson → Modèle YOLOv8 (pose detection)'
   },
   {
     icon: Radio,
-    label: 'RF 433 MHz',
-    description: 'Canal redondant pour assurer la continuité des alertes.'
+    step: '3',
+    label: 'Webhook Alert',
+    description: 'Détection chute → HTTP POST'
   },
   {
-    icon: Waves,
-    label: 'Capteurs Vayyar',
-    description: 'Analyse volumétrique sans caméra dans les zones sensibles.'
+    icon: Server,
+    step: '4',
+    label: 'Dashboard',
+    description: 'React + FastAPI → Alertes temps réel'
+  }
+]
+
+const technicalSpecs = [
+  {
+    icon: BadgeCheck,
+    label: 'Précision détection',
+    value: '>95%',
+    description: 'YOLOv8 fine-tuned sur dataset chutes'
   },
   {
-    icon: SignalHigh,
-    label: 'Tableau de bord temps réel',
-    description: 'Latence < 5 s, faux positifs < 8 %, uptime > 99,5 %.'
+    icon: Activity,
+    label: 'Latence traitement',
+    value: '<500ms',
+    description: 'Frame preprocessing → alert trigger'
+  },
+  {
+    icon: Database,
+    label: 'Faux positifs',
+    value: '<5%',
+    description: 'Threshold confidence 0.85+ ajustable'
+  },
+  {
+    icon: ShieldCheck,
+    label: 'Uptime visé',
+    value: '>99.5%',
+    description: 'Jetson + UDM Pro haute disponibilité'
   }
 ]
 
@@ -73,17 +99,17 @@ export default function RpaSolution() {
             className="space-y-8"
           >
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
-              SerenaCare AI · Réponse d&apos;urgence de nouvelle génération
+              Architecture UniFi-First · IA Edge Processing
             </div>
 
             <h2 className="text-3xl font-bold md:text-4xl">
-              Un système d&apos;appel intelligent conçu pour la réalité des RPA québécoises
+              Détection IA sur infrastructure UniFi existante
             </h2>
 
             <p className="text-lg text-slate-300">
-              Les modules edge Jetson analysent en continu les signaux vidéo, audio et IoT pour déclencher des alertes fiables.
-              Chaque site reçoit une configuration réseau sur mesure (VLAN, QoS, isolation IoT) et un accompagnement terrain
-              complet.
+              Intégrez la détection de chute par intelligence artificielle directement sur vos caméras UniFi Protect.
+              Le module Jetson analyse les flux RTSP en local, sans modification du réseau, pour des alertes instantanées
+              au personnel RPA.
             </p>
 
             <div className="grid gap-4 sm:grid-cols-3">
@@ -97,18 +123,36 @@ export default function RpaSolution() {
             </div>
 
             <div className="rounded-3xl border border-white/10 bg-slate-950/60 p-6 shadow-2xl shadow-black/40">
-              <h3 className="text-xl font-semibold text-white">Kit matériel Phase 1</h3>
+              <h3 className="text-xl font-semibold text-white">Pipeline de traitement Phase 1</h3>
               <p className="mt-2 text-sm text-slate-300">
-                Boutons étanches, capteurs volumétriques et plateforme SaaS livrés avec installation, formation et SLA support
-                &lt; 1 h.
+                Flux de détection de bout en bout, de la caméra UniFi au dashboard React temps réel.
               </p>
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
-                {deviceHighlights.map((highlight) => (
-                  <div key={highlight.label} className="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <highlight.icon className="mt-1 h-5 w-5 text-cyan-300" />
+              <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                {architectureFlow.map((flow) => (
+                  <div key={flow.step} className="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-300">
+                      <flow.icon className="h-5 w-5" />
+                    </div>
                     <div>
-                      <div className="text-sm font-semibold text-white">{highlight.label}</div>
-                      <p className="text-xs text-slate-300">{highlight.description}</p>
+                      <div className="text-xs font-bold text-cyan-300">ÉTAPE {flow.step}</div>
+                      <div className="text-sm font-semibold text-white">{flow.label}</div>
+                      <p className="text-xs text-slate-300">{flow.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-cyan-500/40 bg-cyan-500/10 p-6">
+              <h3 className="text-lg font-semibold text-white">KPI Techniques Phase 1</h3>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                {technicalSpecs.map((spec) => (
+                  <div key={spec.label} className="flex items-start gap-3">
+                    <spec.icon className="h-5 w-5 text-cyan-300" />
+                    <div>
+                      <div className="text-sm font-semibold text-white">{spec.label}</div>
+                      <div className="text-2xl font-bold text-cyan-300">{spec.value}</div>
+                      <p className="text-xs text-slate-300">{spec.description}</p>
                     </div>
                   </div>
                 ))}
@@ -116,10 +160,10 @@ export default function RpaSolution() {
             </div>
 
             <a
-              href="#contact"
+              href="#phase-1"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/5"
             >
-              Réserver une démonstration terrain
+              Voir le roadmap détaillé (4 sprints)
               <ArrowRight className="h-4 w-4" />
             </a>
           </motion.div>
@@ -135,11 +179,39 @@ export default function RpaSolution() {
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/40 shadow-2xl shadow-black/30">
               <Image
                 src="/images/diagrams/serenacare-architecture.png"
-                alt="Architecture Technique SerenaCare - MQTT, Connectivité Duale, Conformité HIPAA, Intégration RFID"
+                alt="Architecture UniFi AI - Jetson Edge, RTSP Stream, Dashboard Temps Réel"
                 width={1024}
                 height={768}
                 className="h-full w-full object-contain p-4"
               />
+            </div>
+            <div className="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-sm text-slate-300">
+              <div className="flex items-center gap-2 font-semibold text-white">
+                <Server className="h-4 w-4 text-cyan-300" />
+                Stack Technique
+              </div>
+              <ul className="mt-3 space-y-2 text-xs">
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                  <span>Frontend: React + TypeScript + TailwindCSS</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                  <span>Backend: FastAPI + PostgreSQL + Redis</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                  <span>Edge AI: NVIDIA Jetson (Nano ou Orin Nano)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                  <span>Modèle: YOLOv8 pose detection (ONNX format)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                  <span>Alertes: Slack webhooks + SendGrid email</span>
+                </li>
+              </ul>
             </div>
           </motion.div>
         </div>
