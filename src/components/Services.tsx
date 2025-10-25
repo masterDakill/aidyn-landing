@@ -13,7 +13,7 @@ const solutions = [
       'IA edge computing avancée',
       'Dashboard React temps réel',
       'Système d&apos;alertes multi-canaux',
-      'Budget: budget optimisé · 4-6 mois'
+      'Déploiement: 4-6 mois'
     ],
     accent: 'from-sky-500 to-cyan-500'
   },

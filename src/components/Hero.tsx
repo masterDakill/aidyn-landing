@@ -15,14 +15,14 @@ const stats = [
     description: 'Détection IA chute sur caméras UniFi existantes'
   },
   {
-    label: 'Budget Phase 1',
-    value: '36-54 k$',
-    description: 'MVP avec intégration UniFi UDM Pro'
+    label: 'Déploiement',
+    value: '< 1 jour',
+    description: 'Installation rapide sur infrastructure existante'
   },
   {
     label: 'Timeline',
-    value: 'Rapide',
-    description: 'Déploiement pilote 2026'
+    value: '2026',
+    description: 'Déploiement pilote et validation marché'
   }
 ]
 

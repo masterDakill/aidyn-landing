@@ -174,44 +174,37 @@ export default function PhaseOne() {
           >
             <div className="rounded-3xl border border-sky-500/40 bg-sky-500/10 p-6">
               <div className="flex items-center gap-2 text-lg font-semibold text-white">
-                <Layers3 className="h-5 w-5 text-sky-300" /> Répartition Budget Phase 1
+                <Layers3 className="h-5 w-5 text-sky-300" /> Investissement Phase 1
               </div>
               <div className="mt-4 space-y-3 text-sm text-sky-200">
-                <div className="flex justify-between">
-                  <span>Hardware (Matériel edge computing):</span>
-                  <span className="font-semibold">390-2,500$</span>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Matériel edge computing optimisé</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Développement IA/ML (80h):</span>
-                  <span className="font-semibold">8,000$</span>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Développement IA et modèles de détection</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Backend + Frontend (100h):</span>
-                  <span className="font-semibold">8,000$</span>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Infrastructure backend et frontend complète</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>QA & Testing site (30h):</span>
-                  <span className="font-semibold">1,800$</span>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Assurance qualité et tests de validation</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Consultant stratégie (75h):</span>
-                  <span className="font-semibold">10,500$</span>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Stratégie commerciale et de financement</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Logiciels & Cloud (6 mois):</span>
-                  <span className="font-semibold">1,320$</span>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Hébergement cloud sécurisé Québec</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Contingency & Misc (10%):</span>
-                  <span className="font-semibold">4,000$</span>
-                </div>
-                <div className="mt-4 border-t border-white/20 pt-3 flex justify-between text-base font-bold">
-                  <span>TOTAL MVP:</span>
-                  <span className="text-sky-300">36,210$ CAD</span>
-                </div>
-                <div className="flex justify-between text-xs text-slate-300">
-                  <span>Version Production-Ready:</span>
-                  <span>~54,310$ CAD</span>
+                <div className="mt-4 border-t border-white/20 pt-3">
+                  <p className="text-xs text-slate-300">
+                    <strong className="text-white">Financement Phase 1:</strong> Programmes gouvernementaux d&apos;innovation et partenariats stratégiques confirmés.
+                  </p>
                 </div>
               </div>
             </div>
