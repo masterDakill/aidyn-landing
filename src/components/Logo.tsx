@@ -9,32 +9,33 @@ interface LogoProps {
   variant?: LogoVariant
   compact?: boolean
   className?: string
-  showFullBrand?: boolean
 }
 
 export default function Logo({ 
   compact = false, 
-  className,
-  showFullBrand = false 
+  className
 }: LogoProps) {
-  // Use the official AIDYN logo images
-  const logoSrc = showFullBrand 
-    ? '/images/brand/aidyn-logo-full-dark.png' 
-    : '/images/brand/aidyn-logo-dark.png'
+  // Use the official AIDYN circle logo
+  const logoSrc = '/images/brand/aidyn-logo-circle.png'
 
   return (
-    <div className={clsx('inline-flex items-center', className)}>
+    <div className={clsx('inline-flex items-center gap-3', className)}>
       <Image
         src={logoSrc}
         alt="AIDYN Technologies"
-        width={compact ? 40 : showFullBrand ? 200 : 120}
-        height={40}
+        width={compact ? 40 : 50}
+        height={compact ? 40 : 50}
         priority
-        style={{ width: 'auto', height: '2.5rem' }}
         className={clsx(
-          'object-contain transition-opacity duration-300'
+          'object-contain transition-opacity duration-300',
+          compact ? 'h-10 w-10' : 'h-12 w-12'
         )}
       />
+      {!compact && (
+        <span className="text-xl font-bold text-white">
+          AIDYN
+        </span>
+      )}
       
       {/* Fallback text for SEO */}
       <span className="sr-only">
