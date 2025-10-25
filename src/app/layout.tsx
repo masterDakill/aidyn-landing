@@ -4,7 +4,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'AIDYN Technologies - SerenaCare AI | Surveillance Intelligente pour RPA',
-  description: 'Plateforme de surveillance intelligente SerenaCare AI pour résidences privées pour aînés. Phase 1 : Pilote Auberge Boischatel avec financement MAPAQ et AGE-WELL.',
+  description: 'Plateforme de surveillance intelligente SerenaCare AI pour résidences privées pour aînés. Détection automatique de chutes par IA sur infrastructure existante.',
   keywords: 'AIDYN, SerenaCare, IA, intelligence artificielle, RPA, résidences aînés, surveillance, santé, Québec',
   authors: [{ name: 'AIDYN Technologies' }],
   openGraph: {

@@ -21,8 +21,8 @@ const stats = [
   },
   {
     label: 'Timeline',
-    value: '4-6 mois',
-    description: 'Mars - Août 2026 · Pilote Auberge Boischatel'
+    value: 'Rapide',
+    description: 'Déploiement pilote 2026'
   }
 ]
 
@@ -83,7 +83,7 @@ export default function Hero() {
                 </h1>
                 <p className="text-lg text-slate-200 sm:text-xl">
                   AIDYN Technologies intègre l&apos;intelligence artificielle directement dans votre infrastructure UniFi UDM Pro.
-                  Détection automatique des chutes avec alertes temps réel, sans changement matériel. Pilote Auberge Boischatel 2026.
+                  Détection automatique des chutes avec alertes temps réel, sans changement matériel. Déploiement pilote 2026.
                 </p>
               </div>
 
@@ -158,7 +158,7 @@ export default function Hero() {
               >
                 <div className="flex items-center gap-3 text-sm text-slate-200">
                   <ShieldCheck className="h-5 w-5 text-emerald-300" />
-                  <span>Modèle YOLOv8 + Jetson Nano · MVP 4-6 mois (2026) · Budget 36-54k$ CAD</span>
+                  <span>Modèle IA avancé + Edge Computing · Déploiement rapide 2026</span>
                 </div>
               </motion.div>
             </motion.div>

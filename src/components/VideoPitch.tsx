@@ -26,8 +26,8 @@ const commitments = [
 
 const highlights = [
   "Réduction ciblée ≥ 40 % des incidents critiques",
-  "Précision de détection ≥ 95 % sur le pilote Auberge Boischatel",
-  "Financement Phase 1 : MAPAQ 50 k$ + AGE-WELL 25 k$",
+  "Précision de détection ≥ 95 % sur le pilote résidence partenaire",
+  "Financement Phase 1 : programmes gouvernementaux et subventions"
 ];
 
 export default function VideoPitch() {
@@ -53,7 +53,7 @@ export default function VideoPitch() {
           <p className="text-lg text-slate-300">
             Cette capsule synthétise la proposition de valeur Phase 1 :
             architecture edge/cloud, KPI opérationnels et feuille de route de
-            déploiement à l&apos;Auberge Boischatel.
+            déploiement à l&apos;résidence partenaire.
           </p>
 
           <ul className="space-y-4 text-sm text-slate-200">

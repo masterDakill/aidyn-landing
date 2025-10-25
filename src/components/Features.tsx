@@ -106,17 +106,17 @@ export default function Features() {
           <h3 className="text-2xl font-bold text-slate-900">Budget & Équipe Phase 1</h3>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <div className="text-3xl font-bold text-cyan-600">36-54k$</div>
-              <div className="mt-2 text-sm font-semibold text-slate-900">Budget Total CAD</div>
+              <div className="text-3xl font-bold text-cyan-600">Optimisé</div>
+              <div className="mt-2 text-sm font-semibold text-slate-900">Budget Efficace</div>
               <p className="mt-2 text-xs text-slate-600">
-                Hardware (Jetson), dev IA/backend/frontend, QA site, consultant stratégie
+                Hardware edge computing, développement IA complet, validation terrain
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <div className="text-3xl font-bold text-cyan-600">4-6 mois</div>
+              <div className="text-3xl font-bold text-cyan-600">Rapide</div>
               <div className="mt-2 text-sm font-semibold text-slate-900">Timeline MVP</div>
               <p className="mt-2 text-xs text-slate-600">
-                Mars - Août 2026 · 4 sprints agile · Pilote Auberge Boischatel
+                Développement agile 2026 · Déploiement sur site pilote
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6">

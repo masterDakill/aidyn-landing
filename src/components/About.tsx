@@ -7,29 +7,29 @@ const highlights = [
   {
     icon: Target,
     title: 'Focus Stratégique',
-    description: 'IA détection chute sur infrastructure UniFi existante - Approche pragmatique et rapide.'
+    description: 'Solution IA de détection de chutes intégrable sur infrastructure existante - Approche pragmatique.'
   },
   {
     icon: TrendingUp,
-    title: 'Marché Validé',
-    description: 'RPA Québec: 50,000+ lits, taux chute 30-50%, coût moyen 28,000$ par incident.'
+    title: 'Marché Porteur',
+    description: 'Secteur des résidences pour aînés en forte croissance avec besoins critiques en sécurité.'
   },
   {
     icon: Award,
     title: 'Avantage Compétitif',
-    description: 'Pas de nouveau hardware - Intégration caméras existantes avec Jetson edge AI.'
+    description: 'Intégration sur caméras existantes sans ajout de matériel coûteux - Intelligence edge computing.'
   },
   {
     icon: Rocket,
-    title: 'Traction Rapide',
-    description: 'MVP 4-6 mois, Budget 36-54k$, Pilote Auberge Boischatel 50 lits confirmé.'
+    title: 'Approche Agile',
+    description: 'Développement itératif rapide avec validation continue sur sites pilotes.'
   }
 ]
 
 const metrics = [
-  { value: '36-54k$', label: 'Budget Phase 1', sublabel: 'MVP complet' },
-  { value: '4-6 mois', label: 'Time-to-Market', sublabel: 'Mars - Août 2026' },
-  { value: '>95%', label: 'Précision IA', sublabel: 'YOLOv8 validé' }
+  { value: 'Optimisé', label: 'Budget Contrôlé', sublabel: 'Développement efficace' },
+  { value: 'Rapide', label: 'Time-to-Market', sublabel: 'Déploiement 2026' },
+  { value: '>95%', label: 'Précision IA', sublabel: 'Technologie validée' }
 ]
 
 export default function About() {

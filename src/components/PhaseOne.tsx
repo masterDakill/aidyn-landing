@@ -5,74 +5,74 @@ import { CalendarClock, CheckCircle2, DollarSign, Layers3, MapPinned, ShieldAler
 
 const sprints = [
   {
-    period: 'Sprint 1 · Semaines 1-2 (Mars 2026)',
-    title: 'Préparation & Données',
+    period: 'Phase 1 · Mars 2026',
+    title: 'Préparation & Infrastructure',
     tasks: [
-      'Audit infrastructure UniFi @ Auberge (caméras, RTSP, réseau)',
-      'Collecte dataset chutes (UP-Fall, URFD, simulations Blender)',
-      'Identification organismes subvention (MAPAQ, AGE-WELL, IRESSS)'
+      'Audit infrastructure existante et évaluation technique',
+      'Collecte et préparation des datasets de validation',
+      'Identification des opportunités de financement'
     ],
-    budget: '2-3k$',
-    livrables: 'Rapport audit + Dataset 500-1000 images + Matrice subventions'
+    budget: 'Budget alloué',
+    livrables: 'Documentation technique complète'
   },
   {
-    period: 'Sprint 2 · Semaines 3-6 (Avril 2026)',
-    title: 'Entraînement Modèle IA',
+    period: 'Phase 2 · Avril 2026',
+    title: 'Développement IA',
     tasks: [
-      'Fine-tune YOLOv8 pose detection (transfer learning)',
-      'Validation >95% précision, <5% faux positifs',
-      'Optimisation Jetson (quantization FP16/INT8, ONNX export)',
-      'Intégration pipeline RTSP → Inference → Webhook'
+      'Entraînement et optimisation du modèle de détection',
+      'Validation de la précision et performance',
+      'Optimisation pour déploiement edge computing',
+      'Intégration pipeline de traitement temps réel'
     ],
-    budget: '12-15k$',
-    livrables: 'Modèle .onnx + Performance report + FastAPI backend'
+    budget: 'Budget alloué',
+    livrables: 'Modèle IA optimisé et validé'
   },
   {
-    period: 'Sprint 3 · Semaines 7-9 (Mai 2026)',
-    title: 'Dashboard & Alerting',
+    period: 'Phase 3 · Mai 2026',
+    title: 'Interface & Alertes',
     tasks: [
-      'Dashboard React (multi-cam live, timeline alertes, analytics)',
-      'Intégrations Slack/Email (SendGrid, webhooks)',
-      'Configuration alerting rules (thresholds, debounce, routing)',
-      'Tests unitaires + E2E (Cypress)'
+      'Développement dashboard de surveillance multi-caméra',
+      'Système d\'alertes intelligent en temps réel',
+      'Configuration des règles de notification',
+      'Tests qualité et validation'
     ],
-    budget: '5-7k$',
-    livrables: 'React app + Docker image + API documentation'
+    budget: 'Budget alloué',
+    livrables: 'Application web complète et testée'
   },
   {
-    period: 'Sprint 4 · Semaines 10-13 (Juin 2026)',
-    title: 'Testing & Pilot Go-Live',
+    period: 'Phase 4 · Juin 2026',
+    title: 'Déploiement Pilote',
     tasks: [
-      'Déploiement Jetson @ Auberge Boischatel',
-      'QA site (chutes simulées, false positive testing)',
-      'Formation personnel + procédures incident response',
-      'Case study documentation + Subvention proposals finales'
+      'Installation et déploiement sur site pilote',
+      'Tests d\'acceptation et validation terrain',
+      'Formation du personnel utilisateur',
+      'Documentation et études de cas'
     ],
-    budget: '10-12k$',
-    livrables: 'Site pilote live + QA report + Case study + PR materials'
+    budget: 'Budget alloué',
+    livrables: 'Site pilote opérationnel'
   }
 ]
 
 const successMetrics = [
   {
     icon: Target,
-    title: 'Détection >95%',
-    detail: 'Précision chutes détectées avec confidence >0.85 sur test set.'
+    title: 'Haute Précision',
+    detail: 'Système de détection validé avec taux de précision élevé.'
   },
   {
     icon: ShieldAlert,
-    title: 'Faux Positifs <5%',
-    detail: 'Moins de 2 fausses alertes par 100h de footage caméra.'
+    title: 'Faible Taux d\'Erreur',
+    detail: 'Minimisation des fausses alertes pour une expérience optimale.'
   },
   {
     icon: Users,
-    title: 'Adoption Terrain',
-    detail: 'Personnel RPA formé, feedback positif, procédures documentées.'
+    title: 'Adoption Réussie',
+    detail: 'Personnel formé et satisfaction utilisateur validée.'
   },
   {
     icon: DollarSign,
-    title: 'Subventions Sécurisées',
-    detail: 'MAPAQ et/ou AGE-WELL approuvés pour financer Phase 2.'
+    title: 'Financement Confirmé',
+    detail: 'Programmes de financement sécurisés pour les phases suivantes.'
   }
 ]
 
@@ -91,11 +91,11 @@ export default function PhaseOne() {
             <CalendarClock className="h-4 w-4" /> PIVOT Phase 1 UniFi
           </div>
           <h2 className="mt-6 text-3xl font-bold md:text-4xl">
-            Roadmap 4 mois · Mars - Juin 2026
+            Roadmap de Développement 2026
           </h2>
           <p className="mt-4 text-lg text-slate-300">
-            Un plan d&apos;exécution pragmatique pour intégrer l&apos;IA de détection chute sur l&apos;infrastructure UniFi
-            existante de l&apos;Auberge Boischatel. MVP opérationnel en 4-6 mois, budget 36-54k$ CAD.
+            Un plan d&apos;exécution structuré pour déployer notre solution de détection intelligente.
+            Développement itératif sur 4 phases, avec validation à chaque étape.
           </p>
         </motion.div>
 
@@ -223,7 +223,7 @@ export default function PhaseOne() {
               <div className="mt-4 space-y-2 text-sm text-slate-300">
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
-                  <span>Auberge Boischatel · 50 lits · RPA Québec</span>
+                  <span>Résidence partenaire · RPA Québec</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
@@ -249,13 +249,12 @@ export default function PhaseOne() {
             </div>
 
             <div className="rounded-3xl border border-emerald-500/40 bg-emerald-500/10 p-6 text-sm text-emerald-200">
-              <div className="font-semibold text-white">Sources Financement Complémentaires</div>
+              <div className="font-semibold text-white">Stratégie de Financement</div>
               <ul className="mt-3 space-y-1 text-xs">
-                <li>• MAPAQ Innovation Santé Aînés (deadline Mars 2026)</li>
-                <li>• AGE-WELL Tech Innovation (deadline Avril 2026)</li>
-                <li>• IRESSS Recherche RPA</li>
-                <li>• CRSNG Alliances + PARI CNRC</li>
-                <li>• Pré-seed Anges Québec (post-pilote si KPI atteints)</li>
+                <li>• Programmes gouvernementaux d&apos;innovation santé</li>
+                <li>• Subventions recherche et développement</li>
+                <li>• Partenariats institutionnels</li>
+                <li>• Financement privé post-validation</li>
               </ul>
             </div>
           </motion.div>

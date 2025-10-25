@@ -13,7 +13,7 @@ const solutions = [
       'YOLOv8 + Jetson edge processing',
       'Dashboard React temps réel',
       'Alertes Slack/Email instantanées',
-      'Budget: 36-54k$ · 4-6 mois'
+      'Budget: budget optimisé · 4-6 mois'
     ],
     accent: 'from-sky-500 to-cyan-500'
   },
@@ -114,7 +114,7 @@ export default function Services() {
           className="mt-12 text-center"
         >
           <p className="text-sm text-slate-600">
-            Phase 1 (2026) est notre focus immédiat. Pilote Auberge Boischatel 50 lits.
+            Phase 1 (2026) est notre focus immédiat. Pilote résidence partenaire 50 lits.
           </p>
         </motion.div>
       </div>
