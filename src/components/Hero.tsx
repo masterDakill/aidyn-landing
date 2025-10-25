@@ -90,17 +90,20 @@ export default function Hero() {
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Link
                   href="#rpa-solution"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 px-7 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-sky-900/30 transition-transform duration-200 hover:translate-y-[-2px] hover:shadow-xl"
+                  className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 px-7 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-sky-500/40 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/50"
                 >
-                  Architecture Technique
-                  <ArrowRight className="h-5 w-5" />
+                  <span className="relative z-10 inline-flex items-center justify-center gap-2">
+                    Architecture Technique
+                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                  <div className="absolute inset-0 -z-0 bg-gradient-to-r from-emerald-400 to-sky-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </Link>
                 <Link
                   href="#contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 px-7 py-4 text-base font-semibold text-slate-50 transition-colors duration-200 hover:border-white/40 hover:bg-white/5"
+                  className="group inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/5 px-7 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-emerald-400/50 hover:bg-emerald-400/10 hover:shadow-lg hover:shadow-emerald-500/20"
                 >
                   Planifier une démo
-                  <MessageSquare className="h-5 w-5" />
+                  <MessageSquare className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
                 </Link>
               </div>
 
