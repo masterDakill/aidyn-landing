@@ -5,7 +5,7 @@ import { CalendarClock, CheckCircle2, DollarSign, Layers3, MapPinned, ShieldAler
 
 const sprints = [
   {
-    period: 'Sprint 1 · Semaines 1-2 (Mars 2025)',
+    period: 'Sprint 1 · Semaines 1-2 (Mars 2026)',
     title: 'Préparation & Données',
     tasks: [
       'Audit infrastructure UniFi @ Auberge (caméras, RTSP, réseau)',
@@ -16,7 +16,7 @@ const sprints = [
     livrables: 'Rapport audit + Dataset 500-1000 images + Matrice subventions'
   },
   {
-    period: 'Sprint 2 · Semaines 3-6 (Avril 2025)',
+    period: 'Sprint 2 · Semaines 3-6 (Avril 2026)',
     title: 'Entraînement Modèle IA',
     tasks: [
       'Fine-tune YOLOv8 pose detection (transfer learning)',
@@ -28,7 +28,7 @@ const sprints = [
     livrables: 'Modèle .onnx + Performance report + FastAPI backend'
   },
   {
-    period: 'Sprint 3 · Semaines 7-9 (Mai 2025)',
+    period: 'Sprint 3 · Semaines 7-9 (Mai 2026)',
     title: 'Dashboard & Alerting',
     tasks: [
       'Dashboard React (multi-cam live, timeline alertes, analytics)',
@@ -40,7 +40,7 @@ const sprints = [
     livrables: 'React app + Docker image + API documentation'
   },
   {
-    period: 'Sprint 4 · Semaines 10-13 (Juin 2025)',
+    period: 'Sprint 4 · Semaines 10-13 (Juin 2026)',
     title: 'Testing & Pilot Go-Live',
     tasks: [
       'Déploiement Jetson @ Auberge Boischatel',
@@ -91,7 +91,7 @@ export default function PhaseOne() {
             <CalendarClock className="h-4 w-4" /> PIVOT Phase 1 UniFi
           </div>
           <h2 className="mt-6 text-3xl font-bold md:text-4xl">
-            Roadmap 4 mois · Mars - Juin 2025
+            Roadmap 4 mois · Mars - Juin 2026
           </h2>
           <p className="mt-4 text-lg text-slate-300">
             Un plan d&apos;exécution pragmatique pour intégrer l&apos;IA de détection chute sur l&apos;infrastructure UniFi
@@ -251,8 +251,8 @@ export default function PhaseOne() {
             <div className="rounded-3xl border border-emerald-500/40 bg-emerald-500/10 p-6 text-sm text-emerald-200">
               <div className="font-semibold text-white">Sources Financement Complémentaires</div>
               <ul className="mt-3 space-y-1 text-xs">
-                <li>• MAPAQ Innovation Santé Aînés (deadline Mars 2025)</li>
-                <li>• AGE-WELL Tech Innovation (deadline Avril 2025)</li>
+                <li>• MAPAQ Innovation Santé Aînés (deadline Mars 2026)</li>
+                <li>• AGE-WELL Tech Innovation (deadline Avril 2026)</li>
                 <li>• IRESSS Recherche RPA</li>
                 <li>• CRSNG Alliances + PARI CNRC</li>
                 <li>• Pré-seed Anges Québec (post-pilote si KPI atteints)</li>

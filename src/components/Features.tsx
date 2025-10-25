@@ -116,7 +116,7 @@ export default function Features() {
               <div className="text-3xl font-bold text-cyan-600">4-6 mois</div>
               <div className="mt-2 text-sm font-semibold text-slate-900">Timeline MVP</div>
               <p className="mt-2 text-xs text-slate-600">
-                Mars - Août 2025 · 4 sprints agile · Pilote Auberge Boischatel
+                Mars - Août 2026 · 4 sprints agile · Pilote Auberge Boischatel
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6">

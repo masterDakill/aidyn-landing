@@ -11,7 +11,7 @@ import Logo from './Logo'
 const navItems = [
   { href: '#rpa-solution', label: 'Architecture', description: 'UniFi + Jetson IA' },
   { href: '#features', label: 'Fonctionnalités', description: 'YOLOv8 · Dashboard React' },
-  { href: '#phase-1', label: 'Roadmap 4 mois', description: 'Mars - Juin 2025 · MVP' },
+  { href: '#phase-1', label: 'Roadmap 4 mois', description: 'Mars - Juin 2026 · MVP' },
   { href: '#services', label: 'Solutions', description: 'Santé · RPA · Immobilier' },
   { href: '#about', label: 'À propos', description: 'AIDYN Technologies' },
   { href: '#contact', label: 'Contact', description: 'Rencontrer l’équipe' }
@@ -50,7 +50,7 @@ export default function Navigation() {
         <div className="flex items-center gap-2 rounded-full bg-slate-950/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-slate-200 shadow-lg backdrop-blur">
           <span>PIVOT Phase 1</span>
           <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-          <span>IA UniFi · Mars-Juin 2025</span>
+          <span>IA UniFi · Mars-Juin 2026</span>
         </div>
       </div>
 
