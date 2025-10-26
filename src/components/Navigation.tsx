@@ -12,6 +12,7 @@ const navItems = [
   { href: '#features', label: 'Fonctionnalités' },
   { href: '#innovation-3d', label: 'Innovation 3D' },
   { href: '#phase-1', label: 'Roadmap' },
+  { href: '/modeles-3d', label: 'Modèles 3D', isExternal: true },
   { href: '#contact', label: 'Contact' }
 ]
 
