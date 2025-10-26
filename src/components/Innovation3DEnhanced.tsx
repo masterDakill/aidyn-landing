@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Brain, Cube, Eye, Layers } from 'lucide-react'
+import { Brain, Box, Eye, Layers } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
 const Model3D = dynamic(() => import('./Model3D'), { 
@@ -22,7 +22,7 @@ const innovations = [
     color: 'from-purple-500 to-pink-500'
   },
   {
-    icon: Cube,
+    icon: Box,
     title: 'Carte Thermique 3D Intelligente',
     description: 'Reconstruction spatiale 3D avec prédiction des zones futures à risque',
     metric: 'Précision ±10cm',
@@ -97,7 +97,7 @@ export default function Innovation3DEnhanced() {
             <div className="absolute bottom-8 left-8 right-8 rounded-2xl border border-white/10 bg-slate-950/90 p-4 backdrop-blur-xl">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
-                  <Cube className="h-5 w-5 text-purple-400" />
+                  <Box className="h-5 w-5 text-purple-400" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">Dashboard 3D Interactif</p>

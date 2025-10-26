@@ -27,16 +27,9 @@ function Model({
   autoRotate = false 
 }: Omit<Model3DProps, 'className' | 'cameraPosition' | 'enableZoom' | 'showShadows' | 'environmentPreset'>) {
   const meshRef = useRef<THREE.Group>(null)
-  const [error, setError] = useState<string | null>(null)
 
-  // Charger le modèle GLTF/GLB
-  let gltf
-  try {
-    gltf = useLoader(GLTFLoader, modelPath)
-  } catch (err) {
-    setError(`Erreur de chargement: ${err}`)
-    console.error('Erreur chargement modèle 3D:', err)
-  }
+  // Charger le modèle GLTF/GLB - MUST be called unconditionally
+  const gltf = useLoader(GLTFLoader, modelPath)
 
   // Animation de rotation automatique
   useFrame((state, delta) => {
@@ -45,7 +38,7 @@ function Model({
     }
   })
 
-  if (error) {
+  if (!gltf?.scene) {
     return (
       <mesh>
         <boxGeometry args={[1, 1, 1]} />
@@ -53,8 +46,6 @@ function Model({
       </mesh>
     )
   }
-
-  if (!gltf) return null
 
   return (
     <group 
