@@ -79,7 +79,7 @@ export default function Background3D({
         className="h-full w-full"
         gl={{ alpha: true, antialias: true }}
       >
-        <PerspectiveCamera makeDefault position={[0, 0, 12]} />
+        <PerspectiveCamera makeDefault position={[0, 0, 20]} />
         
         {/* Lumières douces */}
         <ambientLight intensity={0.3} />

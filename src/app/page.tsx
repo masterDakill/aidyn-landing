@@ -33,9 +33,9 @@ export default function HomePage() {
       {/* 3D Logo Background - Fixed throughout the site */}
       <Background3D 
         modelPath="/models/aidyn_logo.glb"
-        opacity={0.15}
-        scale={3}
-        scrollSpeed={0.0008}
+        opacity={0.12}
+        scale={2.5}
+        scrollSpeed={0.0006}
       />
       
       <Navigation />

@@ -150,29 +150,29 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
-              className="relative"
+              className="relative aspect-square"
             >
-              <div className="absolute inset-0 hidden rounded-[3rem] bg-sky-500/10 blur-3xl lg:block" />
-              <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl shadow-sky-950/60 backdrop-blur-xl">
-                {/* Placeholder visuel élégant - Le logo 3D est maintenant en background du site */}
-                <div className="aspect-square w-full flex items-center justify-center p-12">
-                  <div className="space-y-6 text-center">
-                    <div className="mx-auto h-32 w-32 rounded-full bg-gradient-to-br from-sky-500/20 to-cyan-500/20 backdrop-blur-xl border border-white/10 flex items-center justify-center">
-                      <div className="h-24 w-24 rounded-full bg-gradient-to-br from-sky-400 to-cyan-400 opacity-20 animate-pulse"></div>
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="text-2xl font-bold text-white">
-                        Logo 3D Interactif
-                      </h3>
-                      <p className="text-slate-300">
-                        Visible en arrière-plan du site
-                      </p>
-                      <p className="text-sm text-sky-400">
-                        ✨ Scrollez pour voir l&apos;animation
-                      </p>
-                    </div>
-                  </div>
-                </div>
+              <div className="absolute inset-0 rounded-[3rem] bg-sky-500/10 blur-3xl" />
+              {/* Logo 3D principal - Interactif avec contrôles complets */}
+              <div className="relative h-full w-full">
+                {USE_POLYCAM_EMBED ? (
+                  <PolycamEmbed 
+                    captureId="bcf810d5-ad61-4094-b263-5bf851e2c600"
+                    className="h-full w-full"
+                  />
+                ) : (
+                  <Model3D
+                    modelPath="/models/aidyn_logo.glb"
+                    scale={1.2}
+                    rotation={[0, 0, 0]}
+                    autoRotate={true}
+                    autoRotateSpeed={0.1}
+                    cameraPosition={[0, 0, 10]}
+                    environmentPreset="studio"
+                    enableZoom={true}
+                    showShadows={false}
+                  />
+                )}
               </div>
 
               <motion.div

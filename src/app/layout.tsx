@@ -23,9 +23,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  icons: {
-    icon: '/favicon.ico',
-  },
+  // Next.js détecte automatiquement icon.png et apple-icon.png dans src/app/
 }
 
 export default function RootLayout({
