@@ -48,13 +48,13 @@ function BackgroundModel({
 
   if (!gltf?.scene) return null
 
-  // Appliquer l'opacité à tous les matériaux (25% pour bonne visibilité)
+  // Appliquer l'opacité à tous les matériaux (50% pour haute visibilité)
   gltf.scene.traverse((child) => {
     if (child instanceof THREE.Mesh) {
       if (child.material) {
         const material = child.material as THREE.MeshStandardMaterial
         material.transparent = true
-        material.opacity = 0.25
+        material.opacity = 0.5
         material.depthWrite = false
       }
     }
@@ -80,9 +80,10 @@ export default function Background3D({
       >
         <PerspectiveCamera makeDefault position={[0, 0, 20]} />
         
-        {/* Lumières douces */}
-        <ambientLight intensity={0.3} />
-        <directionalLight position={[5, 5, 5]} intensity={0.3} />
+        {/* Lumières augmentées pour meilleure visibilité */}
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[5, 5, 5]} intensity={0.8} />
+        <directionalLight position={[-5, -5, -5]} intensity={0.4} />
         
         {/* Environnement subtil */}
         <Environment preset="studio" />
