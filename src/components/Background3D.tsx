@@ -48,13 +48,13 @@ function BackgroundModel({
 
   if (!gltf?.scene) return null
 
-  // Appliquer l'opacité à tous les matériaux
+  // Appliquer l'opacité à tous les matériaux (25% pour bonne visibilité)
   gltf.scene.traverse((child) => {
     if (child instanceof THREE.Mesh) {
       if (child.material) {
         const material = child.material as THREE.MeshStandardMaterial
         material.transparent = true
-        material.opacity = 0.15
+        material.opacity = 0.25
         material.depthWrite = false
       }
     }
@@ -69,10 +69,9 @@ function BackgroundModel({
 
 export default function Background3D({
   modelPath,
-  opacity = 0.15,
   scale = 3,
   scrollSpeed = 0.001
-}: Background3DProps) {
+}: Omit<Background3DProps, 'opacity'>) {
   return (
     <div className="pointer-events-none fixed inset-0 z-0">
       <Canvas

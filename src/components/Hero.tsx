@@ -7,20 +7,6 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import Logo from './Logo'
-import PolycamEmbed from './PolycamEmbed'
-
-// Charger le composant 3D dynamiquement (évite les problèmes SSR)
-const Model3D = dynamic(() => import('./Model3D'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex h-full w-full items-center justify-center">
-      <div className="h-12 w-12 animate-spin rounded-full border-4 border-sky-400 border-t-transparent"></div>
-    </div>
-  )
-})
-
-// Toggle entre Model3D local et Polycam Embed
-const USE_POLYCAM_EMBED = false // true = Polycam iframe, false = modèle local GLB
 
 const stats = [
   {
