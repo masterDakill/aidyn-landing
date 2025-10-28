@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import Logo from './Logo'
+import PolycamEmbed from './PolycamEmbed'
 
 // Charger le composant 3D dynamiquement (évite les problèmes SSR)
 const Model3D = dynamic(() => import('./Model3D'), {
@@ -17,6 +18,9 @@ const Model3D = dynamic(() => import('./Model3D'), {
     </div>
   )
 })
+
+// Toggle entre Model3D local et Polycam Embed
+const USE_POLYCAM_EMBED = true // Change à false pour utiliser le modèle local
 
 const stats = [
   {
@@ -151,15 +155,22 @@ export default function Hero() {
               <div className="absolute inset-0 hidden rounded-[3rem] bg-sky-500/10 blur-3xl lg:block" />
               <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl shadow-sky-950/60">
                 <div className="aspect-square w-full">
-                  <Model3D
-                    modelPath="/models/logo-aidyn.glb"
-                    scale={1.8}
-                    autoRotate={true}
-                    cameraPosition={[0, 0, 5]}
-                    environmentPreset="city"
-                    enableZoom={true}
-                    showShadows={true}
-                  />
+                  {USE_POLYCAM_EMBED ? (
+                    <PolycamEmbed 
+                      captureId="bcf810d5-ad61-4094-b263-5bf851e2c600"
+                      className="h-full w-full"
+                    />
+                  ) : (
+                    <Model3D
+                      modelPath="/models/logo-aidyn.glb"
+                      scale={1.8}
+                      autoRotate={true}
+                      cameraPosition={[0, 0, 5]}
+                      environmentPreset="city"
+                      enableZoom={true}
+                      showShadows={true}
+                    />
+                  )}
                 </div>
               </div>
 
