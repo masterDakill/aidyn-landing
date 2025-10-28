@@ -7,44 +7,44 @@ const steps = [
   {
     number: '01',
     icon: Camera,
-    title: 'Flux RTSP UniFi',
-    description: 'Connexion aux caméras UniFi Protect existantes via flux RTSP (H.264). Aucun changement matériel requis.',
-    technical: 'RTSP Stream H.264 • 1080p @ 30fps',
+    title: 'Vos Caméras Actuelles',
+    description: 'Connecte directement à vos caméras UniFi Protect existantes. Aucune installation de nouveaux équipements.',
+    technical: 'Flux RTSP H.264 • 1080p @ 30fps',
     color: 'from-sky-500 to-cyan-500'
   },
   {
     number: '02',
     icon: Cpu,
-    title: 'Inférence Jetson',
-    description: 'Analyse IA locale sur Jetson Nano/Orin avec YOLOv8-Pose (ONNX). Détection de chutes en temps réel.',
-    technical: 'YOLOv8-Pose ONNX • TensorRT INT8 • <500ms latence',
+    title: 'Analyse Intelligente',
+    description: 'Intelligence artificielle locale qui analyse les images en temps réel pour détecter les chutes instantanément.',
+    technical: 'IA YOLOv8-Pose sur Jetson • <500ms',
     color: 'from-cyan-500 to-emerald-500'
   },
   {
     number: '03',
     icon: Webhook,
-    title: 'Webhook FastAPI',
-    description: 'Événements transmis au backend via webhook HTTP. Persistance PostgreSQL, cache Redis, émission WebSocket.',
-    technical: 'FastAPI • PostgreSQL • Redis • WebSocket',
+    title: 'Communication Sécurisée',
+    description: 'Transmission instantanée et sécurisée des alertes vers votre système de gestion. Données sauvegardées.',
+    technical: 'Backend FastAPI • PostgreSQL • WebSocket',
     color: 'from-emerald-500 to-teal-500'
   },
   {
     number: '04',
     icon: MonitorDot,
-    title: 'Dashboard Temps Réel',
-    description: 'Interface React avec alertes instantanées, timeline événements, KPI live, et visualisation 3D des incidents.',
-    technical: 'React • Socket.IO • Three.js • Tailwind',
+    title: 'Visualisation en Direct',
+    description: 'Dashboard interactif avec alertes temps réel, historique complet, et visualisation 3D de votre résidence.',
+    technical: 'React • Three.js • Socket temps réel',
     color: 'from-teal-500 to-sky-500'
   }
 ]
 
 const benefits = [
-  'Infrastructure existante conservée (UniFi Protect)',
-  'Traitement local IA (confidentialité garantie)',
-  'Alertes multi-canaux (Slack, Email, SMS)',
-  'Dashboard temps réel et replay 3D',
-  'Déploiement rapide (<1 jour)',
-  'KPI objectifs: ≥95% précision, <5% faux positifs'
+  'Utilise vos caméras UniFi existantes',
+  'Analyse locale (vos données restent chez vous)',
+  'Alertes Slack, Email, SMS automatiques',
+  'Visualisation 3D et rejeu des incidents',
+  'Installation rapide (moins d\'une journée)',
+  'Très fiable: 95% précision, peu de fausses alertes'
 ]
 
 export default function HowItWorks() {
@@ -75,8 +75,8 @@ export default function HowItWorks() {
             </span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-slate-300">
-            Pipeline technique RTSP → Jetson → Webhook → Dashboard en 4 étapes simples. 
-            Intégration sur infrastructure existante sans modification matérielle.
+            Un système simple en 4 étapes qui transforme vos caméras de sécurité en gardiens intelligents. 
+            <strong className="text-white">S&apos;intègre à votre infrastructure actuelle sans nouveaux équipements.</strong>
           </p>
         </motion.div>
 

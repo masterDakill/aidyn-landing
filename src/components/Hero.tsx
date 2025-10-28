@@ -9,41 +9,48 @@ import Logo from './Logo'
 
 const kpiTargets = [
   {
-    label: 'Précision IA',
+    label: 'Précision',
     value: '≥ 95 %',
-    description: 'Objectif détection de chutes (YOLOv8 Pose)'
+    description: 'Détection fiable des chutes',
+    technical: 'YOLOv8-Pose sur Jetson'
   },
   {
     label: 'Faux Positifs',
     value: '< 5 %',
-    description: 'Taux d\'erreur minimal pour fiabilité opérationnelle'
+    description: 'Très peu de fausses alertes',
+    technical: 'Taux d\'erreur opérationnel'
   },
   {
-    label: 'Latence',
+    label: 'Réactivité',
     value: '< 500 ms',
-    description: 'Temps de traitement frame (inférence Jetson locale)'
+    description: 'Alerte quasi-instantanée',
+    technical: 'Latence inférence locale'
   }
 ]
 
-const pipelineSteps: Array<{ title: string; description: string; icon: LucideIcon }> = [
+const pipelineSteps: Array<{ title: string; description: string; technical: string; icon: LucideIcon }> = [
   {
-    title: '1. Flux RTSP UniFi',
-    description: 'Caméras UniFi Protect existantes (H.264)',
+    title: '1. Vos Caméras',
+    description: 'Utilise vos caméras UniFi actuelles',
+    technical: 'RTSP H.264 UniFi Protect',
     icon: Building2
   },
   {
-    title: '2. Inférence Jetson',
-    description: 'YOLOv8-Pose ONNX (Nano/Orin), <500ms',
+    title: '2. Analyse IA',
+    description: 'Intelligence artificielle locale',
+    technical: 'YOLOv8-Pose ONNX (Jetson)',
     icon: Cpu
   },
   {
-    title: '3. Webhook FastAPI',
-    description: 'Événements → Backend → WebSocket',
+    title: '3. Communication',
+    description: 'Transmission sécurisée des alertes',
+    technical: 'FastAPI + WebSocket',
     icon: Radar
   },
   {
-    title: '4. Dashboard Temps Réel',
-    description: 'Alertes instantanées + Vue 3D',
+    title: '4. Dashboard',
+    description: 'Visualisation temps réel',
+    technical: 'Alertes + Jumeau 3D',
     icon: ShieldCheck
   }
 ]
@@ -76,13 +83,13 @@ export default function Hero() {
               <div className="space-y-6">
                 <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl xl:text-6xl">
                   <span className="bg-gradient-to-r from-sky-300 via-cyan-200 to-emerald-200 bg-clip-text text-transparent">
-                    IA détection chute
+                    Détection automatique des chutes
                   </span>{' '}
-                  sur vos caméras UniFi existantes
+                  avec vos caméras UniFi
                 </h1>
                 <p className="text-lg text-slate-200 sm:text-xl">
-                  AIDYN Technologies intègre l&apos;intelligence artificielle directement dans votre infrastructure UniFi UDM Pro.
-                  Détection automatique des chutes avec alertes temps réel, sans changement matériel. Déploiement pilote 2026.
+                  AIDYN transforme vos caméras de sécurité existantes en système intelligent de prévention des chutes.
+                  Alertes instantanées, visualisation 3D en temps réel. <strong className="text-white">Aucun nouveau matériel requis.</strong>
                 </p>
               </div>
 
@@ -114,6 +121,7 @@ export default function Hero() {
                       <div className="text-2xl font-semibold text-sky-300 sm:text-3xl">{kpi.value}</div>
                       <div className="text-sm font-semibold text-slate-100">{kpi.label}</div>
                       <p className="mt-1 text-xs text-slate-300">{kpi.description}</p>
+                      <p className="mt-0.5 text-[10px] text-slate-400">{kpi.technical}</p>
                     </div>
                   ))}
                 </div>
@@ -122,7 +130,7 @@ export default function Hero() {
               <div className="space-y-3">
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-emerald-400">Pipeline Technique</h3>
                 <div className="grid gap-3 sm:grid-cols-2">
-                  {pipelineSteps.map(({ title, description, icon: Icon }) => (
+                  {pipelineSteps.map(({ title, description, technical, icon: Icon }) => (
                     <div key={title} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-3 backdrop-blur">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-200">
                         <Icon className="h-4 w-4" />
@@ -130,6 +138,7 @@ export default function Hero() {
                       <div>
                         <p className="text-xs font-semibold text-white">{title}</p>
                         <p className="text-xs text-slate-300">{description}</p>
+                        <p className="text-[10px] text-slate-400">{technical}</p>
                       </div>
                     </div>
                   ))}
@@ -150,8 +159,11 @@ export default function Hero() {
                   <span className="text-base font-semibold text-white">Solution IA Edge Computing</span>
                 </div>
                 <p className="text-sm text-slate-200">
-                  Modèle IA avancé intégré dans votre infrastructure UniFi existante. 
-                  Détection automatique et alertes temps réel. Déploiement rapide 2026.
+                  Intelligence artificielle qui s&apos;intègre à votre système de caméras actuel. 
+                  Détecte les chutes automatiquement et vous alerte immédiatement.
+                </p>
+                <p className="text-xs text-slate-400 mt-2">
+                  Edge computing sur Jetson • Déploiement 2026
                 </p>
               </div>
             </motion.div>

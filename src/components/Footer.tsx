@@ -1,5 +1,6 @@
-import { Brain, Mail, Linkedin, Twitter, Github, ExternalLink } from 'lucide-react'
+import { Mail, Linkedin, Twitter, Github, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -10,9 +11,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
-                <Brain className="w-6 h-6 text-white" />
-              </div>
+              <Image
+                src="/images/brand/aidyn-logo-circle.png"
+                alt="AIDYN Logo"
+                width={40}
+                height={40}
+                className="shrink-0"
+              />
               <span className="text-2xl font-bold">AIDYN</span>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">

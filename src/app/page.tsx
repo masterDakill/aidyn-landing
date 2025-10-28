@@ -14,6 +14,8 @@ const About = dynamic(() => import('@/components/About'))
 const Contact = dynamic(() => import('@/components/Contact'))
 const Footer = dynamic(() => import('@/components/Footer'))
 const Innovation3D = dynamic(() => import('@/components/Innovation3D'))
+const RoadmapEnhanced = dynamic(() => import('@/components/RoadmapEnhanced'))
+const GrantsCTA = dynamic(() => import('@/components/GrantsCTA'))
 // Logo3DShowcase removed - too heavy for performance
 
 // Floating components - loaded with SSR disabled for better performance
@@ -63,6 +65,16 @@ export default function HomePage() {
         {/* Innovation 3D Section - Technical Depth */}
         <section id="innovation-3d">
           <Innovation3D />
+        </section>
+
+        {/* Roadmap Enhanced - 3 Phases 2026-2028 */}
+        <section id="roadmap">
+          <RoadmapEnhanced />
+        </section>
+
+        {/* Grants CTA - Financing Available */}
+        <section id="grants-cta">
+          <GrantsCTA />
         </section>
 
         {/* Phase 1 Section */}

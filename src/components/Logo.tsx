@@ -1,6 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
+import Image from 'next/image'
 
 export type LogoVariant = 'light' | 'dark'
 
@@ -19,60 +20,15 @@ export default function Logo({
 
   return (
     <div className={clsx('inline-flex items-center gap-3', className)}>
-      {/* Ultra-light SVG Logo - No hover effects for performance */}
-      <svg
+      {/* Logo 3D AIDYN - Image PNG */}
+      <Image
+        src="/images/brand/aidyn-logo-circle.png"
+        alt="AIDYN Logo"
         width={size}
-        height={size * 1.4}
-        viewBox="0 0 100 140"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        height={size}
         className="shrink-0"
-      >
-        {/* Top sphere */}
-        <ellipse
-          cx="50"
-          cy="25"
-          rx="22"
-          ry="22"
-          fill="currentColor"
-          className={variant === 'light' ? 'text-slate-800' : 'text-white'}
-        />
-        
-        {/* Connection/neck */}
-        <path
-          d="M 35 35 Q 30 50 28 60 L 72 60 Q 70 50 65 35 Z"
-          fill="currentColor"
-          className={variant === 'light' ? 'text-slate-800' : 'text-white'}
-        />
-        
-        {/* Bottom large sphere */}
-        <ellipse
-          cx="50"
-          cy="85"
-          rx="35"
-          ry="35"
-          fill="currentColor"
-          className={variant === 'light' ? 'text-slate-800' : 'text-white'}
-        />
-
-        {/* Simple inner highlights */}
-        <ellipse
-          cx="50"
-          cy="25"
-          rx="12"
-          ry="12"
-          fill="#06B6D4"
-          opacity="0.3"
-        />
-        <ellipse
-          cx="50"
-          cy="85"
-          rx="20"
-          ry="20"
-          fill="#06B6D4"
-          opacity="0.2"
-        />
-      </svg>
+        priority
+      />
 
       {/* Text - no animations */}
       {!compact && (
@@ -82,7 +38,7 @@ export default function Logo({
             variant === 'light' ? 'text-slate-900' : 'text-white'
           )}
         >
-          AiDYN
+          AIDYN
         </span>
       )}
       

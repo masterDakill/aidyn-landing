@@ -139,8 +139,8 @@ export default function Innovation3D() {
           </h2>
           
           <p className="mt-6 text-xl text-slate-300">
-            Visualisez votre résidence en <strong className="text-emerald-400">3D interactive</strong> avec détection IA, 
-            replay forensique des incidents, et heatmap prédictive. Phase 1 inclut le <strong className="text-teal-400">Dashboard WebGL</strong> complet.
+            Visualisez votre résidence en <strong className="text-emerald-400">3D interactive</strong> avec positions en temps réel, 
+            rejeu des incidents, et zones à risque identifiées. <strong className="text-teal-400">Inclus dès Phase 1.</strong>
           </p>
 
           {/* Metrics Bar */}
@@ -197,8 +197,8 @@ export default function Innovation3D() {
                 </div>
 
                 <p className="mt-6 text-lg text-slate-300">
-                  Visualisez votre résidence en <strong className="text-emerald-400">3D interactive</strong> avec positions résidents 
-                  en temps réel, replay forensique des incidents, et heatmap prédictive des zones à risque.
+                  Voyez votre résidence comme jamais auparavant : une <strong className="text-emerald-400">réplique 3D interactive</strong> montrant 
+                  les positions en temps réel, le rejeu complet des incidents, et les zones qui nécessitent plus d&apos;attention.
                 </p>
 
                 {/* Key Features */}
