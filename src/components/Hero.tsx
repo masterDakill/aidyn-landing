@@ -3,10 +3,20 @@
 import type { LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Building2, Cpu, MessageSquare, Radar, ShieldCheck } from 'lucide-react'
-import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import Logo from './Logo'
+
+// Charger le composant 3D dynamiquement (évite les problèmes SSR)
+const Model3D = dynamic(() => import('./Model3D'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center">
+      <div className="h-12 w-12 animate-spin rounded-full border-4 border-sky-400 border-t-transparent"></div>
+    </div>
+  )
+})
 
 const stats = [
   {
@@ -140,14 +150,17 @@ export default function Hero() {
             >
               <div className="absolute inset-0 hidden rounded-[3rem] bg-sky-500/10 blur-3xl lg:block" />
               <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl shadow-sky-950/60">
-                <Image
-                  src="/images/products/serenacare-hero.png"
-                  alt="Architecture IA UniFi - Détection de Chute Temps Réel"
-                  width={1200}
-                  height={900}
-                  priority
-                  className="h-full w-full object-contain"
-                />
+                <div className="aspect-square w-full">
+                  <Model3D
+                    modelPath="/models/logo-aidyn.glb"
+                    scale={1.8}
+                    autoRotate={true}
+                    cameraPosition={[0, 0, 5]}
+                    environmentPreset="city"
+                    enableZoom={true}
+                    showShadows={true}
+                  />
+                </div>
               </div>
 
               <motion.div
