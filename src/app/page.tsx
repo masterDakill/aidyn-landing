@@ -30,12 +30,12 @@ const Background3D = dynamic(
 export default function HomePage() {
   return (
     <>
-      {/* 3D Logo Background - Fixed throughout the site */}
+      {/* 3D Logo Background - Fixed throughout the site, principal visual element */}
       <Background3D 
         modelPath="/models/aidyn_logo.glb"
-        opacity={0.12}
-        scale={2.5}
-        scrollSpeed={0.0006}
+        opacity={0.25}
+        scale={3.5}
+        scrollSpeed={0.0008}
       />
       
       <Navigation />

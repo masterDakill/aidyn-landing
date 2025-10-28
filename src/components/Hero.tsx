@@ -146,46 +146,23 @@ export default function Hero() {
               </div>
             </motion.div>
 
+            {/* Logo 3D géré par le Background3D component - pas de conteneur ici */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
-              className="relative aspect-square"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="rounded-2xl border border-white/10 bg-slate-950/80 p-6 shadow-xl shadow-black/40 backdrop-blur"
             >
-              <div className="absolute inset-0 rounded-[3rem] bg-sky-500/10 blur-3xl" />
-              {/* Logo 3D principal - Interactif avec contrôles complets */}
-              <div className="relative h-full w-full">
-                {USE_POLYCAM_EMBED ? (
-                  <PolycamEmbed 
-                    captureId="bcf810d5-ad61-4094-b263-5bf851e2c600"
-                    className="h-full w-full"
-                  />
-                ) : (
-                  <Model3D
-                    modelPath="/models/aidyn_logo.glb"
-                    scale={1.2}
-                    rotation={[0, 0, 0]}
-                    autoRotate={true}
-                    autoRotateSpeed={0.1}
-                    cameraPosition={[0, 0, 10]}
-                    environmentPreset="studio"
-                    enableZoom={true}
-                    showShadows={false}
-                  />
-                )}
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="absolute -bottom-10 left-6 right-6 rounded-2xl border border-white/10 bg-slate-950/80 p-5 shadow-xl shadow-black/40 backdrop-blur"
-              >
-                <div className="flex items-center gap-3 text-sm text-slate-200">
-                  <ShieldCheck className="h-5 w-5 text-emerald-300" />
-                  <span>Modèle IA avancé + Edge Computing · Déploiement rapide 2026</span>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <ShieldCheck className="h-6 w-6 text-emerald-300" />
+                  <span className="text-base font-semibold text-white">Solution IA Edge Computing</span>
                 </div>
-              </motion.div>
+                <p className="text-sm text-slate-200">
+                  Modèle IA avancé intégré dans votre infrastructure UniFi existante. 
+                  Détection automatique et alertes temps réel. Déploiement rapide 2026.
+                </p>
+              </div>
             </motion.div>
           </div>
         </div>
