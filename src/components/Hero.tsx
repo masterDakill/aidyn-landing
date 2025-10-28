@@ -7,44 +7,44 @@ import Link from 'next/link'
 
 import Logo from './Logo'
 
-const stats = [
+const kpiTargets = [
   {
-    label: 'Précision visée',
+    label: 'Précision IA',
     value: '≥ 95 %',
-    description: 'Détection IA chute sur caméras UniFi existantes'
+    description: 'Objectif détection de chutes (YOLOv8 Pose)'
   },
   {
-    label: 'Déploiement',
-    value: '< 1 jour',
-    description: 'Installation rapide sur infrastructure existante'
+    label: 'Faux Positifs',
+    value: '< 5 %',
+    description: 'Taux d\'erreur minimal pour fiabilité opérationnelle'
   },
   {
-    label: 'Timeline',
-    value: '2026',
-    description: 'Déploiement pilote et validation marché'
+    label: 'Latence',
+    value: '< 500 ms',
+    description: 'Temps de traitement frame (inférence Jetson locale)'
   }
 ]
 
-const quickWins: Array<{ title: string; description: string; icon: LucideIcon }> = [
+const pipelineSteps: Array<{ title: string; description: string; icon: LucideIcon }> = [
   {
-    title: 'Infrastructure Existante',
-    description: 'Caméras UniFi Protect + UDM Pro déjà en place',
+    title: '1. Flux RTSP UniFi',
+    description: 'Caméras UniFi Protect existantes (H.264)',
     icon: Building2
   },
   {
-    title: 'IA Edge Computing',
-    description: 'Traitement intelligent local en temps réel',
+    title: '2. Inférence Jetson',
+    description: 'YOLOv8-Pose ONNX (Nano/Orin), <500ms',
     icon: Cpu
   },
   {
-    title: 'Sécurité Maximale',
-    description: 'Analyse locale des données, confidentialité garantie',
-    icon: ShieldCheck
+    title: '3. Webhook FastAPI',
+    description: 'Événements → Backend → WebSocket',
+    icon: Radar
   },
   {
-    title: 'Alertes Intelligentes',
-    description: 'Notifications instantanées multi-canaux',
-    icon: Radar
+    title: '4. Dashboard Temps Réel',
+    description: 'Alertes instantanées + Vue 3D',
+    icon: ShieldCheck
   }
 ]
 
@@ -106,28 +106,34 @@ export default function Hero() {
                 </Link>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-3">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/30 backdrop-blur">
-                    <div className="text-2xl font-semibold text-sky-300 sm:text-3xl">{stat.value}</div>
-                    <div className="text-sm font-semibold text-slate-100">{stat.label}</div>
-                    <p className="mt-1 text-xs text-slate-300">{stat.description}</p>
-                  </div>
-                ))}
+              <div className="space-y-3">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-sky-400">KPI Cibles Phase 1</h3>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  {kpiTargets.map((kpi) => (
+                    <div key={kpi.label} className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/30 backdrop-blur">
+                      <div className="text-2xl font-semibold text-sky-300 sm:text-3xl">{kpi.value}</div>
+                      <div className="text-sm font-semibold text-slate-100">{kpi.label}</div>
+                      <p className="mt-1 text-xs text-slate-300">{kpi.description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="grid gap-4 pt-4 sm:grid-cols-2">
-                {quickWins.map(({ title, description, icon: Icon }) => (
-                  <div key={title} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-500/20 text-sky-200">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{title}</p>
-                      <p className="text-sm text-slate-300">{description}</p>
+              <div className="space-y-3">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-emerald-400">Pipeline Technique</h3>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {pipelineSteps.map(({ title, description, icon: Icon }) => (
+                    <div key={title} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-3 backdrop-blur">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-200">
+                        <Icon className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <p className="text-xs font-semibold text-white">{title}</p>
+                        <p className="text-xs text-slate-300">{description}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </motion.div>
 
