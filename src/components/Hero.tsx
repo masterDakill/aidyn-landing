@@ -3,7 +3,6 @@
 import type { LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Building2, Cpu, MessageSquare, Radar, ShieldCheck } from 'lucide-react'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import Logo from './Logo'
