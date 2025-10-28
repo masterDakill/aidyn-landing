@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useRef } from 'react'
+import { Suspense, useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
@@ -13,6 +13,7 @@ interface Model3DProps {
   position?: [number, number, number]
   autoRotate?: boolean
   autoRotateSpeed?: number // Vitesse de rotation (0.1 = très lent, 1 = normal, 2 = rapide)
+  scrollAnimation?: boolean // Animation réactive au scroll
   className?: string
   cameraPosition?: [number, number, number]
   enableZoom?: boolean
@@ -26,17 +27,38 @@ function Model({
   rotation = [0, 0, 0],
   position = [0, 0, 0],
   autoRotate = false,
-  autoRotateSpeed = 0.5
+  autoRotateSpeed = 0.5,
+  scrollAnimation = false
 }: Omit<Model3DProps, 'className' | 'cameraPosition' | 'enableZoom' | 'showShadows' | 'environmentPreset'>) {
   const meshRef = useRef<THREE.Group>(null)
+  const [scrollY, setScrollY] = useState(0)
 
   // Charger le modèle GLTF/GLB - MUST be called unconditionally
   const gltf = useLoader(GLTFLoader, modelPath)
 
-  // Animation de rotation automatique (très lente et subtile)
+  // Écouter le scroll de la page (uniquement côté client)
+  useEffect(() => {
+    if (!scrollAnimation) return
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [scrollAnimation])
+
+  // Animation de rotation automatique + réaction au scroll
   useFrame((state, delta) => {
-    if (meshRef.current && autoRotate) {
-      meshRef.current.rotation.y += delta * autoRotateSpeed
+    if (meshRef.current) {
+      if (scrollAnimation) {
+        // Rotation basée sur le scroll (plus fluide et naturel)
+        meshRef.current.rotation.y = scrollY * 0.002
+        meshRef.current.rotation.x = Math.sin(scrollY * 0.001) * 0.1
+      } else if (autoRotate) {
+        // Rotation automatique lente
+        meshRef.current.rotation.y += delta * autoRotateSpeed
+      }
     }
   })
 
@@ -77,6 +99,7 @@ export default function Model3D({
   position = [0, 0, 0],
   autoRotate = true,
   autoRotateSpeed = 0.5,
+  scrollAnimation = false,
   className = '',
   cameraPosition = [0, 0, 5],
   enableZoom = true,
@@ -112,6 +135,7 @@ export default function Model3D({
             position={position}
             autoRotate={autoRotate}
             autoRotateSpeed={autoRotateSpeed}
+            scrollAnimation={scrollAnimation}
           />
         </Suspense>
 

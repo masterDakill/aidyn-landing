@@ -163,11 +163,10 @@ export default function Hero() {
                   ) : (
                     <Model3D
                       modelPath="/models/aidyn_logo.glb"
-                      scale={2.2}
-                      rotation={[0, 0.3, 0]}
-                      autoRotate={true}
-                      autoRotateSpeed={0.15}
-                      cameraPosition={[0, 0, 6]}
+                      scale={1.5}
+                      rotation={[0, 0, 0]}
+                      scrollAnimation={true}
+                      cameraPosition={[0, 0, 8]}
                       environmentPreset="studio"
                       enableZoom={true}
                       showShadows={true}
