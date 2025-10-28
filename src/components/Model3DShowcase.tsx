@@ -44,6 +44,18 @@ const models: ModelConfig[] = [
     environmentPreset: 'studio'
   },
   {
+    id: 'polycam',
+    name: 'Scan Polycam 3D',
+    description: 'Exemple de scan 3D photogramétrique avec textures réalistes',
+    modelPath: '/models/polycam-example.glb',
+    icon: Box,
+    scale: 1.2,
+    rotation: [0, 0, 0],
+    position: [0, -0.5, 0],
+    cameraPosition: [0, 0, 3],
+    environmentPreset: 'sunset'
+  },
+  {
     id: 'device',
     name: 'Dispositif SerenaCare',
     description: 'Bracelet connecté IP67 avec capteurs biométriques',
