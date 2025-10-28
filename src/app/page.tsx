@@ -14,8 +14,7 @@ const About = dynamic(() => import('@/components/About'))
 const Contact = dynamic(() => import('@/components/Contact'))
 const Footer = dynamic(() => import('@/components/Footer'))
 const Innovation3D = dynamic(() => import('@/components/Innovation3D'))
-const RoadmapEnhanced = dynamic(() => import('@/components/RoadmapEnhanced'))
-const GrantsCTA = dynamic(() => import('@/components/GrantsCTA'))
+const RoadmapCommercial = dynamic(() => import('@/components/RoadmapCommercial'))
 // Logo3DShowcase removed - too heavy for performance
 
 // Floating components - loaded with SSR disabled for better performance
@@ -67,14 +66,9 @@ export default function HomePage() {
           <Innovation3D />
         </section>
 
-        {/* Roadmap Enhanced - 3 Phases 2026-2028 */}
+        {/* Roadmap Commercial - Products Evolution 2026-2028 */}
         <section id="roadmap">
-          <RoadmapEnhanced />
-        </section>
-
-        {/* Grants CTA - Financing Available */}
-        <section id="grants-cta">
-          <GrantsCTA />
+          <RoadmapCommercial />
         </section>
 
         {/* Phase 1 Section */}
