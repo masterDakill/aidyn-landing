@@ -20,7 +20,7 @@ const Model3D = dynamic(() => import('./Model3D'), {
 })
 
 // Toggle entre Model3D local et Polycam Embed
-const USE_POLYCAM_EMBED = true // Change à false pour utiliser le modèle local
+const USE_POLYCAM_EMBED = false // true = Polycam iframe, false = modèle local GLB
 
 const stats = [
   {
@@ -162,7 +162,7 @@ export default function Hero() {
                     />
                   ) : (
                     <Model3D
-                      modelPath="/models/logo-aidyn.glb"
+                      modelPath="/models/aidyn_logo.glb"
                       scale={1.8}
                       autoRotate={true}
                       cameraPosition={[0, 0, 5]}
