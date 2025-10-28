@@ -1,21 +1,39 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Sparkles, Cpu, Eye, Brain, Target, Award, Zap, TrendingUp } from 'lucide-react'
+import { Sparkles, Cpu, Eye, Brain, Target, Award, Zap, TrendingUp, Box, Clock, Users, Play } from 'lucide-react'
 
 const innovations = [
   {
+    icon: Zap,
+    title: 'Jumeau Numérique Temps Réel',
+    subtitle: 'Coeur du Dashboard Phase 1',
+    description: 'Réplique 3D interactive de la résidence complète avec visualisation temps réel des résidents, personnel et alertes. WebSocket synchronisé avec pipeline Jetson.',
+    features: [
+      'Scène 3D WebGL temps réel (Three.js/React Three Fiber)',
+      'Position résidents live (précision 10cm) via multi-caméra',
+      'Replay incidents 3D: 30s pré-chute vers événement vers 1min post',
+      'Heatmap incidents superposée (zones à risque)',
+      'Timeline forensique navigable (scrub événement)',
+      'Export vidéo + 3D data pour formation/assurance'
+    ],
+    badge: 'Exclusif Phase 1',
+    color: 'from-emerald-500 to-teal-500',
+    glow: 'emerald',
+    highlighted: true
+  },
+  {
     icon: Brain,
     title: 'Analyse Posturale Prédictive',
-    subtitle: 'Prévention AVANT la chute',
-    description: 'IA 3D détecte démarche instable et posture à risque pour alerter AVANT l\'incident.',
+    subtitle: 'Phase 2 - Prévention AVANT la chute',
+    description: 'IA 3D détecte démarche instable et posture à risque pour alerter AVANT l\'incident (Phase 2, 2027).',
     features: [
-      'Skeleton tracking 3D temps réel',
-      'Score de risque prédictif',
-      'Alertes préventives personnalisées',
-      'Réduction incidents: >60%'
+      'Skeleton tracking 3D temps réel (YOLOv8-Pose + MediaPipe)',
+      'Score de risque prédictif basé historique posture',
+      'Alertes préventives personnalisées par résident',
+      'Réduction incidents projetée: plus de 60%'
     ],
-    badge: 'Brevetable',
+    badge: 'Phase 2 (2027)',
     color: 'from-purple-500 to-pink-500',
     glow: 'purple'
   },
@@ -25,12 +43,12 @@ const innovations = [
     subtitle: 'Zones à risque visualisées',
     description: 'Reconstruction 3D de la résidence avec heatmap historique des incidents pour optimisation proactive.',
     features: [
-      'Modèle 3D spatial automatique',
-      'Historique incidents géolocalisés',
-      'Prédiction zones futures à risque',
-      'ROI calculé par intervention'
+      'Modèle 3D spatial automatique depuis plan 2D',
+      'Historique incidents géolocalisés (timestamp + coords XYZ)',
+      'Prédiction zones futures à risque (ML clustering)',
+      'ROI calculé par intervention évitée'
     ],
-    badge: 'Exclusif',
+    badge: 'Phase 1+',
     color: 'from-orange-500 to-red-500',
     glow: 'orange'
   },
@@ -38,31 +56,16 @@ const innovations = [
     icon: Eye,
     title: 'Vision Multi-Caméra Fusionnée',
     subtitle: 'Tracking 360° sans angle mort',
-    description: 'Fusion intelligente de plusieurs caméras pour suivi continu et reconstruction 3D position exacte.',
+    description: 'Fusion intelligente de plusieurs caméras UniFi pour suivi continu et reconstruction 3D position exacte.',
     features: [
-      'Calibration multi-caméra 3D',
-      'Tracking entre caméras seamless',
-      'Position 3D précise (<10cm)',
-      'Précision détection: >98%'
+      'Calibration multi-caméra 3D (homographie + SLAM)',
+      'Tracking entre caméras seamless (re-ID visuel)',
+      'Position 3D précise (erreur 10cm) par triangulation',
+      'Précision détection: plus de 98% (YOLOv8-Pose)'
     ],
-    badge: 'Avancé',
+    badge: 'Phase 1 Core',
     color: 'from-cyan-500 to-blue-500',
     glow: 'cyan'
-  },
-  {
-    icon: Zap,
-    title: 'Jumeau Numérique Temps Réel',
-    subtitle: 'Dashboard 3D superviseur',
-    description: 'Réplique 3D interactive de la résidence avec overlay temps réel résidents, personnel et alertes.',
-    features: [
-      'Vue 3D temps réel complète',
-      'Replay incidents en 3D',
-      'Optimisation placement personnel',
-      'Formation virtuelle immersive'
-    ],
-    badge: 'Innovation',
-    color: 'from-emerald-500 to-teal-500',
-    glow: 'emerald'
   }
 ]
 
@@ -88,11 +91,13 @@ const metrics = [
 ]
 
 const techStack = [
-  'YOLOv8 Pose Detection',
-  'MediaPipe 3D Skeleton',
+  'Three.js / React Three Fiber',
+  'YOLOv8-Pose ONNX (Jetson)',
+  'WebSocket Temps Réel',
   'Multi-View Geometry',
   'WebGL Rendering',
-  'Real-Time Fusion',
+  'MediaPipe 3D Skeleton',
+  'FastAPI Backend',
   'Spatial Computing'
 ]
 
@@ -127,15 +132,15 @@ export default function Innovation3D() {
           </div>
 
           <h2 className="mt-8 text-5xl font-bold leading-tight md:text-6xl">
-            Technologie 3D{' '}
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-              de Pointe
+            Jumeau Numérique & Vision{' '}
+            <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+              3D Temps Réel
             </span>
           </h2>
           
           <p className="mt-6 text-xl text-slate-300">
-            AIDYN ne détecte pas seulement les chutes - nous les <strong className="text-purple-400">PRÉVENONS</strong> 
-            {' '}grâce à l&apos;analyse posturale 3D prédictive et la vision multi-caméra fusionnée.
+            Visualisez votre résidence en <strong className="text-emerald-400">3D interactive</strong> avec détection IA, 
+            replay forensique des incidents, et heatmap prédictive. Phase 1 inclut le <strong className="text-teal-400">Dashboard WebGL</strong> complet.
           </p>
 
           {/* Metrics Bar */}
@@ -161,9 +166,132 @@ export default function Innovation3D() {
           </div>
         </motion.div>
 
+        {/* Jumeau Numérique Hero Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-20"
+        >
+          <div className="relative overflow-hidden rounded-3xl border-2 border-emerald-500/30 bg-gradient-to-br from-slate-900 via-emerald-900/20 to-slate-900 p-8 shadow-2xl shadow-emerald-500/20 backdrop-blur-xl lg:p-12">
+            {/* Premium Badge */}
+            <div className="absolute right-8 top-8 flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-1.5 backdrop-blur-sm">
+              <Sparkles className="h-4 w-4 animate-pulse text-emerald-400" />
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">
+                Différenciateur Clé Phase 1
+              </span>
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+              {/* Left: Description */}
+              <div>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 shadow-lg shadow-emerald-500/40">
+                    <Zap className="h-10 w-10 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold text-white">Jumeau Numérique 3D</h3>
+                    <p className="text-emerald-400 font-semibold">Dashboard Immersif Temps Réel</p>
+                  </div>
+                </div>
+
+                <p className="mt-6 text-lg text-slate-300">
+                  Visualisez votre résidence en <strong className="text-emerald-400">3D interactive</strong> avec positions résidents 
+                  en temps réel, replay forensique des incidents, et heatmap prédictive des zones à risque.
+                </p>
+
+                {/* Key Features */}
+                <div className="mt-8 space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Box className="h-6 w-6 shrink-0 text-emerald-400" />
+                    <div>
+                      <h4 className="font-semibold text-white">Scène 3D WebGL Temps Réel</h4>
+                      <p className="text-sm text-slate-400">Three.js + React Three Fiber | WebSocket synchronisé avec pipeline Jetson</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <Clock className="h-6 w-6 shrink-0 text-emerald-400" />
+                    <div>
+                      <h4 className="font-semibold text-white">Replay Forensique 3D</h4>
+                      <p className="text-sm text-slate-400">30s pré-incident vers événement vers 1min post | Timeline navigable</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <Target className="h-6 w-6 shrink-0 text-emerald-400" />
+                    <div>
+                      <h4 className="font-semibold text-white">Heatmap Incidents Superposée</h4>
+                      <p className="text-sm text-slate-400">Zones à risque visualisées | Historique géolocalisé (précision 10cm)</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <Users className="h-6 w-6 shrink-0 text-emerald-400" />
+                    <div>
+                      <h4 className="font-semibold text-white">Export Formation & Assurance</h4>
+                      <p className="text-sm text-slate-400">Vidéo + données 3D pour analyses post-incident et conformité</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Button */}
+                <a
+                  href="#contact"
+                  className="mt-8 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-3 font-bold text-white shadow-lg shadow-emerald-500/40 transition-all duration-300 hover:scale-105 hover:shadow-emerald-500/60"
+                >
+                  <Play className="h-5 w-5" />
+                  Voir la Démo 3D Interactive
+                </a>
+              </div>
+
+              {/* Right: Visual Demo Placeholder */}
+              <div className="relative">
+                <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-emerald-500/30 bg-slate-950 shadow-2xl shadow-emerald-500/20">
+                  {/* Placeholder for 3D Demo */}
+                  <div className="flex h-full items-center justify-center bg-gradient-to-br from-slate-900 via-emerald-900/10 to-slate-900">
+                    <div className="text-center space-y-4 p-8">
+                      <Box className="h-16 w-16 mx-auto animate-pulse text-emerald-400" />
+                      <p className="text-xl font-bold text-white">
+                        Jumeau Numérique 3D
+                      </p>
+                      <p className="text-sm text-slate-400">
+                        Dashboard interactif WebGL<br />
+                        Intégration disponible en Phase 1
+                      </p>
+                      <div className="mt-4 flex justify-center gap-2">
+                        <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+                        <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400 animation-delay-200" />
+                        <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400 animation-delay-400" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tech Stack Badges */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                    Three.js
+                  </span>
+                  <span className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                    React Three Fiber
+                  </span>
+                  <span className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                    WebSocket Real-Time
+                  </span>
+                  <span className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                    Multi-Camera Fusion
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Innovation Cards Grid */}
         <div className="mt-20 grid gap-8 lg:grid-cols-2">
-          {innovations.map((innovation, idx) => (
+          {innovations.slice(1).map((innovation, idx) => (
             <motion.div
               key={innovation.title}
               initial={{ opacity: 0, y: 30 }}
@@ -249,23 +377,35 @@ export default function Innovation3D() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="inline-flex flex-col items-center gap-4 rounded-3xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 p-8 backdrop-blur-xl">
+          <div className="inline-flex flex-col items-center gap-4 rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 p-8 backdrop-blur-xl">
             <p className="text-lg text-slate-200">
-              <strong className="text-purple-400">Différenciation technologique majeure</strong> · 
-              Propriété intellectuelle brevetable · 
-              <strong className="text-cyan-400">Avance compétitive 2-3 ans</strong>
+              <strong className="text-emerald-400">Jumeau Numérique Phase 1</strong> · 
+              Dashboard 3D inclus dès le déploiement · 
+              <strong className="text-cyan-400">Différenciateur clé 2-3 ans d&apos;avance</strong>
             </p>
             
-            <a
-              href="#contact"
-              className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 px-8 py-4 font-bold text-white shadow-2xl shadow-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-purple-500/60"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                Voir la démo 3D
-                <Sparkles className="h-5 w-5" />
-              </span>
-              <div className="absolute inset-0 -z-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            </a>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="#contact"
+                className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-8 py-4 font-bold text-white shadow-2xl shadow-emerald-500/40 transition-all duration-300 hover:scale-105 hover:shadow-emerald-500/60"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  <Play className="h-5 w-5" />
+                  Voir la Démo 3D
+                </span>
+                <div className="absolute inset-0 -z-0 bg-gradient-to-r from-cyan-500 to-emerald-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </a>
+              
+              <a
+                href="#roadmap"
+                className="group rounded-xl border-2 border-emerald-500/30 bg-emerald-500/5 px-8 py-4 font-bold text-emerald-300 backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:border-emerald-400/50 hover:bg-emerald-500/10"
+              >
+                <span className="flex items-center gap-2">
+                  <Target className="h-5 w-5" />
+                  Voir le Roadmap
+                </span>
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>
