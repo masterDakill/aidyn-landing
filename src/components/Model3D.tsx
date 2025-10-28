@@ -12,6 +12,7 @@ interface Model3DProps {
   rotation?: [number, number, number]
   position?: [number, number, number]
   autoRotate?: boolean
+  autoRotateSpeed?: number // Vitesse de rotation (0.1 = très lent, 1 = normal, 2 = rapide)
   className?: string
   cameraPosition?: [number, number, number]
   enableZoom?: boolean
@@ -24,17 +25,18 @@ function Model({
   scale = 1, 
   rotation = [0, 0, 0],
   position = [0, 0, 0],
-  autoRotate = false 
+  autoRotate = false,
+  autoRotateSpeed = 0.5
 }: Omit<Model3DProps, 'className' | 'cameraPosition' | 'enableZoom' | 'showShadows' | 'environmentPreset'>) {
   const meshRef = useRef<THREE.Group>(null)
 
   // Charger le modèle GLTF/GLB - MUST be called unconditionally
   const gltf = useLoader(GLTFLoader, modelPath)
 
-  // Animation de rotation automatique
+  // Animation de rotation automatique (très lente et subtile)
   useFrame((state, delta) => {
     if (meshRef.current && autoRotate) {
-      meshRef.current.rotation.y += delta * 0.5
+      meshRef.current.rotation.y += delta * autoRotateSpeed
     }
   })
 
@@ -74,6 +76,7 @@ export default function Model3D({
   rotation = [0, 0, 0],
   position = [0, 0, 0],
   autoRotate = true,
+  autoRotateSpeed = 0.5,
   className = '',
   cameraPosition = [0, 0, 5],
   enableZoom = true,
@@ -108,6 +111,7 @@ export default function Model3D({
             rotation={rotation}
             position={position}
             autoRotate={autoRotate}
+            autoRotateSpeed={autoRotateSpeed}
           />
         </Suspense>
 
@@ -128,7 +132,7 @@ export default function Model3D({
           minDistance={2}
           maxDistance={10}
           autoRotate={autoRotate}
-          autoRotateSpeed={2}
+          autoRotateSpeed={autoRotateSpeed * 4} // OrbitControls utilise une échelle différente
         />
       </Canvas>
     </div>
