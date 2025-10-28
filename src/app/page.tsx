@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 
 // Critical components - loaded immediately
+import HowItWorks from '@/components/HowItWorks'
 import RpaSolution from '@/components/RpaSolution'
 import Features from '@/components/Features'
 import PhaseOne from '@/components/PhaseOne'
@@ -42,6 +43,11 @@ export default function HomePage() {
         {/* Hero Section - Introduction */}
         <section id="hero">
           <Hero />
+        </section>
+
+        {/* How It Works - Phase 1 Pipeline */}
+        <section id="how-it-works">
+          <HowItWorks />
         </section>
 
         {/* Product Section - SerenaCare */}
