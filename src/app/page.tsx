@@ -21,11 +21,25 @@ const FloatingEngagement = dynamic(
   { ssr: false }
 )
 
+// 3D Background - loaded with SSR disabled
+const Background3D = dynamic(
+  () => import('@/components/Background3D'),
+  { ssr: false }
+)
+
 export default function HomePage() {
   return (
     <>
+      {/* 3D Logo Background - Fixed throughout the site */}
+      <Background3D 
+        modelPath="/models/aidyn_logo.glb"
+        opacity={0.15}
+        scale={3}
+        scrollSpeed={0.0008}
+      />
+      
       <Navigation />
-      <main className="min-h-screen pt-20">
+      <main className="relative z-10 min-h-screen pt-20">
         {/* Hero Section - Introduction */}
         <section id="hero">
           <Hero />
