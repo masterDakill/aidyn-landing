@@ -62,10 +62,9 @@ function FloatingButton({ action, index, isOpen, onClick }: {
         y: isOpen ? -(index + 1) * 70 : 0
       }}
       transition={{
-        delay: isOpen ? index * 0.1 : 0,
-        type: "spring",
-        stiffness: 200,
-        damping: 20
+        delay: isOpen ? index * 0.05 : 0,
+        duration: 0.2,
+        ease: "easeOut"
       }}
       className="absolute bottom-0 right-0"
       onMouseEnter={() => setIsHovered(true)}
@@ -91,14 +90,12 @@ function FloatingButton({ action, index, isOpen, onClick }: {
         </AnimatePresence>
 
         {/* Button */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+        <button
           onClick={onClick}
-          className={`w-12 h-12 rounded-full bg-gradient-to-r ${action.color} text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center`}
+          className={`w-12 h-12 rounded-full bg-gradient-to-r ${action.color} text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center`}
         >
           <action.icon className="w-5 h-5" />
-        </motion.button>
+        </button>
       </div>
     </motion.div>
   )
@@ -201,21 +198,24 @@ export default function FloatingEngagement() {
   }, [])
 
   const handleActionClick = (action: EngagementAction) => {
-    if (action.href) {
-      window.open(action.href, action.href.startsWith('tel:') || action.href.startsWith('mailto:') ? '_self' : '_blank')
-      setNotificationMessage(`✅ ${action.label} ouvert!`)
-    } else if (action.onClick) {
-      action.onClick()
-      // Message personnalisé pour Agent IA
-      if (action.id === 'chatbot') {
-        setNotificationMessage('🤖 Agent IA AIDYN bientôt disponible!\n\n📧 En attendant: contact@aidyn.ai')
-      } else {
-        setNotificationMessage(`✅ ${action.label} activé!`)
+    // Déférer les opérations lourdes après le paint
+    requestAnimationFrame(() => {
+      if (action.href) {
+        window.open(action.href, action.href.startsWith('tel:') || action.href.startsWith('mailto:') ? '_self' : '_blank')
+        setNotificationMessage(`✅ ${action.label} ouvert!`)
+      } else if (action.onClick) {
+        action.onClick()
+        // Message personnalisé pour Agent IA
+        if (action.id === 'chatbot') {
+          setNotificationMessage('🤖 Agent IA AIDYN bientôt disponible!\n\n📧 En attendant: contact@aidyn.ai')
+        } else {
+          setNotificationMessage(`✅ ${action.label} activé!`)
+        }
       }
-    }
 
-    setShowNotification(true)
-    setIsOpen(false)
+      setShowNotification(true)
+      setIsOpen(false)
+    })
   }
 
   return (
