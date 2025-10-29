@@ -39,8 +39,8 @@ const engagementActions: EngagementAction[] = [
     color: 'from-purple-500 to-pink-500',
     onClick: () => {
       // TODO: Intégrer votre chatbot IA ici
-      console.log('Chatbot IA ouvert')
-      alert('Agent IA AIDYN bientôt disponible!\n\nEn attendant, contactez-nous à contact@aidyn.ai')
+      console.log('Chatbot IA - bientôt disponible')
+      // Pas d'alert() bloquant - utilise la notification existante
     }
   }
 ]
@@ -153,7 +153,7 @@ function NotificationBubble({ message, onClose }: { message: string, onClose: ()
           <Bot className="w-4 h-4" />
         </div>
         <div className="flex-1">
-          <p className="text-gray-800 text-sm leading-relaxed">{message}</p>
+          <p className="text-gray-800 text-sm leading-relaxed whitespace-pre-line">{message}</p>
         </div>
         <button
           onClick={onClose}
@@ -203,12 +203,17 @@ export default function FloatingEngagement() {
   const handleActionClick = (action: EngagementAction) => {
     if (action.href) {
       window.open(action.href, action.href.startsWith('tel:') || action.href.startsWith('mailto:') ? '_self' : '_blank')
+      setNotificationMessage(`✅ ${action.label} ouvert!`)
     } else if (action.onClick) {
       action.onClick()
+      // Message personnalisé pour Agent IA
+      if (action.id === 'chatbot') {
+        setNotificationMessage('🤖 Agent IA AIDYN bientôt disponible!\n\n📧 En attendant: contact@aidyn.ai')
+      } else {
+        setNotificationMessage(`✅ ${action.label} activé!`)
+      }
     }
 
-    // Show success notification
-    setNotificationMessage(`✅ ${action.label} activé!`)
     setShowNotification(true)
     setIsOpen(false)
   }
