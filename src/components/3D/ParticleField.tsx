@@ -12,9 +12,9 @@ interface ParticleFieldProps {
 }
 
 export default function ParticleField({ 
-  count = 1000, 
-  radius = 15,
-  speed = 0.3
+  count = 800, 
+  radius = 18,
+  speed = 0.2
 }: ParticleFieldProps) {
   const points = useRef<THREE.Points>(null)
   const noise3D = useMemo(() => createNoise3D(), [])
@@ -36,11 +36,11 @@ export default function ParticleField({
       positions[i3 + 1] = r * Math.sin(phi) * Math.sin(theta)
       positions[i3 + 2] = r * Math.cos(phi)
       
-      // Gradient color (cyan to purple)
+      // Soft cyan/teal color with subtle variation
       const t = i / count
-      colors[i3] = 0.2 + t * 0.6      // R: cyan->purple
-      colors[i3 + 1] = 0.6 - t * 0.4  // G: fade out
-      colors[i3 + 2] = 0.9            // B: high blue
+      colors[i3] = 0.0 + t * 0.3      // R: very low (cyan/teal)
+      colors[i3 + 1] = 0.7 + t * 0.2  // G: high (cyan/teal)
+      colors[i3 + 2] = 0.85 + t * 0.1 // B: high (cyan/teal)
     }
     
     return [positions, colors]
@@ -99,10 +99,10 @@ export default function ParticleField({
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.08}
+        size={0.04}
         vertexColors
         transparent
-        opacity={0.6}
+        opacity={0.35}
         sizeAttenuation
         blending={THREE.AdditiveBlending}
         depthWrite={false}

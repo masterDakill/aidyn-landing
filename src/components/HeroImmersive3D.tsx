@@ -12,21 +12,21 @@ import ParticleField from './3D/ParticleField'
 import InteractiveModel from './3D/InteractiveModel'
 import HolographicGrid from './3D/HolographicGrid'
 
-// Loading component
-function CanvasLoader() {
-  return (
-    <div className="flex h-full items-center justify-center">
-      <div className="text-center">
-        <Sparkles className="mx-auto h-12 w-12 animate-pulse text-cyan-400" />
-        <p className="mt-4 text-sm text-slate-400">Chargement de l'expérience 3D...</p>
-      </div>
-    </div>
-  )
-}
+// Loading component (currently unused but kept for future use)
+// function CanvasLoader() {
+//   return (
+//     <div className="flex h-full items-center justify-center">
+//       <div className="text-center">
+//         <Sparkles className="mx-auto h-12 w-12 animate-pulse text-cyan-400" />
+//         <p className="mt-4 text-sm text-slate-400">Chargement de l&apos;expérience 3D...</p>
+//       </div>
+//     </div>
+//   )
+// }
 
 export default function HeroImmersive3D() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-slate-950">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#0a1929] via-[#0d2535] to-[#0a1929]">
       {/* 3D Canvas Background */}
       <div className="absolute inset-0 z-0">
         <Canvas
@@ -40,22 +40,26 @@ export default function HeroImmersive3D() {
         >
           <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={75} />
           
-          {/* Lighting Setup */}
-          <ambientLight intensity={0.4} />
-          <directionalLight position={[10, 10, 5]} intensity={1} color="#00ffff" />
-          <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#ff00ff" />
-          <pointLight position={[0, 0, 10]} intensity={2} color="#00ffff" distance={20} />
+          {/* Lighting Setup - Soft and Subtle */}
+          <ambientLight intensity={0.3} />
+          <directionalLight position={[10, 10, 5]} intensity={0.6} color="#00d9ff" />
+          <directionalLight position={[-10, -10, -5]} intensity={0.3} color="#0a4f5f" />
+          <pointLight position={[0, 5, 8]} intensity={1.5} color="#00f0ff" distance={25} />
+          <pointLight position={[0, -3, 0]} intensity={0.8} color="#00d9ff" distance={15} />
+          
+          {/* Fog for depth and atmosphere */}
+          <fog attach="fog" args={['#0a1929', 10, 35]} />
           
           {/* Environment for reflections */}
           <Environment preset="city" />
 
           {/* 3D Content */}
           <Suspense fallback={null}>
-            {/* Holographic Grid Background */}
-            <HolographicGrid size={60} divisions={60} color="#00ffff" />
+            {/* Holographic Grid Background - Subtle */}
+            <HolographicGrid size={70} divisions={100} color="#00d9ff" />
             
-            {/* Particle Field */}
-            <ParticleField count={1500} radius={20} speed={0.3} />
+            {/* Particle Field - Reduced and Subtle */}
+            <ParticleField count={800} radius={18} speed={0.2} />
             
             {/* Interactive Logo Model */}
             <InteractiveModel

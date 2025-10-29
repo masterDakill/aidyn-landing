@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 
