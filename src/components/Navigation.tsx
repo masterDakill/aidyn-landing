@@ -12,7 +12,8 @@ const navItems = [
   { href: '#features', label: 'Fonctionnalités' },
   { href: '#innovation-3d', label: 'Innovation 3D' },
   { href: '#phase-1', label: 'Roadmap' },
-  { href: '/modeles-3d', label: 'Modèles 3D', isExternal: true },
+  { href: '/dashboard-3d', label: 'Dashboard 3D', isExternal: true },
+  { href: '/demo-videos', label: 'Démos Vidéo IA', isExternal: true },
   { href: '#contact', label: 'Contact' }
 ]
 
