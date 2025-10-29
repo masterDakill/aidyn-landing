@@ -13,7 +13,7 @@ const navItems = [
   { href: '#innovation-3d', label: 'Innovation 3D' },
   { href: '#phase-1', label: 'Roadmap' },
   { href: '/dashboard-3d', label: 'Dashboard 3D', isExternal: true },
-  { href: '/demo-videos', label: 'Démos Vidéo', isExternal: true },
+  { href: '/demo-virtual', label: 'Démos Virtuelles', isExternal: true },
   { href: '#contact', label: 'Contact' }
 ]
 

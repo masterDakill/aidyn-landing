@@ -18,7 +18,7 @@ import {
 } from 'lucide-react'
 
 // 3D Components
-import ResidenceScene from './3D/ResidenceScene'
+import ResidenceSceneOptimized from './3D/ResidenceSceneOptimized'
 import Marker3D from './3D/Marker3D'
 import Heatmap3D from './3D/Heatmap3D'
 
@@ -44,8 +44,8 @@ function Dashboard3DScene() {
       {/* Environment */}
       <Environment preset="city" />
 
-      {/* Residence Floor Plan */}
-      <ResidenceScene />
+      {/* Residence Floor Plan - Optimized */}
+      <ResidenceSceneOptimized />
 
       {/* Residents Markers */}
       {residents.map((resident) => (
