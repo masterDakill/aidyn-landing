@@ -61,10 +61,10 @@ export default function HeroImmersive3D() {
             {/* Particle Field - Reduced and Subtle */}
             <ParticleField count={800} radius={18} speed={0.2} />
             
-            {/* Interactive Logo Model */}
+            {/* Interactive Logo Model - Reduced scale for better visibility */}
             <InteractiveModel
               modelPath="/models/aidyn_logo.glb"
-              scale={1.5}
+              scale={0.6}
               autoRotate={true}
               mouseTracking={true}
             />

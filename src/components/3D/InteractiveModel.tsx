@@ -53,9 +53,9 @@ export default function InteractiveModel({
           material.roughness = 0.2
           material.envMapIntensity = 1.5
           
-          // Add emissive glow
+          // Add dynamic emissive glow
           material.emissive = new THREE.Color(0x00ffff)
-          material.emissiveIntensity = 0.3
+          material.emissiveIntensity = 0.5  // Increased from 0.3
         }
       }
     })
@@ -72,20 +72,24 @@ export default function InteractiveModel({
       groupRef.current.rotation.y = time * 0.2
     }
 
-    // Mouse tracking with smooth interpolation
+    // Mouse tracking with AMPLIFIED effects
     if (mouseTracking) {
-      const targetRotationY = mouse.x * 0.5
-      const targetRotationX = mouse.y * 0.3
+      const targetRotationY = mouse.x * 1.5  // Increased from 0.5 to 1.5
+      const targetRotationX = mouse.y * 1.0  // Increased from 0.3 to 1.0
+      const targetPositionX = mouse.x * 0.5  // Parallax effect
+      const targetPositionZ = mouse.y * 0.3  // Depth parallax
 
-      groupRef.current.rotation.y += (targetRotationY - groupRef.current.rotation.y) * 0.05
-      groupRef.current.rotation.x += (targetRotationX - groupRef.current.rotation.x) * 0.05
+      groupRef.current.rotation.y += (targetRotationY - groupRef.current.rotation.y) * 0.08
+      groupRef.current.rotation.x += (targetRotationX - groupRef.current.rotation.x) * 0.08
+      groupRef.current.position.x += (targetPositionX - groupRef.current.position.x) * 0.05
+      groupRef.current.position.z += (targetPositionZ - groupRef.current.position.z) * 0.05
     }
 
-    // Subtle floating animation
-    groupRef.current.position.y = Math.sin(time * 0.5) * 0.3
+    // Enhanced floating animation
+    groupRef.current.position.y = Math.sin(time * 0.8) * 0.5 + Math.cos(time * 0.5) * 0.2
     
-    // Pulsing scale effect
-    const pulseScale = 1 + Math.sin(time * 0.8) * 0.05
+    // More pronounced pulsing scale effect
+    const pulseScale = 1 + Math.sin(time * 1.2) * 0.08 + Math.cos(time * 0.6) * 0.04
     groupRef.current.scale.setScalar(scale * pulseScale)
   })
 
