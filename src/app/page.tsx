@@ -18,8 +18,8 @@ const RoadmapCommercial = dynamic(() => import('@/components/RoadmapCommercial')
 // Logo3DShowcase removed - too heavy for performance
 
 // Floating components - loaded with SSR disabled for better performance
-const FloatingEngagement = dynamic(
-  () => import('@/components/Interactive/FloatingEngagement'),
+const AskAidyn = dynamic(
+  () => import('@/components/AskAidyn'),
   { ssr: false }
 )
 
@@ -94,7 +94,7 @@ export default function HomePage() {
         {/* Footer */}
         <Footer />
       </main>
-      <FloatingEngagement />
+      <AskAidyn mailto="admin@aidyn.ai" />
     </>
   )
 }
