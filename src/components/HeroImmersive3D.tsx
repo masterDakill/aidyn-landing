@@ -10,7 +10,7 @@ import Link from 'next/link'
 // Dynamic imports for 3D components
 import ParticleField from './3D/ParticleField'
 import InteractiveModel from './3D/InteractiveModel'
-import HolographicGrid from './3D/HolographicGrid'
+import CinematicBackground from './3D/CinematicBackground'
 
 // Loading component (currently unused but kept for future use)
 // function CanvasLoader() {
@@ -55,8 +55,8 @@ export default function HeroImmersive3D() {
 
           {/* 3D Content */}
           <Suspense fallback={null}>
-            {/* Holographic Grid Background - Subtle */}
-            <HolographicGrid size={70} divisions={100} color="#00d9ff" />
+            {/* Cinematic Background - Inspired by AiDYN image */}
+            <CinematicBackground particleCount={200} />
             
             {/* Particle Field - Reduced and Subtle */}
             <ParticleField count={800} radius={18} speed={0.2} />
