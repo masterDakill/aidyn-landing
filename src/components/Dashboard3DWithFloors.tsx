@@ -18,13 +18,14 @@ import {
 import ResidenceSceneWithFloorPlans from './3D/ResidenceSceneWithFloorPlans'
 import Marker3D from './3D/Marker3D'
 import Heatmap3D from './3D/Heatmap3D'
+import PolycamModel from './3D/PolycamModel'
 
 // Store
 import { useDashboardStore } from '@/stores/dashboardStore'
 
 type FloorType = 'basement' | 'ground' | 'first' | 'second'
 
-function Dashboard3DScene({ currentFloor }: { currentFloor: FloorType }) {
+function Dashboard3DScene({ currentFloor, usePolycamModel }: { currentFloor: FloorType; usePolycamModel: boolean }) {
   const { residents, staff, heatmap, showHeatmap } = useDashboardStore()
 
   return (
@@ -43,8 +44,12 @@ function Dashboard3DScene({ currentFloor }: { currentFloor: FloorType }) {
       {/* Environment */}
       <Environment preset="city" />
 
-      {/* Residence Floor Plan avec vraies images (à venir) */}
-      <ResidenceSceneWithFloorPlans currentFloor={currentFloor} />
+      {/* Residence Floor Plan - Switch between simple and Polycam model */}
+      {usePolycamModel ? (
+        <PolycamModel polycamId="097328f4-7a14-453e-88a5-e0aaee44bdf9" scale={0.1} />
+      ) : (
+        <ResidenceSceneWithFloorPlans currentFloor={currentFloor} />
+      )}
 
       {/* Residents Markers - filtrés par étage */}
       {residents.map((resident) => (
@@ -87,6 +92,7 @@ function Dashboard3DScene({ currentFloor }: { currentFloor: FloorType }) {
 
 export default function Dashboard3DWithFloors() {
   const [currentFloor, setCurrentFloor] = useState<FloorType>('ground')
+  const [usePolycamModel, setUsePolycamModel] = useState(false)
   const { toggleHeatmap, showHeatmap } = useDashboardStore()
 
   const floors = [
@@ -106,7 +112,7 @@ export default function Dashboard3DWithFloors() {
       >
         <PerspectiveCamera makeDefault position={[15, 15, 15]} fov={50} />
         <Suspense fallback={null}>
-          <Dashboard3DScene currentFloor={currentFloor} />
+          <Dashboard3DScene currentFloor={currentFloor} usePolycamModel={usePolycamModel} />
         </Suspense>
       </Canvas>
 

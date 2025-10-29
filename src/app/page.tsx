@@ -15,6 +15,7 @@ const Contact = dynamic(() => import('@/components/Contact'))
 const Footer = dynamic(() => import('@/components/Footer'))
 const Innovation3D = dynamic(() => import('@/components/Innovation3D'))
 const RoadmapCommercial = dynamic(() => import('@/components/RoadmapCommercial'))
+const PWADashboardPreview = dynamic(() => import('@/components/PWADashboardPreview'))
 
 // Floating components - loaded with SSR disabled for better performance
 const AskAidyn = dynamic(
@@ -76,6 +77,11 @@ export default function HomePage() {
         {/* Phase 1 Section */}
         <section id="phase-1">
           <PhaseOne />
+        </section>
+
+        {/* PWA Dashboard Preview Section - NEW */}
+        <section id="pwa-dashboard">
+          <PWADashboardPreview />
         </section>
 
         {/* Services Section */}
