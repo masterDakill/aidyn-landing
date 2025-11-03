@@ -1,13 +1,10 @@
 import type { Metadata } from 'next'
-import WebVitalsReporter from '@/components/WebVitalsReporter'
+import { Inter } from 'next/font/google'
 import './globals.css'
- codex/adjust-design-according-to-provided-images-2025-10-17
 import { ToastProvider } from '@/components/Interactive/ToastNotifications'
 import BuilderRegistryProvider from '@/components/builder/BuilderRegistryProvider'
 
 const inter = Inter({ subsets: ['latin'] })
-
- main
 
 export const metadata: Metadata = {
   title: 'AIDYN Technologies - SerenaCare AI | Surveillance Intelligente pour RPA',
@@ -30,7 +27,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  // Next.js détecte automatiquement icon.png et apple-icon.png dans src/app/
 }
 
 export default function RootLayout({
@@ -40,18 +36,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className="scroll-smooth">
- codex/adjust-design-according-to-provided-images-2025-10-17
       <body className={`${inter.className} antialiased`}>
         <BuilderRegistryProvider>
           <ToastProvider>
             {children}
           </ToastProvider>
         </BuilderRegistryProvider>
-
-      <body className="antialiased">
-        <WebVitalsReporter />
-        {children}
- main
       </body>
     </html>
   )

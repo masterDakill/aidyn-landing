@@ -43,21 +43,16 @@
   },
   "include": [
     "next-env.d.ts",
- codex/adjust-design-according-to-provided-images-2025-10-17
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
-
     "src/**/*.ts",
     "src/**/*.tsx",
     "scripts/**/*.ts",
     "scripts/**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "frontend"]
- main
+  "exclude": [
+    "node_modules",
+    "frontend"
+  ]
 }
