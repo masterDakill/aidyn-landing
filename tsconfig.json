@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "es6"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es6"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,15 +23,35 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/styles/*": ["./src/styles/*"],
-      "@/types/*": ["./src/types/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ],
+      "@/components/*": [
+        "./src/components/*"
+      ],
+      "@/lib/*": [
+        "./src/lib/*"
+      ],
+      "@/styles/*": [
+        "./src/styles/*"
+      ],
+      "@/types/*": [
+        "./src/types/*"
+      ]
+    },
+    "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",
+ codex/adjust-design-according-to-provided-images-2025-10-17
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+
     "src/**/*.ts",
     "src/**/*.tsx",
     "scripts/**/*.ts",
@@ -35,4 +59,5 @@
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules", "frontend"]
+ main
 }
