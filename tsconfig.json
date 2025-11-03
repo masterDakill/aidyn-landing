@@ -45,10 +45,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "scripts/**/*.ts",
-    "scripts/**/*.tsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [

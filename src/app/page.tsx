@@ -16,6 +16,7 @@ const Footer = dynamic(() => import('@/components/Footer'))
 const Innovation3D = dynamic(() => import('@/components/Innovation3D'))
 const RoadmapCommercial = dynamic(() => import('@/components/RoadmapCommercial'))
 const DashboardPWAPreview = dynamic(() => import('@/components/DashboardPWAPreview'))
+const LiveCameraDemo = dynamic(() => import('@/components/LiveCameraDemo'), { ssr: false })
 
 // Floating components - loaded with SSR disabled for better performance
 const AskAidyn = dynamic(
@@ -52,6 +53,11 @@ export default function HomePage() {
         {/* How It Works - Phase 1 Pipeline */}
         <section id="how-it-works">
           <HowItWorks />
+        </section>
+
+        {/* Live Camera Demo - NEW: AI Detection in Real-Time */}
+        <section id="live-demo">
+          <LiveCameraDemo />
         </section>
 
         {/* Product Section - SerenaCare */}

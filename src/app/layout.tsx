@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import WebVitalsReporter from '@/components/WebVitalsReporter'
 import './globals.css'
 import { ToastProvider } from '@/components/Interactive/ToastNotifications'
 import BuilderRegistryProvider from '@/components/builder/BuilderRegistryProvider'
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <BuilderRegistryProvider>
           <ToastProvider>
+            <WebVitalsReporter />
             {children}
           </ToastProvider>
         </BuilderRegistryProvider>
