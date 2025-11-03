@@ -18,6 +18,7 @@
     "docker:dev": "docker-compose up --build"
   },
   "dependencies": {
+    "@builder.io/react": "^8.2.9",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
     "clsx": "^2.0.0",

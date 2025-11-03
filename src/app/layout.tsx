@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ToastProvider } from '@/components/Interactive/ToastNotifications'
+import BuilderRegistryProvider from '@/components/builder/BuilderRegistryProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,9 +38,11 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth">
       <body className={`${inter.className} antialiased`}>
-        <ToastProvider>
-          {children}
-        </ToastProvider>
+        <BuilderRegistryProvider>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </BuilderRegistryProvider>
       </body>
     </html>
   )
