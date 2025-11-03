@@ -1,10 +1,11 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type ComponentType } from 'react'
+import type { SVGProps } from 'react'
 import {
   Play, CheckCircle, ArrowRight, Clock, Users, Shield,
-  Smartphone, Wifi, Settings, Phone, MapPin, BarChart3,
+  Smartphone, Settings, Phone, MapPin,
   Award, Sparkles, ChevronRight, ChevronDown, Info
 } from 'lucide-react'
 
@@ -12,7 +13,7 @@ interface Step {
   id: string
   title: string
   description: string
-  icon: React.ComponentType<any>
+  icon: ComponentType<SVGProps<SVGSVGElement>>
   duration: string
   details: string[]
   benefits: string[]
@@ -28,7 +29,7 @@ const onboardingSteps: Step[] = [
     duration: '1-2 heures',
     details: [
       'Visite de votre établissement par nos experts',
-      'Évaluation de l\'infrastructure existante',
+      'Évaluation de l’infrastructure existante',
       'Identification des points critiques',
       'Proposition de solution sur mesure'
     ],
@@ -36,21 +37,21 @@ const onboardingSteps: Step[] = [
       'Consultation 100% gratuite',
       'Rapport détaillé inclus',
       'Devis personnalisé',
-      'Recommandations d\'experts'
+      'Recommandations d’experts'
     ],
     color: 'from-blue-500 to-cyan-500'
   },
   {
     id: 'planning',
     title: 'Planification Détaillée',
-    description: 'Création du plan d\'installation personnalisé pour votre RPA',
+    description: 'Création du plan d’installation personnalisé pour votre RPA',
     icon: MapPin,
     duration: '3-5 jours',
     details: [
       'Cartographie complète des zones',
-      'Sélection optimale des points d\'installation',
+      'Sélection optimale des points d’installation',
       'Planification du réseau Wi-Fi et RF',
-      'Calendrier d\'installation détaillé'
+      'Calendrier d’installation détaillé'
     ],
     benefits: [
       'Plan 3D interactif',
@@ -103,14 +104,14 @@ const onboardingSteps: Step[] = [
   {
     id: 'formation',
     title: 'Formation du Personnel',
-    description: 'Formation complète de votre équipe sur l\'utilisation du système',
+    description: 'Formation complète de votre équipe sur l’utilisation du système',
     icon: Award,
     duration: '2-3 heures',
     details: [
       'Formation pratique du personnel soignant',
       'Formation administrative pour les superviseurs',
       'Utilisation du tableau de bord',
-      'Procédures d\'urgence et maintenance'
+      'Procédures d’urgence et maintenance'
     ],
     benefits: [
       'Formation certifiée',
@@ -245,7 +246,7 @@ function StepCard({ step, index, isActive, isCompleted, onClick }: {
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                       <Info className="w-4 h-4" />
-                      Détails de l'étape
+                      Détails de l’étape
                     </h4>
                     <ul className="space-y-2">
                       {step.details.map((detail, i) => (
@@ -350,28 +351,28 @@ export default function InteractiveOnboarding() {
 
       <div className="container-max section-padding relative z-10">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-500 to-purple-500 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg"
-          >
-            <Sparkles className="w-4 h-4" />
-            Processus d'Implémentation
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-500 to-purple-500 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg"
+              >
+                <Sparkles className="w-4 h-4" />
+                Processus d’Implémentation
+              </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Votre Parcours Vers <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">l'Excellence</span>
-          </h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Votre Parcours Vers <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">l’Excellence</span>
+              </h2>
 
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-            Découvrez notre processus d'implémentation étape par étape, conçu pour garantir le succès de votre projet RPA
-          </p>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+                Découvrez notre processus d’implémentation étape par étape, conçu pour garantir le succès de votre projet RPA
+              </p>
 
           {/* Controls */}
           <div className="flex items-center justify-center gap-4">
@@ -445,7 +446,7 @@ export default function InteractiveOnboarding() {
               Prêt à Commencer Votre Transformation ?
             </h3>
             <p className="text-gray-600 mb-6">
-              Contactez-nous pour démarrer votre projet RPA dès aujourd'hui
+              Contactez-nous pour démarrer votre projet RPA dès aujourd’hui
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}

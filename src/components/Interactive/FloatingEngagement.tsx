@@ -1,15 +1,21 @@
 'use client'
 
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
-import { useState, useEffect } from 'react'
-import {
-  MessageCircle, Phone, Calendar, Download, X, ChevronUp,
-  Headphones, Mail, MapPin, Clock, Star, Zap, Heart
-} from 'lucide-react'
+import { useState, useEffect, type ComponentType } from 'react'
+import type { SVGProps } from 'react'
+import { MessageCircle, Phone, Calendar, Download, X, ChevronUp, Zap, Heart } from 'lucide-react'
+
+const NOTIFICATION_MESSAGES = [
+  '💡 Nouveau: Découvrez notre simulateur RPA interactif!',
+  '🎯 Statistiques mises à jour: 99.9% de disponibilité garantie',
+  '⚡ Démo gratuite: Voyez AIDYN en action dans votre RPA',
+  '🏆 Témoignage: “AIDYN a transformé notre établissement” - Dr. Bouchard',
+  '📞 Support 24/7: Nos experts sont là pour vous aider'
+]
 
 interface EngagementAction {
   id: string
-  icon: React.ComponentType<any>
+  icon: ComponentType<SVGProps<SVGSVGElement>>
   label: string
   description: string
   color: string
@@ -179,14 +185,6 @@ export default function FloatingEngagement() {
   const [notificationMessage, setNotificationMessage] = useState('')
   const [visitTime, setVisitTime] = useState(0)
 
-  const notifications = [
-    "💡 Nouveau: Découvrez notre simulateur RPA interactif!",
-    "🎯 Statistiques mises à jour: 99.9% de disponibilité garantie",
-    "⚡ Démo gratuite: Voyez AIDYN en action dans votre RPA",
-    "🏆 Témoignage: 'AIDYN a transformé notre établissement' - Dr. Bouchard",
-    "📞 Support 24/7: Nos experts sont là pour vous aider"
-  ]
-
   useEffect(() => {
     const timer = setInterval(() => {
       setVisitTime(prev => prev + 1)
@@ -198,13 +196,13 @@ export default function FloatingEngagement() {
   useEffect(() => {
     // Show first notification after 10 seconds
     const initialTimer = setTimeout(() => {
-      setNotificationMessage(notifications[0])
+      setNotificationMessage(NOTIFICATION_MESSAGES[0])
       setShowNotification(true)
     }, 10000)
 
     // Show subsequent notifications every 30 seconds
     const recurringTimer = setInterval(() => {
-      const randomMessage = notifications[Math.floor(Math.random() * notifications.length)]
+      const randomMessage = NOTIFICATION_MESSAGES[Math.floor(Math.random() * NOTIFICATION_MESSAGES.length)]
       setNotificationMessage(randomMessage)
       setShowNotification(true)
     }, 30000)

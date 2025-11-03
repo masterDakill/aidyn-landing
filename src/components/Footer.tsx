@@ -1,22 +1,11 @@
-import { 
-  Brain, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Linkedin, 
-  Twitter,
-  Github,
-  ExternalLink
-} from 'lucide-react'
+import { Brain, Mail, Linkedin, Twitter, Github, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
-      {/* Main footer */}
       <div className="container-max section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
@@ -25,26 +14,25 @@ export default function Footer() {
               <span className="text-2xl font-bold">AIDYN</span>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Solutions d'intelligence artificielle pour révolutionner 
-              votre business immobilier et maximiser vos investissements.
+              Technologies d’intelligence artificielle conçues au Québec pour sécuriser les résidences privées pour aînés et soutenir leurs équipes.
             </p>
             <div className="flex items-center gap-4">
-              <a 
-                href="https://linkedin.com/company/aidyn-technologies" 
+              <a
+                href="https://linkedin.com/company/aidyn-technologies"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a 
-                href="https://twitter.com/aidyn_tech" 
+              <a
+                href="https://twitter.com/aidyn_tech"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5" />
               </a>
-              <a 
-                href="https://github.com/aidyn-technologies" 
+              <a
+                href="https://github.com/aidyn-technologies"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-colors"
                 aria-label="GitHub"
               >
@@ -53,13 +41,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Solutions */}
           <div>
             <h4 className="font-semibold mb-6">Solutions RPA</h4>
             <ul className="space-y-3">
               <li>
                 <Link href="#rpa-solution" className="text-gray-400 hover:text-white transition-colors">
-                  Phase 1 - Système d'appel
+                  Phase 1 - Système d’appel
                 </Link>
               </li>
               <li>
@@ -85,7 +72,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Technologies */}
           <div>
             <h4 className="font-semibold mb-6">Technologies</h4>
             <ul className="space-y-3">
@@ -107,7 +93,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="font-semibold mb-6">Contact</h4>
             <div className="space-y-4">
@@ -115,30 +100,28 @@ export default function Footer() {
                 <Mail className="w-5 h-5 text-primary-500 flex-shrink-0 mt-0.5" />
                 <div>
                   <a
-                    href="mailto:admin@aidyn.ai"
+                    href="mailto:contact@aidyn.ai"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
-                    admin@aidyn.ai
+                    contact@aidyn.ai
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* CTA */}
             <div className="mt-6">
-              <Link
-                href="#contact"
+              <a
+                href="mailto:contact@aidyn.ai"
                 className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 font-medium transition-colors"
               >
-                Nous contacter
+                Nous écrire
                 <ExternalLink className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="border-t border-gray-800">
         <div className="container-max py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -150,7 +133,7 @@ export default function Footer() {
                 Politique de confidentialité
               </Link>
               <Link href="#contact" className="text-gray-400 hover:text-white transition-colors">
-                Conditions d'utilisation
+                Conditions d’utilisation
               </Link>
               <Link href="#contact" className="text-gray-400 hover:text-white transition-colors">
                 Mentions légales

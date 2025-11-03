@@ -1,180 +1,146 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import {
+  Activity,
+  ArrowRight,
+  BadgeCheck,
   Droplets,
-  Wifi,
   Radio,
-  BarChart3,
-  Network,
-  Shield,
-  Clock,
-  Users,
-  CheckCircle,
-  Target
+  ShieldCheck,
+  SignalHigh,
+  Waves,
+  Wifi
 } from 'lucide-react'
 
-const features = [
+const corePillars = [
   {
-    icon: Droplets,
-    title: 'IP67 Waterproof',
-    description: 'Usage sécuritaire dans la douche et le bain. Résistance totale à l\'eau et à l\'humidité.',
-    benefit: 'Sécurité maximale'
+    icon: BadgeCheck,
+    title: 'Détection centrée sur le résident',
+    detail: 'Chutes, immobilité et errance nocturne analysées par vision, audio et capteurs contextuels.'
   },
   {
-    icon: Radio,
-    title: 'Double connectivité Wi-Fi + RF 433 MHz',
-    description: 'Redondance en cas de panne réseau. Fonctionnement garanti même sans Internet.',
-    benefit: 'Fiabilité 24/7'
+    icon: ShieldCheck,
+    title: 'Vie privée protégée',
+    detail: 'Traitement edge, anonymisation et traçabilité complètes pour rassurer familles et équipes.'
   },
   {
-    icon: Network,
-    title: 'MQTT Compatible',
-    description: 'Intégration facile aux systèmes existants et supervision centralisée.',
-    benefit: 'Interopérabilité'
-  },
-  {
-    icon: BarChart3,
-    title: 'Tableau de bord temps réel',
-    description: 'Alertes instantanées, logs complets, statut des appareils en permanence.',
-    benefit: 'Visibilité totale'
-  },
-  {
-    icon: Shield,
-    title: 'Intégration réseau RPA',
-    description: 'VLAN VoIP, QoS/DSCP optimisé, isolation invités/IoT selon les normes.',
-    benefit: 'Conformité réseau'
+    icon: Activity,
+    title: 'Interventions orchestrées',
+    detail: 'Escalades SMS, Slack et tableau de bord clinique pour déclencher la bonne réponse sans délai.'
   }
 ]
 
-const benefits = [
+const deviceHighlights = [
   {
-    icon: Clock,
-    title: 'Réduction des délais d\'intervention',
-    description: 'Alertes instantanées permettent une réaction immédiate du personnel soignant.'
+    icon: Droplets,
+    label: 'Boutons IP67',
+    description: 'Utilisables à la douche comme en chambre, sans risque pour l’électronique.'
   },
   {
-    icon: Shield,
-    title: 'Renforcement de la sécurité',
-    description: 'Surveillance continue et systèmes redondants garantissent la protection des résidents.'
+    icon: Wifi,
+    label: 'Wi-Fi + MQTT',
+    description: 'Connexion sécurisée avec supervision à distance des équipements.'
   },
   {
-    icon: Users,
-    title: 'Tranquillité des familles',
-    description: 'Les proches ont l\'assurance que leurs êtres chers sont surveillés et protégés.'
+    icon: Radio,
+    label: 'Secours RF 433 MHz',
+    description: 'Maintien des alertes même lors d’une coupure Internet.'
+  },
+  {
+    icon: Waves,
+    label: 'Capteurs volumétriques',
+    description: 'Vayyar sans caméra pour les zones sensibles comme les salles de bain.'
+  },
+  {
+    icon: SignalHigh,
+    label: 'Dashboard temps réel',
+    description: 'Latence < 5 s, faux positifs < 8 % et disponibilité visée > 99,5 %.'
   }
 ]
 
 export default function RpaSolution() {
   return (
-    <section id="rpa-solution" className="section-padding bg-white">
+    <section id="rpa-solution" className="section-padding bg-slate-900 text-slate-100">
       <div className="container-max">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            <Target className="w-4 h-4" />
-            Phase 1 — Prête à déployer
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Solution complète pour
-            <span className="text-gradient block">établissements RPA</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Notre système intelligent d'appel d'urgence transforme la sécurité et l'efficacité
-            de votre établissement dès le déploiement de la Phase 1.
-          </p>
-        </motion.div>
+        <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
+              SerenaCare AI · Plateforme de sécurité augmentée
+            </div>
 
-        {/* Benefits Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {benefits.map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="text-center p-6 bg-gradient-to-br from-primary-50 to-blue-50 rounded-2xl border border-primary-100"
-            >
-              <div className="inline-flex p-3 rounded-xl bg-primary-600 mb-4">
-                <benefit.icon className="w-8 h-8 text-white" />
+            <h2 className="text-3xl font-bold md:text-4xl">
+              Une plateforme unifiée pour des résidences privées pour aînés plus sereines
+            </h2>
+
+            <p className="text-lg text-slate-300">
+              Nos modules edge Jetson surveillent en continu les flux vidéo, audio et IoT pour déclencher la bonne intervention au bon moment.
+              Chaque résidence profite d’une architecture réseau adaptée (VLAN, QoS, isolation IoT) et d’un accompagnement terrain clé en main.
+            </p>
+
+            <div className="grid gap-4 sm:grid-cols-3">
+              {corePillars.map((pillar) => (
+                <div key={pillar.title} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <pillar.icon className="mb-3 h-6 w-6 text-cyan-300" />
+                  <h3 className="text-base font-semibold text-white">{pillar.title}</h3>
+                  <p className="mt-2 text-sm text-slate-300">{pillar.detail}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-slate-950/60 p-6 shadow-2xl shadow-black/40">
+              <h3 className="text-xl font-semibold text-white">Kit matériel Phase 1</h3>
+              <p className="mt-2 text-sm text-slate-300">
+                Boutons étanches, capteurs volumétriques et plateforme SaaS sont livrés, installés et configurés avec formation et soutien &lt; 1 h.
+              </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {deviceHighlights.map((highlight) => (
+                  <div key={highlight.label} className="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <highlight.icon className="mt-1 h-5 w-5 text-cyan-300" />
+                    <div>
+                      <div className="text-sm font-semibold text-white">{highlight.label}</div>
+                      <p className="text-xs text-slate-300">{highlight.description}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">{benefit.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
-            </motion.div>
-          ))}
+            </div>
+
+            <a
+              href="mailto:contact@aidyn.ai"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/5"
+            >
+              Réserver une démonstration
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="absolute -inset-6 rounded-3xl bg-cyan-500/20 blur-3xl" />
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/40 shadow-2xl shadow-black/30">
+              <Image
+                src="/images/SerenaCare_Website_Product_Section.png"
+                alt="Dispositifs SerenaCare"
+                width={1024}
+                height={768}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </motion.div>
         </div>
-
-        {/* Features Details */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h3 className="text-3xl font-bold text-center mb-12">
-            Fonctionnalités techniques
-          </h3>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="flex gap-4 p-6 bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
-                    <feature.icon className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-start justify-between mb-2">
-                    <h4 className="text-lg font-bold text-gray-900">{feature.title}</h4>
-                    <span className="text-sm font-medium text-primary-600 bg-primary-50 px-2 py-1 rounded-full">
-                      {feature.benefit}
-                    </span>
-                  </div>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* KPI Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-r from-primary-600 to-blue-600 rounded-3xl p-8 md:p-12 text-white text-center"
-        >
-          <h3 className="text-3xl font-bold mb-8">KPI visés avec la Phase 1</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-              <div className="text-4xl font-bold mb-2">↓ 75%</div>
-              <div className="text-primary-100">Temps de réponse moyen</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-              <div className="text-4xl font-bold mb-2">↑ 95%</div>
-              <div className="text-primary-100">Taux de résolution</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-              <div className="text-4xl font-bold mb-2">99.9%</div>
-              <div className="text-primary-100">Uptime système 24/7</div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   )

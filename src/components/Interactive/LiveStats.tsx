@@ -1,12 +1,13 @@
 'use client'
 
-import { motion, useMotionValue, useSpring, useInView } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { useEffect, useRef, useState, type ComponentType } from 'react'
+import type { SVGProps } from 'react'
 import { TrendingUp, Users, Clock, Shield, Zap, Phone } from 'lucide-react'
 
 interface StatItem {
   id: string
-  icon: React.ComponentType<any>
+  icon: ComponentType<SVGProps<SVGSVGElement>>
   value: number
   label: string
   prefix?: string
@@ -247,9 +248,9 @@ export default function LiveStats() {
             Performance <span className="bg-gradient-to-r from-primary-600 to-blue-600 bg-clip-text text-transparent">Exceptionnelle</span>
           </h2>
 
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Découvrez l'impact mesurable de nos solutions RPA sur les établissements québécois
-          </p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Découvrez l’impact mesurable de nos solutions RPA sur les établissements québécois
+            </p>
 
           {/* Live indicator */}
           <motion.div

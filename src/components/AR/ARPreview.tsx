@@ -2,9 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, useGLTF, Html, PerspectiveCamera } from '@react-three/drei'
+import { OrbitControls, Html } from '@react-three/drei'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Camera, Maximize2, RotateCcw, Layers, Smartphone } from 'lucide-react'
+import { Camera, RotateCcw, Layers, Smartphone } from 'lucide-react'
 import * as THREE from 'three'
 
 // Composant pour un modèle 3D de bouton IP67

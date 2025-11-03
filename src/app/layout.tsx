@@ -4,28 +4,46 @@ import './globals.css'
 import { ToastProvider } from '@/components/Interactive/ToastNotifications'
 
 const inter = Inter({ subsets: ['latin'] })
+const siteUrl = 'https://aidyn-tech.com'
 
 export const metadata: Metadata = {
-  title: 'AIDYN Technologies - Solutions IA pour l\'Immobilier',
-  description: 'AIDYN Technologies révolutionne le secteur immobilier avec des solutions d\'intelligence artificielle avancées. Automatisation, analyse prédictive et optimisation de vos investissements.',
-  keywords: 'IA immobilier, intelligence artificielle, automatisation immobilière, analyse prédictive, investissement immobilier, AIDYN',
-  authors: [{ name: 'Mathieu Chamberland', url: 'https://aidyn-tech.com' }],
-  creator: 'AIDYN Technologies',
-  publisher: 'AIDYN Technologies',
+  metadataBase: new URL(siteUrl),
+  title: 'AIDYN Technologies – SerenaCare AI pour résidences privées pour aînés',
+  description:
+    "SerenaCare AI de Technologies AIDYN détecte les chutes, errances et détresses audio en RPA grâce à une IA multimodale edge/cloud. Phase 1 : pilote Auberge Boischatel, KPI ≥95 %, soutien 24/7.",
+  keywords:
+    'SerenaCare AI, RPA, résidences privées pour aînés, détection de chutes, IA multimodale, surveillance intelligente, Technologies AIDYN',
+  authors: [{ name: 'Mathieu Chamberland', url: siteUrl }],
+  creator: 'Technologies AIDYN Inc.',
+  publisher: 'Technologies AIDYN Inc.',
   robots: 'index, follow',
+  alternates: {
+    canonical: siteUrl,
+  },
   openGraph: {
     type: 'website',
     locale: 'fr_CA',
-    url: 'https://aidyn-tech.com',
-    title: 'AIDYN Technologies - Solutions IA pour l\'Immobilier',
-    description: 'Solutions d\'intelligence artificielle révolutionnaires pour le secteur immobilier',
+    url: siteUrl,
     siteName: 'AIDYN Technologies',
+    title: 'SerenaCare AI – Sécurité intelligente pour milieux de vie aînés',
+    description:
+      'Plateforme SerenaCare AI : vision + audio + capteurs edge pour réduire de 40 % les incidents critiques en résidences privées pour aînés.',
+    images: [
+      {
+        url: '/images/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png',
+        width: 1200,
+        height: 900,
+        alt: 'Tableau de bord SerenaCare AI avec alertes en temps réel',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AIDYN Technologies',
-    description: 'Solutions IA pour l\'immobilier',
+    title: 'SerenaCare AI par AIDYN Technologies',
+    description:
+      "Détection d'événements critiques par IA multimodale pour les résidences privées pour aînés – Phase 1 prête au pilote Auberge Boischatel.",
     creator: '@aidyn_tech',
+    images: ['/images/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png'],
   },
 }
 

@@ -36,7 +36,7 @@ const networkFeatures = [
   {
     icon: Wifi,
     title: 'Roaming AP',
-    description: 'Couverture Wi-Fi seamless dans tout l\'établissement'
+    description: 'Couverture Wi-Fi seamless dans tout l’établissement'
   }
 ]
 
@@ -62,12 +62,12 @@ const tools = [
   {
     icon: MessageSquare,
     title: 'Slack/Teams',
-    description: 'Notifications d\'urgence directes dans vos canaux'
+    description: 'Notifications d’urgence directes dans vos canaux'
   },
   {
     icon: Phone,
     title: 'Twilio/VoIP',
-    description: 'Appels automatiques et SMS d\'alerte'
+    description: 'Appels automatiques et SMS d’alerte'
   },
   {
     icon: BarChart3,
@@ -93,7 +93,7 @@ export default function Integrations() {
             <span className="text-gradient"> complètes</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Notre solution s'intègre parfaitement dans votre infrastructure existante
+            Notre solution s’intègre parfaitement dans votre infrastructure existante
             avec des protocoles standards et une architecture réseau optimisée.
           </p>
         </motion.div>
