@@ -1,6 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
 import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
-import Hero from '@/components/Hero'
 
 // Critical components - loaded immediately
 import HowItWorks from '@/components/HowItWorks'
@@ -15,7 +15,7 @@ const Contact = dynamic(() => import('@/components/Contact'))
 const Footer = dynamic(() => import('@/components/Footer'))
 const Innovation3D = dynamic(() => import('@/components/Innovation3D'))
 const RoadmapCommercial = dynamic(() => import('@/components/RoadmapCommercial'))
-// Logo3DShowcase removed - too heavy for performance
+const DashboardPWAPreview = dynamic(() => import('@/components/DashboardPWAPreview'))
 
 // Floating components - loaded with SSR disabled for better performance
 const AskAidyn = dynamic(
@@ -23,27 +23,30 @@ const AskAidyn = dynamic(
   { ssr: false }
 )
 
-// 3D Background - loaded with SSR disabled
-const Background3D = dynamic(
-  () => import('@/components/Background3D'),
-  { ssr: false }
+// NEW: Hero 3D Immersive - loaded with SSR disabled for optimal performance
+const HeroImmersive3D = dynamic(
+  () => import('@/components/HeroImmersive3D'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="flex min-h-screen items-center justify-center bg-slate-950">
+        <div className="text-center">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-cyan-500 border-t-transparent mx-auto"></div>
+          <p className="mt-4 text-slate-400">Chargement de l'expérience 3D...</p>
+        </div>
+      </div>
+    )
+  }
 )
 
 export default function HomePage() {
   return (
     <>
-      {/* 3D Logo Background - Fixed throughout the site, principal visual element */}
-      <Background3D 
-        modelPath="/models/aidyn_logo.glb"
-        scale={5}
-        scrollSpeed={0.001}
-      />
-      
       <Navigation />
-      <main className="relative z-10 min-h-screen pt-20">
-        {/* Hero Section - Introduction */}
+      <main className="relative z-10 min-h-screen">
+        {/* NEW: Hero 3D Immersive Section - Full-screen premium experience */}
         <section id="hero">
-          <Hero />
+          <HeroImmersive3D />
         </section>
 
         {/* How It Works - Phase 1 Pipeline */}
@@ -74,6 +77,11 @@ export default function HomePage() {
         {/* Phase 1 Section */}
         <section id="phase-1">
           <PhaseOne />
+        </section>
+
+        {/* PWA Dashboard Preview Section - NEW */}
+        <section id="pwa-dashboard">
+          <DashboardPWAPreview />
         </section>
 
         {/* Services Section */}
