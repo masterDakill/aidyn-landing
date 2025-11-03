@@ -3,7 +3,7 @@
 ## Résumé / Overview
 
 - **Produit**: SerenaCare AI – plateforme de surveillance intelligente pour résidences privées pour aînés (RPA).
-- **Portée**: Mise de l’avant de la **Phase 1** du plan d’affaires 2025–2026 (fondations, pilote Auberge Boischatel, financement initial).
+- **Portée**: Mise de l'avant de la **Phase 1** du plan d'affaires 2025–2026 (fondations, pilote Auberge Boischatel, financement initial).
 - **Stack**: Next.js 14, TypeScript, Tailwind CSS, Framer Motion.
 - **Design**: Aligné sur les visuels fournis (gradients bleu nuit, cartes SerenaCare) avec une navigation en verre dépoli et un hero mobile-first.
 - **Contenu**: Textes marketing réécrits pour un ton web orienté clients et harmonisé avec la version en ligne.
@@ -62,19 +62,19 @@ npm run docker:down
 
 > Par défaut, Traefik publie l'appli sur http://aidyn.localhost (port 80) et son dashboard sur http://localhost:8080. Ajustez les labels dans `compose.prod.yml` pour votre domaine final.
 - **Scripts images** :
-  - installez libvips (`brew install vips` sur macOS) pour permettre à Sharp d’optimiser les visuels ;
+  - installez libvips (`brew install vips` sur macOS) pour permettre à Sharp d'optimiser les visuels ;
   - assurez-vous que la variable `AIDYN_IMG_SRC` pointe vers le dossier source avant `npm run images:import` ;
-  - `npm run images:check` échouera si un slug du manifest n’est pas référencé par le code (`getImage('slug')`).
+  - `npm run images:check` échouera si un slug du manifest n'est pas référencé par le code (`getImage('slug')`).
 - **Images SerenaCare absentes** :
-  - la galerie charge maintenant une image par défaut ; si l’affichage reste vide, relancez `npm run dev` après avoir vérifié que le dossier `public/images` est bien synchronisé ;
+  - la galerie charge maintenant une image par défaut ; si l'affichage reste vide, relancez `npm run dev` après avoir vérifié que le dossier `public/images` est bien synchronisé ;
   - le hero et la section produit pointent explicitement vers `public/images`, assurez-vous que les fichiers y sont présents (sinon mettez à jour les chemins) ;
   - en production, exécutez `npm run preview` pour reconstruire le bundle et valider que les assets sont servis sans 404.
 - **Vidéo Synthesia bloquée** :
   - vérifiez que le navigateur autorise les iframes `share.synthesia.io` (désactiver les bloqueurs de contenu si nécessaire) ;
-  - la section charge l’iframe en lazy-loading, patientez quelques secondes ou rechargez ;
-  - en mode hors ligne, remplacez temporairement l’URL dans `VideoPitch.tsx` par un fichier local contrôlé.
+  - la section charge l'iframe en lazy-loading, patientez quelques secondes ou rechargez ;
+  - en mode hors ligne, remplacez temporairement l'URL dans `VideoPitch.tsx` par un fichier local contrôlé.
 - **Erreur `frontend/vite.config.ts` ou `Cannot find module 'vite'` pendant `npm run build` / Vercel** :
-  - supprimez toute ancienne arborescence `frontend/` héritée d’une version Vite (`rm -rf frontend`) ;
+  - supprimez toute ancienne arborescence `frontend/` héritée d'une version Vite (`rm -rf frontend`) ;
   - confirmez que `git status` ne liste plus de fichiers `frontend/*` avant de relancer `npm run build` ;
   - Vercel reconstruira automatiquement après un nouveau push propre.
 
@@ -88,7 +88,7 @@ npm run docker:down
 - `src/components/Features.tsx`: piliers techniques alignés sur les livrables Phase 1.
 - `src/components/VideoPitch.tsx`: capsule Synthesia intégrée avec rappels KPI et engagements Phase 1.
 - `src/components/Services.tsx`: verticales IA (Santé, Automatisation RPA, Immobilier).
-- `ui/Button.tsx` & `ui/AnimateIn.tsx`: primitives UI (boutons gradient, animations d’apparition).
+- `ui/Button.tsx` & `ui/AnimateIn.tsx`: primitives UI (boutons gradient, animations d'apparition).
 - `src/lib/image-manifest.ts` + scripts `scripts/*.mjs`: gestion centralisée des visuels SerenaCare (import, optimisation, contrôle).
 - `config/site.json` & `content/*.json`: contenu éditable (projets, services) sans toucher au code.
 - `public/`: visuels officiels AIDYN (optimisés via Sharp).
@@ -125,8 +125,8 @@ npm run docker:down
 ## SEO & métadonnées
 
 - `src/app/layout.tsx` centralise désormais un titre, une description et des balises Open Graph/Twitter alignées sur SerenaCare AI Phase 1 (RPA, KPI ≥95 %, pilote Auberge Boischatel).
-- Les visuels d’aperçu pointent vers `public/images/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png` pour refléter le design final.
-- `src/lib/logger.ts` active les logs console structurés et prépare l’activation Sentry via `NEXT_PUBLIC_SENTRY_DSN`.
+- Les visuels d'aperçu pointent vers `public/images/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png` pour refléter le design final.
+- `src/lib/logger.ts` active les logs console structurés et prépare l'activation Sentry via `NEXT_PUBLIC_SENTRY_DSN`.
 
 ### Authentification différée / Deferred authentication
 
@@ -154,7 +154,7 @@ npm run docker:down
    git remote add origin git@github.com:<organisation>/<repo>.git
    git remote set-url origin git@github.com:<organisation>/<repo>.git  # pour mettre à jour
    ```
-2. **Vérifier la branche active** : la convention est `codex/<feature>-<YYYY-MM-DD>`. Confirmez avec `git status` qu’aucun fichier n’est en attente.
+2. **Vérifier la branche active** : la convention est `codex/<feature>-<YYYY-MM-DD>`. Confirmez avec `git status` qu'aucun fichier n'est en attente.
 3. **Pousser les commits** :
    ```bash
    git push -u origin <branch>
@@ -162,7 +162,7 @@ npm run docker:down
    Utilisez un PAT (Personal Access Token) ou une clé SSH avec les droits `repo` si GitHub demande une authentification.
 4. **Ouvrir la PR** :
    - depuis la ligne de commande avec `gh pr create --fill` (GitHub CLI) ;
-   - ou via l’interface Web en vous rendant sur `https://github.com/<organisation>/<repo>/compare`.
+   - ou via l'interface Web en vous rendant sur `https://github.com/<organisation>/<repo>/compare`.
 5. **Mettre le site en ligne / Preview** :
    ```bash
    npm run preview          # build + start sur 0.0.0.0:3000 (PORT surchargé si besoin)
@@ -174,7 +174,7 @@ npm run docker:down
    - localement : http://localhost:3000 (ou votre adresse LAN) ;
    - Vercel : URL `https://<project>.vercel.app` affichée après le déploiement.
 
-> ⚠️ L’assistant ne peut pas pousser vers GitHub ni déclencher Vercel à votre place ; exécutez les commandes ci-dessus sur votre machine.
+> ⚠️ L'assistant ne peut pas pousser vers GitHub ni déclencher Vercel à votre place ; exécutez les commandes ci-dessus sur votre machine.
 
 ---
 
@@ -184,7 +184,7 @@ npm run docker:down
 - **Scope**: Highlights Business Plan Phase 1 (foundations, Auberge Boischatel pilot, grants strategy).
 - **Stack**: Next.js 14 + TypeScript + Tailwind + Framer Motion.
 - **Design**: Matches provided dark teal visuals with a glassmorphism navigation bar and mobile-first hero layout.
-- **Content**: Marketing copy refreshed to match the live site tone and highlight Phase 1 outcomes.
+- **Content**: Marketing copy refreshed to match the live site tone and highlight Phase 1 outcomes.
 
 ### Development
 
@@ -205,7 +205,7 @@ npm run verify
 
 ### SEO & metadata
 
-- `src/app/layout.tsx` defines the SerenaCare AI Phase 1 title, description, and Open Graph/Twitter images (senior living focus, ≥95 % KPI target, Auberge Boischatel pilot).
+- `src/app/layout.tsx` defines the SerenaCare AI Phase 1 title, description, and Open Graph/Twitter images (senior living focus, ≥95 % KPI target, Auberge Boischatel pilot).
 - Keep the preview artwork under `public/images/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png`, or update the paths if a new asset ships.
 - `src/lib/logger.ts` keeps logs local by default and enables Sentry once `NEXT_PUBLIC_SENTRY_DSN` is provided.
 
@@ -268,4 +268,8 @@ npm run verify
   - audit SEO & métadonnées (Head, Open Graph, sitemaps) ;
   - CTA dynamique vers « SerenaCare Pilot Program » ;
   - pipeline CI GitHub Actions (lint, build, docker push GHCR).
-- Chaque livrable inclut objectifs, étapes techniques, dépendances et critères d’acceptation pour accélérer la Phase 2.
+- Chaque livrable inclut objectifs, étapes techniques, dépendances et critères d'acceptation pour accélérer la Phase 2.
+
+---
+
+© 2025 AIDYN Technologies Inc. Tous droits réservés.

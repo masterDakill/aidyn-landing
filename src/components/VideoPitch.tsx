@@ -6,25 +6,28 @@ import { ArrowRight, ShieldCheck, Sparkles, Zap } from "lucide-react";
 const commitments = [
   {
     title: "Pilote terrain orchestré",
-    description: "Formation, scénarios d'escalade et boucle de rétroaction avec le personnel et les familles.",
+    description:
+      "Formation du personnel, scénarios d'escalade et boucle de rétroaction résidents/familles incluses.",
     icon: ShieldCheck,
   },
   {
     title: "IA multimodale maîtrisée",
-    description: "Vision, audio et capteurs edge Jetson alignés sur les exigences cliniques et réglementaires.",
+    description:
+      "Vision + audio + capteurs edge Jetson alignés sur les exigences cliniques et réglementaires.",
     icon: Zap,
   },
   {
     title: "Confiance & conformité",
-    description: "Journalisation complète, anonymisation contextuelle et préparation certification CE/RoHS.",
+    description:
+      "Journalisation complète, anonymisation contextuelle et préparation certification CE/RoHS.",
     icon: Sparkles,
   },
 ];
 
 const highlights = [
   "Réduction ciblée ≥ 40 % des incidents critiques",
-  "Précision de détection ≥ 95 % sur le pilote Auberge Boischatel",
-  "Financement Phase 1 : MAPAQ 50 k$ + AGE-WELL 25 k$",
+  "Précision de détection ≥ 95 % sur le pilote résidence partenaire",
+  "Financement Phase 1 : programmes gouvernementaux et subventions"
 ];
 
 export default function VideoPitch() {
@@ -43,11 +46,14 @@ export default function VideoPitch() {
           </span>
 
           <h2 className="text-3xl font-bold sm:text-4xl">
-            Pitch exécutif : comment SerenaCare AI protège les milieux de vie aînés
+            Pitch exécutif : comment SerenaCare AI sécurise les milieux de vie
+            aînés
           </h2>
 
           <p className="text-lg text-slate-300">
-            Cette capsule résume la valeur Phase 1 : architecture edge/cloud, indicateurs opérationnels et préparation du pilote à l&apos;Auberge Boischatel.
+            Cette capsule synthétise la proposition de valeur Phase 1 :
+            architecture edge/cloud, KPI opérationnels et feuille de route de
+            déploiement à l&apos;résidence partenaire.
           </p>
 
           <ul className="space-y-4 text-sm text-slate-200">
@@ -76,10 +82,10 @@ export default function VideoPitch() {
           </div>
 
           <a
-            href="mailto:contact@aidyn.ai"
+            href="#contact"
             className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:border-white/40 hover:bg-white/5"
           >
-            Planifier une conversation
+            Discuter du déploiement
             <ArrowRight className="h-4 w-4" />
           </a>
         </motion.div>

@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import WebVitalsReporter from '@/components/WebVitalsReporter'
 import './globals.css'
 import { ToastProvider } from '@/components/Interactive/ToastNotifications'
+import BuilderRegistryProvider from '@/components/builder/BuilderRegistryProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 const siteUrl = 'https://aidyn-tech.com'
@@ -21,6 +23,8 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
+    title: 'AIDYN Technologies - SerenaCare AI',
+    description: 'Plateforme de surveillance intelligente pour résidences privées pour aînés',
     type: 'website',
     locale: 'fr_CA',
     url: siteUrl,
@@ -55,9 +59,12 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth">
       <body className={`${inter.className} antialiased`}>
-        <ToastProvider>
-          {children}
-        </ToastProvider>
+        <BuilderRegistryProvider>
+          <ToastProvider>
+            <WebVitalsReporter />
+            {children}
+          </ToastProvider>
+        </BuilderRegistryProvider>
       </body>
     </html>
   )

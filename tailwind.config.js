@@ -8,18 +8,36 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // AIDYN Brand Colors from Design System
+        aidyn: {
+          primary: '#22CF6', // Primary blue
+          accent: '#00D2C7', // Accent cyan/turquoise
+          dark: '#08120',    // Dark navy
+        },
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
+          50: '#e6f7ff',
+          100: '#b3e5ff',
+          200: '#80d4ff',
+          300: '#4dc2ff',
+          400: '#22cf6',  // AIDYN Primary
           500: '#0ea5e9',
           600: '#0284c7',
           700: '#0369a1',
           800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          900: '#08120',  // AIDYN Dark
+          950: '#08120',
+        },
+        accent: {
+          50: '#e6fffd',
+          100: '#b3fff9',
+          200: '#80fff5',
+          300: '#4dfff1',
+          400: '#1afded',
+          500: '#00d2c7', // AIDYN Accent
+          600: '#00a89f',
+          700: '#007e77',
+          800: '#00544f',
+          900: '#002a27',
         },
         gray: {
           50: '#f9fafb',
@@ -32,7 +50,7 @@ module.exports = {
           700: '#374151',
           800: '#1f2937',
           900: '#111827',
-          950: '#030712',
+          950: '#08120',  // AIDYN Dark
         },
       },
       fontFamily: {

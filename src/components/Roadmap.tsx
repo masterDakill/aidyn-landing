@@ -7,16 +7,16 @@ const roadmap = [
   {
     period: 'Oct. – Nov. 2025',
     title: 'Fondations & financement',
-    details: ['Incorporation, structure légale et gouvernance', 'Dépôt MAPAQ (50 k$) et AGE-WELL (25 k$)', 'Achat GPU, Jetson, capteurs et mise en place pipeline données']
+    details: ['Incorporation, structure légale et gouvernance', 'Dépôt programmes gouvernementaux) et subventions innovation)', 'Achat matériel IA, capteurs et mise en place pipeline données']
   },
   {
     period: 'Déc. 2025',
     title: 'Développement IA core',
-    details: ['Modèles YOLOv8 & Whisper optimisés edge', 'API FastAPI + PostgreSQL/Redis + intégrations Twilio/Slack', 'Tests unitaires, CI/CD GitHub Actions et monitoring']
+    details: ['Modèles modèles IA optimisés edge', 'API backend + base de données + intégrations notifications', 'Tests unitaires, CI/CD intégration continue et monitoring']
   },
   {
     period: 'Jan. 2026',
-    title: 'Préparation pilote Auberge Boischatel',
+    title: 'Préparation pilote résidence partenaire',
     details: ['Dashboard React temps réel, WebSocket et analytics', 'Formation du personnel, procédures SLA < 1 h', 'Déploiement staging sécurisé avec scénarios UX']
   },
   {

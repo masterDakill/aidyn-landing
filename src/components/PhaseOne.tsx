@@ -1,62 +1,78 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { CalendarClock, CheckCircle2, Layers3, MapPinned, ShieldAlert, Users } from 'lucide-react'
+import { CalendarClock, CheckCircle2, DollarSign, Layers3, MapPinned, ShieldAlert, Target, Users } from 'lucide-react'
 
-const milestones = [
+const sprints = [
   {
-    period: 'Octobre – Novembre 2025',
-    title: 'Fondations et subventions',
-    bullets: [
-      'Incorporation et gouvernance initiale',
-      'Dépôt MAPAQ (50 k$) + achats GPU, Jetson, capteurs',
-      'Cadre de conformité et sécurité des données'
-    ]
+    period: 'Phase 1 · Mars 2026',
+    title: 'Préparation & Infrastructure',
+    tasks: [
+      'Audit infrastructure existante et évaluation technique',
+      'Collecte et préparation des datasets de validation',
+      'Identification des opportunités de financement'
+    ],
+    budget: 'Budget alloué',
+    livrables: 'Documentation technique complète'
   },
   {
-    period: 'Décembre 2025',
-    title: 'Développement IA core',
-    bullets: [
-      'Entraînement YOLOv8 (vision) et Whisper (audio)',
-      'Backend FastAPI + intégrations Twilio/Slack',
-      'Tests unitaires et pipeline CI/CD'
-    ]
+    period: 'Phase 2 · Avril 2026',
+    title: 'Développement IA',
+    tasks: [
+      'Entraînement et optimisation du modèle de détection',
+      'Validation de la précision et performance',
+      'Optimisation pour déploiement edge computing',
+      'Intégration pipeline de traitement temps réel'
+    ],
+    budget: 'Budget alloué',
+    livrables: 'Modèle IA optimisé et validé'
   },
   {
-    period: 'Janvier 2026',
-    title: 'Préparation pilote Auberge Boischatel',
-    bullets: [
-      'Dashboard React temps réel + WebSocket',
-      'Scénarios UX et formation du personnel',
-      'Déploiement environnement staging sécurisé'
-    ]
+    period: 'Phase 3 · Mai 2026',
+    title: 'Interface & Alertes',
+    tasks: [
+      'Développement dashboard de surveillance multi-caméra',
+      'Système d\'alertes intelligent en temps réel',
+      'Configuration des règles de notification',
+      'Tests qualité et validation'
+    ],
+    budget: 'Budget alloué',
+    livrables: 'Application web complète et testée'
   },
   {
-    period: 'Février 2026',
-    title: 'Go-live site pilote',
-    bullets: [
-      'Installation 12 caméras UniFi & 8 capteurs Vayyar',
-      'Configuration SLA 24/7 et support < 1 h',
-      'Suivi KPI : précision, latence, faux positifs'
-    ]
+    period: 'Phase 4 · Juin 2026',
+    title: 'Déploiement Pilote',
+    tasks: [
+      'Installation et déploiement sur site pilote',
+      'Tests d\'acceptation et validation terrain',
+      'Formation du personnel utilisateur',
+      'Documentation et études de cas'
+    ],
+    budget: 'Budget alloué',
+    livrables: 'Site pilote opérationnel'
   }
 ]
 
-const successChecks = [
+const successMetrics = [
   {
-    icon: CheckCircle2,
-    title: 'MVP opérationnel',
-    detail: 'Détection ≥95 % et continuité edge/cloud documentée.'
+    icon: Target,
+    title: 'Haute Précision',
+    detail: 'Système de détection validé avec taux de précision élevé.'
   },
   {
     icon: ShieldAlert,
-    title: 'Confiance réglementaire',
-    detail: 'Journalisation, anonymisation et préparation CE/RoHS.'
+    title: 'Faible Taux d\'Erreur',
+    detail: 'Minimisation des fausses alertes pour une expérience optimale.'
   },
   {
     icon: Users,
-    title: 'Adoption terrain',
-    detail: 'Personnel RPA formé, rétroaction familles et résidents intégrée.'
+    title: 'Adoption Réussie',
+    detail: 'Personnel formé et satisfaction utilisateur validée.'
+  },
+  {
+    icon: DollarSign,
+    title: 'Financement Confirmé',
+    detail: 'Programmes de financement sécurisés pour les phases suivantes.'
   }
 ]
 
@@ -72,83 +88,167 @@ export default function PhaseOne() {
           className="mx-auto max-w-3xl text-center"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-sky-500/40 bg-sky-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">
-            <CalendarClock className="h-4 w-4" /> Phase 1 SerenaCare AI
+            <CalendarClock className="h-4 w-4" /> PIVOT Phase 1 UniFi
           </div>
           <h2 className="mt-6 text-3xl font-bold md:text-4xl">
-            Une feuille de route opérationnelle vers un pilote exemplaire dès 2025
+            Roadmap de Développement 2026
           </h2>
           <p className="mt-4 text-lg text-slate-300">
-            La Phase 1 consolide financement, technologie et préparation terrain pour livrer un déploiement rassurant à l’Auberge Boischatel et préparer l’expansion provinciale.
+            Un plan d&apos;exécution structuré pour déployer notre solution de détection intelligente.
+            Développement itératif sur 4 phases, avec validation à chaque étape.
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-[1.5fr_1fr]">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            {milestones.map((milestone) => (
-              <div key={milestone.period} className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/30">
-                <div className="text-sm font-semibold uppercase tracking-wide text-sky-300">{milestone.period}</div>
-                <h3 className="mt-2 text-2xl font-semibold text-white">{milestone.title}</h3>
-                <ul className="mt-4 space-y-2 text-sm text-slate-200">
-                  {milestone.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-3">
-                      <span className="mt-1 inline-flex h-2.5 w-2.5 flex-shrink-0 rounded-full bg-sky-400" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+        <div className="mt-16 space-y-8">
+          {sprints.map((sprint, index) => (
+            <motion.div
+              key={sprint.period}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-lg shadow-black/30"
+            >
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                <div className="flex-1">
+                  <div className="text-sm font-semibold uppercase tracking-wide text-sky-300">{sprint.period}</div>
+                  <h3 className="mt-2 text-2xl font-semibold text-white">{sprint.title}</h3>
+                  <ul className="mt-4 space-y-2 text-sm text-slate-200">
+                    {sprint.tasks.map((task) => (
+                      <li key={task} className="flex items-start gap-3">
+                        <span className="mt-1 inline-flex h-2 w-2 flex-shrink-0 rounded-full bg-sky-400" />
+                        <span>{task}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="shrink-0 space-y-2 rounded-2xl border border-sky-500/40 bg-sky-500/10 p-4 text-center lg:w-48">
+                  <div className="text-xs font-semibold uppercase tracking-wide text-sky-300">Budget Sprint</div>
+                  <div className="text-3xl font-bold text-sky-200">{sprint.budget}</div>
+                  <div className="mt-3 pt-3 border-t border-white/10 text-xs text-slate-300">
+                    <div className="font-semibold text-white">Livrables:</div>
+                    <div className="mt-1">{sprint.livrables}</div>
+                  </div>
+                </div>
               </div>
-            ))}
-          </motion.div>
+            </motion.div>
+          ))}
+        </div>
 
+        <div className="mt-16 grid gap-8 lg:grid-cols-[1fr_1.2fr]">
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 p-8 shadow-2xl shadow-black/40"
           >
             <div>
-              <h3 className="text-xl font-semibold text-white">Critères de succès 12–18 mois</h3>
+              <h3 className="text-xl font-semibold text-white">Critères de Succès MVP</h3>
               <p className="mt-2 text-sm text-slate-300">
-                Ces indicateurs servent de garde-fous pour nos partenaires financiers et les équipes terrain impliquées dans le pilote.
+                Objectifs mesurables pour valider le pilote et débloquer Phase 2 (assistant vocal, expansion sites).
               </p>
             </div>
 
-            <div className="space-y-5">
-              {successChecks.map((check) => (
-                <div key={check.title} className="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="space-y-4">
+              {successMetrics.map((metric) => (
+                <div key={metric.title} className="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-500/20 text-sky-300">
-                    <check.icon className="h-6 w-6" />
+                    <metric.icon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="text-base font-semibold text-white">{check.title}</h4>
-                    <p className="text-sm text-slate-300">{check.detail}</p>
+                    <h4 className="text-base font-semibold text-white">{metric.title}</h4>
+                    <p className="text-sm text-slate-300">{metric.detail}</p>
                   </div>
                 </div>
               ))}
             </div>
+          </motion.div>
 
-            <div className="rounded-2xl border border-sky-500/40 bg-sky-500/10 p-4 text-sm text-sky-200">
-              <div className="flex items-center gap-2 font-semibold">
-                <Layers3 className="h-4 w-4" /> Budget Phase 1
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <div className="rounded-3xl border border-sky-500/40 bg-sky-500/10 p-6">
+              <div className="flex items-center gap-2 text-lg font-semibold text-white">
+                <Layers3 className="h-5 w-5 text-sky-300" /> Investissement Phase 1
               </div>
-              <p className="mt-2">
-                400 h IA/ML · 150 h DevOps/Backend · 80 h UX/UI · matériel edge (Jetson, capteurs) · préparation conformité et certifications.
-              </p>
-              <p className="mt-2 text-xs text-slate-300">
-                Sources complémentaires : CRSNG Alliances, PARI CNRC, pré-seed Anges Québec (post-pilote si KPI atteints).
-              </p>
+              <div className="mt-4 space-y-3 text-sm text-sky-200">
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Matériel edge computing optimisé</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Développement IA et modèles de détection</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Infrastructure backend et frontend complète</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Assurance qualité et tests de validation</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Stratégie commerciale et de financement</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5 flex-shrink-0" />
+                  <span>Hébergement cloud sécurisé Québec</span>
+                </div>
+                <div className="mt-4 border-t border-white/20 pt-3">
+                  <p className="text-xs text-slate-300">
+                    <strong className="text-white">Financement Phase 1:</strong> Programmes gouvernementaux d&apos;innovation et partenariats stratégiques confirmés.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs text-slate-300">
-              <MapPinned className="mb-2 h-5 w-5 text-sky-300" />
-              Auberge Boischatel · 12 caméras UniFi · 8 capteurs Vayyar · modules Jetson · SLA support &lt; 1 h · Uptime visé &gt; 99,5 %.
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <div className="flex items-center gap-2 text-lg font-semibold text-white">
+                <MapPinned className="h-5 w-5 text-sky-300" /> Site Pilote
+              </div>
+              <div className="mt-4 space-y-2 text-sm text-slate-300">
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
+                  <span>Résidence partenaire · RPA Québec</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
+                  <span>Caméras UniFi Protect existantes (à auditer)</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
+                  <span>UDM Pro routeur/NVR en place</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
+                  <span>Matériel edge computing · Inference locale edge</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
+                  <span>Interface de gestion · Alertes automatiques</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-sky-300 mt-0.5" />
+                  <span>SLA support &lt;1h · Uptime visé &gt;99.5%</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-emerald-500/40 bg-emerald-500/10 p-6 text-sm text-emerald-200">
+              <div className="font-semibold text-white">Stratégie de Financement</div>
+              <ul className="mt-3 space-y-1 text-xs">
+                <li>• Programmes gouvernementaux d&apos;innovation santé</li>
+                <li>• Subventions recherche et développement</li>
+                <li>• Partenariats institutionnels</li>
+                <li>• Financement privé post-validation</li>
+              </ul>
             </div>
           </motion.div>
         </div>

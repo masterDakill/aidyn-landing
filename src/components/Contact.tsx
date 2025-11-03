@@ -27,9 +27,10 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-
+    
+    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000))
-
+    
     setSubmitted(true)
     setIsSubmitting(false)
   }
@@ -51,7 +52,7 @@ export default function Contact() {
               <p className="text-gray-600 mb-8">
                 Merci pour votre intérêt. Nous vous contacterons dans les 24 heures.
               </p>
-              <button
+              <button 
                 onClick={() => setSubmitted(false)}
                 className="btn-primary"
               >
@@ -85,6 +86,7 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -97,10 +99,10 @@ export default function Contact() {
                   <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-semibold mb-2">Courriel direct</h4>
-                  <p className="text-gray-600 mb-2">Réponse garantie sous 24 h ouvrables.</p>
-                  <a href="mailto:contact@aidyn.ai" className="text-primary-600 hover:text-primary-700 font-medium">
-                    contact@aidyn.ai
+                  <h4 className="text-xl font-semibold mb-2">Email</h4>
+                  <p className="text-gray-600 mb-2">Réponse garantie sous 24h</p>
+                  <a href="mailto:admin@aidyn.ai" className="text-primary-600 hover:text-primary-700 font-medium">
+                    admin@aidyn.ai
                   </a>
                 </div>
               </div>
@@ -110,16 +112,17 @@ export default function Contact() {
                   <MessageCircle className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-semibold mb-2">Rencontre exploratoire</h4>
-                  <p className="text-gray-600 mb-2">Planifiez un échange confidentiel autour de votre projet RPA.</p>
-                  <a href="mailto:contact@aidyn.ai" className="text-primary-600 hover:text-primary-700 font-medium">
-                    Fixer un rendez-vous
-                  </a>
+                  <h4 className="text-xl font-semibold mb-2">Discussion</h4>
+                  <p className="text-gray-600 mb-2">Planifiez une rencontre pour discuter de votre projet RPA</p>
+                  <button className="text-primary-600 hover:text-primary-700 font-medium">
+                    Planifier une rencontre
+                  </button>
                 </div>
               </div>
             </div>
           </motion.div>
 
+          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -177,7 +180,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                    Téléphone (masqué)
+                    Téléphone
                   </label>
                   <input
                     type="tel"
@@ -186,14 +189,14 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-                    placeholder="###-###-####"
+                    placeholder="+1 (514) 123-4567"
                   />
                 </div>
               </div>
 
               <div className="mb-6">
-                <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                  Service d’intérêt
+                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                    Service d’intérêt
                 </label>
                 <select
                   id="service"
@@ -203,7 +206,7 @@ export default function Contact() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
                 >
                   <option value="">Sélectionnez un service</option>
-                  <option value="rpa-phase1">Phase 1 - Système d’appel RPA</option>
+                    <option value="rpa-phase1">Phase 1 - Système d’appel RPA</option>
                   <option value="integration">Intégration réseau complète</option>
                   <option value="deployment">Déploiement SerenaCare</option>
                   <option value="grants">Aide aux subventions Québec</option>
