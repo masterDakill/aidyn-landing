@@ -173,7 +173,7 @@ export default function ProofKpi() {
               Étude de cas Québec
             </div>
             <h3 className="text-3xl font-bold mb-4">
-              Déploiement réussi - Auberge Boischatel
+              Déploiement réussi - résidence partenaire
             </h3>
             <p className="text-xl text-primary-100 max-w-3xl mx-auto">
               Infrastructure réseau stabilisée, QoS VoIP optimisé, et roaming seamless
@@ -210,7 +210,7 @@ export default function ProofKpi() {
                 Les alertes instantanées nous permettent d’intervenir immédiatement.”
               </blockquote>
             <div className="mt-4 text-primary-200">
-              — Direction, Auberge Boischatel
+              — Direction, résidence partenaire
             </div>
           </div>
         </motion.div>

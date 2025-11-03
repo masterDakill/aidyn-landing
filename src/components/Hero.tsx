@@ -3,49 +3,55 @@
 import type { LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Building2, Cpu, MessageSquare, Radar, ShieldCheck } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import Logo from './Logo'
 
-const stats = [
+const kpiTargets = [
   {
-    label: 'Incidents critiques réduits',
-    value: '40 %',
-    description: 'Objectif Phase 1 vs. baseline 2024'
-  },
-  {
-    label: 'Précision attendue',
+    label: 'Précision',
     value: '≥ 95 %',
-    description: 'Détection IA sur le pilote Auberge Boischatel'
+    description: 'Détection fiable des chutes',
+    technical: 'YOLOv8-Pose sur Jetson'
   },
   {
-    label: 'Financement recherché',
-    value: '75 k$',
-    description: 'MAPAQ + AGE-WELL pour consolider la Phase 1'
+    label: 'Faux Positifs',
+    value: '< 5 %',
+    description: 'Très peu de fausses alertes',
+    technical: 'Taux d\'erreur opérationnel'
+  },
+  {
+    label: 'Réactivité',
+    value: '< 500 ms',
+    description: 'Alerte quasi-instantanée',
+    technical: 'Latence inférence locale'
   }
 ]
 
-const quickWins: Array<{ title: string; description: string; icon: LucideIcon }> = [
+const pipelineSteps: Array<{ title: string; description: string; technical: string; icon: LucideIcon }> = [
   {
-    title: 'Pilote Auberge Boischatel',
-    description: '12 caméras UniFi, 8 radars Vayyar, Jetson edge encrypté',
+    title: '1. Vos Caméras',
+    description: 'Utilise vos caméras UniFi actuelles',
+    technical: 'RTSP H.264 UniFi Protect',
     icon: Building2
   },
   {
-    title: 'Infrastructure souveraine',
-    description: 'FastAPI + PostgreSQL + Redis hébergés au Québec, auditables',
+    title: '2. Analyse IA',
+    description: 'Intelligence artificielle locale',
+    technical: 'YOLOv8-Pose ONNX (Jetson)',
     icon: Cpu
   },
   {
-    title: 'Surveillance respectueuse',
-    description: 'Traitement edge, anonymisation contextuelle et traçabilité complète',
-    icon: ShieldCheck
+    title: '3. Communication',
+    description: 'Transmission sécurisée des alertes',
+    technical: 'FastAPI + WebSocket',
+    icon: Radar
   },
   {
-    title: 'Alertes temps réel',
-    description: 'Twilio SMS, Slack, WebSocket; latence &lt;5 s visée',
-    icon: Radar
+    title: '4. Dashboard',
+    description: 'Visualisation temps réel',
+    technical: 'Alertes + Jumeau 3D',
+    icon: ShieldCheck
   }
 ]
 
@@ -69,96 +75,97 @@ export default function Hero() {
             >
               <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-slate-100">
                 <Logo compact className="hidden sm:inline-flex" />
-                <span>SerenaCare AI</span>
+                <span>PIVOT Phase 1</span>
                 <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                <span>Phase 1 · Fondation 2025</span>
+                <span>IA Caméras UniFi · 2026</span>
               </div>
 
               <div className="space-y-6">
                 <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl xl:text-6xl">
                   <span className="bg-gradient-to-r from-sky-300 via-cyan-200 to-emerald-200 bg-clip-text text-transparent">
-                    Intelligence de confiance
+                    Détection automatique des chutes
                   </span>{' '}
-                  pour sécuriser les milieux de vie aînés
+                  avec vos caméras UniFi
                 </h1>
                 <p className="text-lg text-slate-200 sm:text-xl">
-                  AIDYN Technologies déploie SerenaCare AI – une plateforme intégrant vision, audio et capteurs edge pour réduire les
-                  incidents critiques en RPA. La Phase 1 solidifie l’infrastructure, les flux d’alertes et la conformité nécessaire au
-                  pilote Auberge Boischatel.
+                  AIDYN transforme vos caméras de sécurité existantes en système intelligent de prévention des chutes.
+                  Alertes instantanées, visualisation 3D en temps réel. <strong className="text-white">Aucun nouveau matériel requis.</strong>
                 </p>
               </div>
 
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Link
-                  href="#phase-1"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 px-7 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-sky-900/30 transition-transform duration-200 hover:translate-y-[-2px] hover:shadow-xl"
+                  href="#rpa-solution"
+                  className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 px-7 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-sky-500/40 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/50"
                 >
-                  Découvrir la Phase 1
-                  <ArrowRight className="h-5 w-5" />
+                  <span className="relative z-10 inline-flex items-center justify-center gap-2">
+                    Architecture Technique
+                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                  <div className="absolute inset-0 -z-0 bg-gradient-to-r from-emerald-400 to-sky-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </Link>
                 <Link
                   href="#contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 px-7 py-4 text-base font-semibold text-slate-50 transition-colors duration-200 hover:border-white/40 hover:bg-white/5"
+                  className="group inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/5 px-7 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-emerald-400/50 hover:bg-emerald-400/10 hover:shadow-lg hover:shadow-emerald-500/20"
                 >
-                  Planifier une rencontre
-                  <MessageSquare className="h-5 w-5" />
+                  Planifier une démo
+                  <MessageSquare className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
                 </Link>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-3">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/30 backdrop-blur">
-                    <div className="text-2xl font-semibold text-sky-300 sm:text-3xl">{stat.value}</div>
-                    <div className="text-sm font-semibold text-slate-100">{stat.label}</div>
-                    <p className="mt-1 text-xs text-slate-300">{stat.description}</p>
-                  </div>
-                ))}
+              <div className="space-y-3">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-sky-400">KPI Cibles Phase 1</h3>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  {kpiTargets.map((kpi) => (
+                    <div key={kpi.label} className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/30 backdrop-blur">
+                      <div className="text-2xl font-semibold text-sky-300 sm:text-3xl">{kpi.value}</div>
+                      <div className="text-sm font-semibold text-slate-100">{kpi.label}</div>
+                      <p className="mt-1 text-xs text-slate-300">{kpi.description}</p>
+                      <p className="mt-0.5 text-[10px] text-slate-400">{kpi.technical}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="grid gap-4 pt-4 sm:grid-cols-2">
-                {quickWins.map(({ title, description, icon: Icon }) => (
-                  <div key={title} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-500/20 text-sky-200">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{title}</p>
-                      <p className="text-sm text-slate-300">{description}</p>
+              <div className="space-y-3">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-emerald-400">Pipeline Technique</h3>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {pipelineSteps.map(({ title, description, technical, icon: Icon }) => (
+                    <div key={title} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-3 backdrop-blur">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-200">
+                        <Icon className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <p className="text-xs font-semibold text-white">{title}</p>
+                        <p className="text-xs text-slate-300">{description}</p>
+                        <p className="text-[10px] text-slate-400">{technical}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </motion.div>
 
+            {/* Logo 3D géré par le Background3D component - pas de conteneur ici */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
-              className="relative"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="rounded-2xl border border-white/10 bg-slate-950/80 p-6 shadow-xl shadow-black/40 backdrop-blur"
             >
-              <div className="absolute inset-0 hidden rounded-[3rem] bg-sky-500/10 blur-3xl lg:block" />
-              <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl shadow-sky-950/60">
-                <Image
-                  src="/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png"
-                  alt="Tableau de bord SerenaCare AI montrant les alertes et KPI Phase 1"
-                  width={1200}
-                  height={900}
-                  priority
-                  className="h-full w-full object-cover"
-                />
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="absolute -bottom-10 left-6 right-6 rounded-2xl border border-white/10 bg-slate-950/80 p-5 shadow-xl shadow-black/40 backdrop-blur"
-              >
-                <div className="flex items-center gap-3 text-sm text-slate-200">
-                  <ShieldCheck className="h-5 w-5 text-emerald-300" />
-                  <span>Infrastructure prête pour certification CE/RoHS · Uptime cible &gt;99,5 %</span>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <ShieldCheck className="h-6 w-6 text-emerald-300" />
+                  <span className="text-base font-semibold text-white">Solution IA Edge Computing</span>
                 </div>
-              </motion.div>
+                <p className="text-sm text-slate-200">
+                  Intelligence artificielle qui s&apos;intègre à votre système de caméras actuel. 
+                  Détecte les chutes automatiquement et vous alerte immédiatement.
+                </p>
+                <p className="text-xs text-slate-400 mt-2">
+                  Edge computing sur Jetson • Déploiement 2026
+                </p>
+              </div>
             </motion.div>
           </div>
         </div>

@@ -3,14 +3,13 @@
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useState, useEffect, type ComponentType } from 'react'
 import type { SVGProps } from 'react'
-import { MessageCircle, Phone, Calendar, Download, X, ChevronUp, Zap, Heart } from 'lucide-react'
+import { Mail, X, ChevronUp, Zap, Bot } from 'lucide-react'
 
 const NOTIFICATION_MESSAGES = [
-  '💡 Nouveau: Découvrez notre simulateur RPA interactif!',
-  '🎯 Statistiques mises à jour: 99.9% de disponibilité garantie',
-  '⚡ Démo gratuite: Voyez AIDYN en action dans votre RPA',
-  '🏆 Témoignage: “AIDYN a transformé notre établissement” - Dr. Bouchard',
-  '📞 Support 24/7: Nos experts sont là pour vous aider'
+  '🤖 Agent IA disponible: Posez vos questions sur AIDYN',
+  '💡 Nouveau: Détection intelligente des chutes Phase 1',
+  '⚡ Démo disponible: Voyez AIDYN en action',
+  '📧 Contactez-nous: contact@aidyn.ai'
 ]
 
 interface EngagementAction {
@@ -25,36 +24,24 @@ interface EngagementAction {
 
 const engagementActions: EngagementAction[] = [
   {
-    id: 'chat',
-    icon: MessageCircle,
-    label: 'Chat en direct',
-    description: 'Obtenez des réponses instantanées',
-    color: 'from-blue-500 to-cyan-500',
-    onClick: () => console.log('Chat ouvert')
+    id: 'email',
+    icon: Mail,
+    label: 'Email',
+    description: 'contact@aidyn.ai',
+    color: 'from-emerald-500 to-teal-500',
+    href: 'mailto:contact@aidyn.ai'
   },
   {
-    id: 'call',
-    icon: Phone,
-    label: 'Appeler maintenant',
-    description: 'Parlez à un expert RPA',
-    color: 'from-green-500 to-emerald-500',
-    href: 'tel:+15148881234'
-  },
-  {
-    id: 'demo',
-    icon: Calendar,
-    label: 'Démo gratuite',
-    description: 'Réservez votre présentation',
-    color: 'from-purple-500 to-violet-500',
-    onClick: () => console.log('Démo réservée')
-  },
-  {
-    id: 'brochure',
-    icon: Download,
-    label: 'Télécharger',
-    description: 'Brochure technique PDF',
-    color: 'from-orange-500 to-red-500',
-    href: '/documents/brochure-aidyn-rpa.pdf'
+    id: 'chatbot',
+    icon: Bot,
+    label: 'Agent IA',
+    description: 'Discutez avec notre assistant spécialisé',
+    color: 'from-purple-500 to-pink-500',
+    onClick: () => {
+      // TODO: Intégrer votre chatbot IA ici
+      console.log('Chatbot IA - bientôt disponible')
+      // Pas d'alert() bloquant - utilise la notification existante
+    }
   }
 ]
 
@@ -75,10 +62,9 @@ function FloatingButton({ action, index, isOpen, onClick }: {
         y: isOpen ? -(index + 1) * 70 : 0
       }}
       transition={{
-        delay: isOpen ? index * 0.1 : 0,
-        type: "spring",
-        stiffness: 200,
-        damping: 20
+        delay: isOpen ? index * 0.05 : 0,
+        duration: 0.2,
+        ease: "easeOut"
       }}
       className="absolute bottom-0 right-0"
       onMouseEnter={() => setIsHovered(true)}
@@ -104,14 +90,12 @@ function FloatingButton({ action, index, isOpen, onClick }: {
         </AnimatePresence>
 
         {/* Button */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+        <button
           onClick={onClick}
-          className={`w-12 h-12 rounded-full bg-gradient-to-r ${action.color} text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center`}
+          className={`w-12 h-12 rounded-full bg-gradient-to-r ${action.color} text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center`}
         >
           <action.icon className="w-5 h-5" />
-        </motion.button>
+        </button>
       </div>
     </motion.div>
   )
@@ -141,7 +125,7 @@ function ProgressIndicator() {
           strokeWidth="3"
           fill="none"
           strokeLinecap="round"
-          className="text-primary-500"
+          className="text-emerald-500"
           style={{
             pathLength,
             strokeDasharray: "283", // 2 * π * 45
@@ -162,11 +146,11 @@ function NotificationBubble({ message, onClose }: { message: string, onClose: ()
       className="absolute bottom-20 right-0 bg-white rounded-xl shadow-modern-xl p-4 max-w-72 border border-gray-100"
     >
       <div className="flex items-start gap-3">
-        <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-blue-500 rounded-full flex items-center justify-center text-white flex-shrink-0">
-          <Heart className="w-4 h-4" />
+        <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center text-white flex-shrink-0">
+          <Bot className="w-4 h-4" />
         </div>
         <div className="flex-1">
-          <p className="text-gray-800 text-sm leading-relaxed">{message}</p>
+          <p className="text-gray-800 text-sm leading-relaxed whitespace-pre-line">{message}</p>
         </div>
         <button
           onClick={onClose}
@@ -214,16 +198,24 @@ export default function FloatingEngagement() {
   }, [])
 
   const handleActionClick = (action: EngagementAction) => {
-    if (action.href) {
-      window.open(action.href, action.href.startsWith('tel:') ? '_self' : '_blank')
-    } else if (action.onClick) {
-      action.onClick()
-    }
+    // Déférer les opérations lourdes après le paint
+    requestAnimationFrame(() => {
+      if (action.href) {
+        window.open(action.href, action.href.startsWith('tel:') || action.href.startsWith('mailto:') ? '_self' : '_blank')
+        setNotificationMessage(`✅ ${action.label} ouvert!`)
+      } else if (action.onClick) {
+        action.onClick()
+        // Message personnalisé pour Agent IA
+        if (action.id === 'chatbot') {
+          setNotificationMessage('🤖 Agent IA AIDYN bientôt disponible!\n\n📧 En attendant: contact@aidyn.ai')
+        } else {
+          setNotificationMessage(`✅ ${action.label} activé!`)
+        }
+      }
 
-    // Show success notification
-    setNotificationMessage(`✅ ${action.label} activé! Nous vous contactons bientôt.`)
-    setShowNotification(true)
-    setIsOpen(false)
+      setShowNotification(true)
+      setIsOpen(false)
+    })
   }
 
   return (
@@ -260,7 +252,7 @@ export default function FloatingEngagement() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className={`relative w-16 h-16 rounded-full bg-gradient-to-r from-primary-600 to-blue-600 text-white shadow-modern-xl hover:shadow-modern-2xl transition-all duration-300 flex items-center justify-center ${
+              className={`relative w-16 h-16 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-modern-xl hover:shadow-modern-2xl transition-all duration-300 flex items-center justify-center ${
                 isOpen ? 'rotate-45' : ''
               }`}
               animate={{ rotate: isOpen ? 45 : 0 }}
@@ -279,7 +271,7 @@ export default function FloatingEngagement() {
 
               {/* Pulse animation */}
               <motion.div
-                className="absolute inset-0 rounded-full bg-primary-400"
+                className="absolute inset-0 rounded-full bg-emerald-400"
                 animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.7, 0, 0.7]
@@ -297,7 +289,7 @@ export default function FloatingEngagement() {
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 2 }}
-              className="absolute -top-2 -left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium"
+              className="absolute -top-2 -left-2 bg-emerald-500 text-white text-xs px-2 py-1 rounded-full font-medium"
             >
               {Math.floor(visitTime / 60)}:{(visitTime % 60).toString().padStart(2, '0')}
             </motion.div>

@@ -1,117 +1,136 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { CheckCircle, Users, Calendar } from 'lucide-react'
-import Image from 'next/image'
+import { Target, TrendingUp, Award, Rocket } from 'lucide-react'
+
+const highlights = [
+  {
+    icon: Target,
+    title: 'Focus Stratégique',
+    description: 'Solution IA de détection de chutes intégrable sur infrastructure existante - Approche pragmatique.'
+  },
+  {
+    icon: TrendingUp,
+    title: 'Marché Porteur',
+    description: 'Secteur des résidences pour aînés en forte croissance avec besoins critiques en sécurité.'
+  },
+  {
+    icon: Award,
+    title: 'Avantage Compétitif',
+    description: 'Intégration sur caméras existantes sans ajout de matériel coûteux - Intelligence edge computing.'
+  },
+  {
+    icon: Rocket,
+    title: 'Approche Agile',
+    description: 'Développement itératif rapide avec validation continue sur sites pilotes.'
+  }
+]
+
+const metrics = [
+  { value: 'Optimisé', label: 'Budget Contrôlé', sublabel: 'Développement efficace' },
+  { value: 'Rapide', label: 'Time-to-Market', sublabel: 'Déploiement 2026' },
+  { value: '>95%', label: 'Précision IA', sublabel: 'Technologie validée' }
+]
 
 export default function About() {
   return (
-    <section id="about" className="section-padding gradient-bg">
+    <section id="about" className="section-padding bg-gradient-to-b from-slate-50 to-white">
       <div className="container-max">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              AIDYN Technologies
-              <span className="text-gradient block">
-                Solutions RPA Québec
-              </span>
-            </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Spécialisés dans les systèmes d’appel d’urgence pour établissements RPA du Québec.
-              Expertise technique et connaissance du marché pour des solutions fiables et conformes.
-            </p>
-            
-            {/* Achievements */}
-            <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-semibold mb-1">Phase 1 - Système d’appel</h4>
-                  <p className="text-gray-600">Solution complète avec boutons IP67 et surveillance 24/7</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-semibold mb-1">Conformité Québec</h4>
-                  <p className="text-gray-600">Solutions adaptées aux normes et réglementations RPA</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-semibold mb-1">Évolution future</h4>
-                  <p className="text-gray-600">Roadmap IA avancée et expansion vers d’autres secteurs</p>
-                </div>
-              </div>
-            </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <div className="inline-flex items-center gap-2 rounded-full border border-sky-600/30 bg-sky-600/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-sky-600">
+            À Propos · AIDYN Technologies
+          </div>
+          <h2 className="mt-6 text-4xl font-bold text-slate-900 md:text-5xl">
+            Innovation IA pour la{' '}
+            <span className="bg-gradient-to-r from-sky-600 to-emerald-600 bg-clip-text text-transparent">
+              sécurité des aînés
+            </span>
+          </h2>
+          <p className="mt-6 text-lg text-slate-600">
+            AIDYN Technologies développe des solutions d&apos;intelligence artificielle pour prévenir les incidents critiques
+            en résidences pour aînés, en commençant par la détection automatique de chutes.
+          </p>
+        </motion.div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl">
-                <CheckCircle className="w-8 h-8 text-primary-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-primary-600">Phase 1</div>
-                <div className="text-sm text-gray-600">Prête à déployer</div>
-              </div>
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl">
-                <Users className="w-8 h-8 text-primary-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-primary-600">RPA</div>
-                <div className="text-sm text-gray-600">Québec spécialisé</div>
-              </div>
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl">
-                <Calendar className="w-8 h-8 text-primary-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-primary-600">24/7</div>
-                <div className="text-sm text-gray-600">Support dédié</div>
-              </div>
-            </div>
-
-            {/* Trust badges */}
+        {/* Key Highlights */}
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {highlights.map((item, idx) => (
             <motion.div
+              key={item.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
-              className="relative"
+              className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-500/10"
             >
-              <Image
-                src="/images/AIDYN_Badges_Confiance_-_Export.png"
-                alt="AIDYN Badges de Confiance - Technologies fiables"
-                width={640}
-                height={640}
-                className="w-full max-w-md h-auto object-contain"
-                priority
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-[4/5] bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <div className="text-8xl font-bold mb-4">MC</div>
-                  <div className="text-xl">Mathieu Chamberland</div>
-                  <div className="text-primary-200 mt-2">CEO & Fondateur AIDYN</div>
-                </div>
+              <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-emerald-500 p-3 text-white shadow-lg shadow-sky-500/30 transition-transform duration-300 group-hover:scale-110">
+                <item.icon className="h-6 w-6" />
               </div>
-              {/* Decorative elements */}
-              <div className="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full"></div>
-              <div className="absolute bottom-4 left-4 w-12 h-12 bg-white/10 rounded-full"></div>
-            </div>
-          </motion.div>
+              <h3 className="mb-2 text-lg font-bold text-slate-900">{item.title}</h3>
+              <p className="text-sm text-slate-600">{item.description}</p>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Metrics */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mt-16 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-8 shadow-xl"
+        >
+          <h3 className="mb-8 text-center text-2xl font-bold text-slate-900">Métriques Clés Phase 1</h3>
+          <div className="grid gap-8 md:grid-cols-3">
+            {metrics.map((metric, idx) => (
+              <motion.div
+                key={metric.label}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="mb-2 text-4xl font-bold bg-gradient-to-r from-sky-600 to-emerald-600 bg-clip-text text-transparent">
+                  {metric.value}
+                </div>
+                <div className="text-sm font-semibold text-slate-900">{metric.label}</div>
+                <div className="mt-1 text-xs text-slate-500">{metric.sublabel}</div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Founder */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="mt-16 rounded-3xl border border-slate-200 bg-white p-8 shadow-lg"
+        >
+          <div className="flex flex-col items-center gap-6 md:flex-row md:gap-8">
+            <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-sky-500 to-emerald-500 p-1 shadow-lg shadow-sky-500/30">
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-900 text-4xl font-bold text-white">
+                MC
+              </div>
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <h4 className="text-2xl font-bold text-slate-900">Mathieu Chamberland</h4>
+              <p className="mt-1 text-sm font-semibold text-sky-600">CEO & Fondateur · AIDYN Technologies</p>
+              <p className="mt-4 text-sm text-slate-600">
+                Spécialiste en IA et systèmes d&apos;urgence pour RPA. Vision: Rendre la technologie de détection de chute
+                accessible et abordable pour toutes les résidences au Québec.
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
