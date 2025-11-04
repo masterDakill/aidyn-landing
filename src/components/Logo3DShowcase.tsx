@@ -1,25 +1,44 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
 import { motion } from 'framer-motion'
 import { Sparkles, Zap } from 'lucide-react'
 
-// Enhanced 3D Logo with more sophisticated design
+// Enhanced 3D Logo with more sophisticated design and mouse tracking
 function EnhancedLogoMesh() {
   const groupRef = useRef<THREE.Group>(null)
   const [hovered, setHovered] = useState(false)
+  const mouseRef = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      // Normalize mouse position to -1 to 1 range
+      mouseRef.current = {
+        x: (event.clientX / window.innerWidth) * 2 - 1,
+        y: -(event.clientY / window.innerHeight) * 2 + 1
+      }
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
   useFrame((state) => {
     if (groupRef.current) {
-      // Smooth rotation
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.3
-      
-      // Floating effect
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2
-      
+      // Mouse-reactive rotation with base animation - INCREASED SENSITIVITY, SLOWER AUTO
+      const baseRotation = Math.sin(state.clock.elapsedTime * 0.15) * 0.2
+      const targetRotationY = baseRotation + mouseRef.current.x * 0.9
+      const targetRotationX = mouseRef.current.y * 0.7
+
+      groupRef.current.rotation.y += (targetRotationY - groupRef.current.rotation.y) * 0.1
+      groupRef.current.rotation.x += (targetRotationX - groupRef.current.rotation.x) * 0.1
+
+      // Floating effect - AMPLIFIED
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.35
+
       // Scale on hover
       const targetScale = hovered ? 1.15 : 1
       groupRef.current.scale.lerp(
@@ -88,13 +107,17 @@ function EnhancedLogoMesh() {
         />
       </mesh>
 
-      {/* Glowing ring particles */}
+      {/* Glowing ring particles - INCREASED COUNT & VARIETY */}
       {hovered && (
         <group>
-          {Array.from({ length: 30 }).map((_, i) => {
-            const angle = (i / 30) * Math.PI * 2
-            const radius = 2.5
-            const height = Math.sin(angle * 3) * 0.5
+          {Array.from({ length: 60 }).map((_, i) => {
+            const angle = (i / 60) * Math.PI * 2
+            const layer = Math.floor(i / 30)
+            const radius = 2.5 + layer * 0.5
+            const height = Math.sin(angle * 3 + layer) * 0.6
+            const size = 0.08 + Math.random() * 0.04
+            const colorIndex = i % 3
+            const colors = [highlightColor, accentColor, '#10B981']
             return (
               <mesh
                 key={i}
@@ -104,8 +127,8 @@ function EnhancedLogoMesh() {
                   Math.sin(angle) * radius
                 ]}
               >
-                <sphereGeometry args={[0.08, 16, 16]} />
-                <meshBasicMaterial color={highlightColor} />
+                <sphereGeometry args={[size, 16, 16]} />
+                <meshBasicMaterial color={colors[colorIndex]} />
               </mesh>
             )
           })}
@@ -153,7 +176,7 @@ export default function Logo3DShowcase({ className = '' }: Logo3DShowcaseProps) 
               <div className="absolute inset-0 -z-10 animate-pulse rounded-full bg-gradient-to-br from-blue-600/30 to-cyan-500/30 blur-3xl" />
               
               <Canvas shadows>
-                <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={50} />
+                <PerspectiveCamera makeDefault position={[0, 0, 14]} fov={40} />
                 
                 {/* Advanced Lighting */}
                 <ambientLight intensity={0.3} />
@@ -190,7 +213,10 @@ export default function Logo3DShowcase({ className = '' }: Logo3DShowcaseProps) 
                   minPolarAngle={Math.PI / 3}
                   maxPolarAngle={Math.PI / 1.5}
                   autoRotate
-                  autoRotateSpeed={1}
+                  autoRotateSpeed={0.8}
+                  rotateSpeed={2.0}
+                  enableDamping
+                  dampingFactor={0.05}
                 />
               </Canvas>
             </div>
