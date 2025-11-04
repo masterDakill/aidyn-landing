@@ -58,7 +58,7 @@ const toastStyles = {
   warning: 'bg-yellow-50 border-yellow-200 text-yellow-800'
 }
 
-function ToastItem({ toast, onRemove }: { toast: Toast, onRemove: () => void }) {
+const ToastItem = forwardRef<HTMLDivElement, { toast: Toast, onRemove: () => void }>(function ToastItem({ toast, onRemove }, ref) {
   const [progress, setProgress] = useState(100)
   const duration = toast.duration || 5000
   const Icon = toast.icon || toastIcons[toast.type]
@@ -80,6 +80,7 @@ function ToastItem({ toast, onRemove }: { toast: Toast, onRemove: () => void }) 
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, x: 300, scale: 0.8 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       exit={{ opacity: 0, x: 300, scale: 0.8 }}
@@ -150,7 +151,7 @@ function ToastItem({ toast, onRemove }: { toast: Toast, onRemove: () => void }) 
       </div>
     </motion.div>
   )
-}
+})
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([])
