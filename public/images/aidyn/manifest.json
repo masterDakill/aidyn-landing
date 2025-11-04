@@ -1,0 +1,13 @@
+{
+  "generatedAt": "1970-01-01T00:00:00.000Z",
+  "images": [
+    {
+      "slug": "serenacare-hero",
+      "original": "/images/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png",
+      "width": 1920,
+      "height": 1080,
+      "placeholder": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
+      "variants": {}
+    }
+  ]
+}

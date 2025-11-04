@@ -27,7 +27,7 @@ const AskAidyn = dynamic(
 // NEW: Hero 3D Immersive - loaded with SSR disabled for optimal performance
 const HeroImmersive3D = dynamic(
   () => import('@/components/HeroImmersive3D'),
-  { 
+  {
     ssr: false,
     loading: () => (
       <div className="flex min-h-screen items-center justify-center bg-slate-950">

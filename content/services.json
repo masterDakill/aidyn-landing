@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Déploiement SerenaCare AI",
+    "summary": "Installation edge + calibration IA en RPA, intégration aux workflows existants, formation initiale.",
+    "sla": "Soutien 24/7, temps de réponse <1 h"
+  },
+  {
+    "name": "Optimisation continue",
+    "summary": "Analyse KPI incidents, ajustements multimodaux et rapports mensuels personnalisés.",
+    "sla": "Revues trimestrielles, roadmap partagée"
+  }
+]

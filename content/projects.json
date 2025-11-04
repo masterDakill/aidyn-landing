@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Auberge Boischatel",
+    "description": "Pilote SerenaCare AI en RPA avec déploiement de 12 caméras UniFi et 8 capteurs Vayyar pour la Phase 1.",
+    "status": "Préparation du Go-Live"
+  },
+  {
+    "name": "Plateforme SaaS",
+    "description": "Tableau de bord React + Next.js pour alertes temps réel, analytics incidents et traçabilité.",
+    "status": "MVP design validé"
+  }
+]
