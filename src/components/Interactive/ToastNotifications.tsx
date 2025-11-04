@@ -66,17 +66,23 @@ const ToastItem = forwardRef<HTMLDivElement, { toast: Toast, onRemove: () => voi
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress(prev => {
-        const newProgress = prev - (100 / (duration / 100))
-        if (newProgress <= 0) {
-          onRemove()
-          return 0
-        }
-        return newProgress
+        const decrement = 100 / (duration / 100 || 1)
+        const newProgress = prev - decrement
+        return newProgress <= 0 ? 0 : newProgress
       })
     }, 100)
 
     return () => clearInterval(interval)
-  }, [duration, onRemove])
+  }, [duration])
+
+  // When progress reaches 0, remove the toast in an effect (avoids setState during render)
+  useEffect(() => {
+    if (progress === 0) {
+      const t = setTimeout(() => onRemove(), 0)
+      return () => clearTimeout(t)
+    }
+    return
+  }, [progress, onRemove])
 
   return (
     <motion.div
@@ -294,7 +300,7 @@ export const useEngagementToasts = () => {
     addToast({
       type: 'info',
       title: '📞 Expert disponible',
-      message: 'Un spécialiste RPA peut vous aider dès maintenant!',
+      message: 'Un sp��cialiste RPA peut vous aider dès maintenant!',
       icon: Phone,
       duration: 7000,
       action: {
