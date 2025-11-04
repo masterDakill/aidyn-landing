@@ -6,6 +6,7 @@ import {
   useEffect,
   createContext,
   useContext,
+  forwardRef,
   type ReactNode,
   type ComponentType
 } from 'react'
@@ -57,7 +58,7 @@ const toastStyles = {
   warning: 'bg-yellow-50 border-yellow-200 text-yellow-800'
 }
 
-function ToastItem({ toast, onRemove }: { toast: Toast, onRemove: () => void }) {
+const ToastItem = forwardRef<HTMLDivElement, { toast: Toast, onRemove: () => void }>(function ToastItem({ toast, onRemove }, ref) {
   const [progress, setProgress] = useState(100)
   const duration = toast.duration || 5000
   const Icon = toast.icon || toastIcons[toast.type]
@@ -65,20 +66,27 @@ function ToastItem({ toast, onRemove }: { toast: Toast, onRemove: () => void }) 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress(prev => {
-        const newProgress = prev - (100 / (duration / 100))
-        if (newProgress <= 0) {
-          onRemove()
-          return 0
-        }
-        return newProgress
+        const decrement = 100 / (duration / 100 || 1)
+        const newProgress = prev - decrement
+        return newProgress <= 0 ? 0 : newProgress
       })
     }, 100)
 
     return () => clearInterval(interval)
-  }, [duration, onRemove])
+  }, [duration])
+
+  // When progress reaches 0, remove the toast in an effect (avoids setState during render)
+  useEffect(() => {
+    if (progress === 0) {
+      const t = setTimeout(() => onRemove(), 0)
+      return () => clearTimeout(t)
+    }
+    return
+  }, [progress, onRemove])
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, x: 300, scale: 0.8 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       exit={{ opacity: 0, x: 300, scale: 0.8 }}
@@ -149,7 +157,7 @@ function ToastItem({ toast, onRemove }: { toast: Toast, onRemove: () => void }) 
       </div>
     </motion.div>
   )
-}
+})
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([])
@@ -292,7 +300,7 @@ export const useEngagementToasts = () => {
     addToast({
       type: 'info',
       title: '📞 Expert disponible',
-      message: 'Un spécialiste RPA peut vous aider dès maintenant!',
+      message: 'Un sp��cialiste RPA peut vous aider dès maintenant!',
       icon: Phone,
       duration: 7000,
       action: {
