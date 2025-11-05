@@ -130,8 +130,23 @@ export default function Model3D({
   cameraPosition = [0, 0, 5],
   enableZoom = true,
   showShadows = true,
+  enableDraco = true,
   environmentPreset = 'studio'
 }: Model3DProps) {
+  // Ensure DRACO decoder path is set when requested. This runs on client only.
+  useEffect(() => {
+    if (!enableDraco) return
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { DRACOLoader } = require('three/examples/jsm/loaders/DRACOLoader')
+      if (DRACOLoader && typeof DRACOLoader.setDecoderPath === 'function') {
+        DRACOLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn('DRACOLoader not available to set decoder path', e)
+    }
+  }, [enableDraco])
   return (
     <div className={`h-full w-full ${className}`}>
       <Canvas shadows={showShadows}>
