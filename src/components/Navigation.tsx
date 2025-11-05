@@ -21,14 +21,27 @@ const navItems = [
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [active, setActive] = useState<string>('')
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
 
+    const handleHashChange = () => {
+      setActive(window.location.hash || window.location.pathname)
+    }
+
+    handleHashChange()
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('hashchange', handleHashChange)
+    window.addEventListener('popstate', handleHashChange)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('hashchange', handleHashChange)
+      window.removeEventListener('popstate', handleHashChange)
+    }
   }, [])
 
   const containerClasses = clsx(
@@ -37,6 +50,14 @@ export default function Navigation() {
       ? 'border-white/80 bg-white/98 text-slate-900 shadow-slate-900/10 backdrop-blur-2xl'
       : 'border-white/20 bg-slate-950/70 text-white shadow-black/30 backdrop-blur-xl'
   )
+
+  const isItemActive = (href: string) => {
+    if (href.startsWith('#')) {
+      return active === href
+    }
+    // for external/path links, compare pathname
+    return active === href || (active && active.startsWith(href))
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
@@ -52,31 +73,38 @@ export default function Navigation() {
       <nav className="w-full">
         <div className={containerClasses}>
           {/* Logo - Simple without hover effects */}
-          <Link 
-            href="#hero" 
-            className="flex items-center gap-3" 
-            onClick={() => setIsOpen(false)}
+          <Link
+            href="#hero"
+            className="flex items-center gap-3"
+            onClick={() => { setIsOpen(false); setActive('#hero') }}
           >
             <Logo variant={scrolled ? 'light' : 'dark'} className="shrink-0" />
           </Link>
 
           {/* Desktop Menu - Ultra light, no animations */}
           <div className="hidden items-center gap-1 lg:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className={clsx(
-                  'px-4 py-2 text-sm font-semibold',
-                  scrolled
-                ? 'text-slate-700 hover:text-cyan-600'
-                : 'text-cyan-200 hover:text-white hover:bg-white/5'
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const activeClass = isItemActive(item.href) ? 'nav-link active' : 'nav-link'
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => {
+                    setIsOpen(false)
+                    setActive(item.href)
+                  }}
+                  className={clsx(
+                    activeClass,
+                    'px-4 py-2 text-sm font-semibold',
+                    scrolled
+                      ? 'text-slate-700 hover:text-cyan-600'
+                      : 'text-cyan-200 hover:text-white hover:bg-white/5'
+                  )}
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
           </div>
 
           {/* CTA Button - Simple */}
