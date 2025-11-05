@@ -18,6 +18,7 @@ interface Model3DProps {
   cameraPosition?: [number, number, number]
   enableZoom?: boolean
   showShadows?: boolean
+  enableDraco?: boolean
   environmentPreset?: 'sunset' | 'dawn' | 'night' | 'warehouse' | 'forest' | 'apartment' | 'studio' | 'city' | 'park' | 'lobby'
 }
 
