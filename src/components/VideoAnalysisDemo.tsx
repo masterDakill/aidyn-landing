@@ -441,7 +441,7 @@ export default function VideoAnalysisDemo({
               transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
             />
 
-            {/* Detection Boxes */}
+            {/* Detection Boxes (hidden when privacy blur active) */}
             <AnimatePresence>
               {detections.map((detection) => (
                 <motion.div
@@ -457,14 +457,16 @@ export default function VideoAnalysisDemo({
                     height: `${detection.height}%`
                   }}
                 >
-                  {/* Bounding Box */}
-                  <div className={`h-full w-full rounded border-2 ${getStatusColor(detection.status)}`}>
-                    {/* Corner markers */}
-                    <div className="absolute -left-1 -top-1 h-3 w-3 border-l-2 border-t-2 border-cyan-400" />
-                    <div className="absolute -right-1 -top-1 h-3 w-3 border-r-2 border-t-2 border-cyan-400" />
-                    <div className="absolute -bottom-1 -left-1 h-3 w-3 border-b-2 border-l-2 border-cyan-400" />
-                    <div className="absolute -bottom-1 -right-1 h-3 w-3 border-b-2 border-r-2 border-cyan-400" />
-                  </div>
+                  {/* Bounding Box (only show when privacy not enabled) */}
+                  {!privacyEnabled && (
+                    <div className={`h-full w-full rounded border-2 ${getStatusColor(detection.status)}`}>
+                      {/* Corner markers */}
+                      <div className="absolute -left-1 -top-1 h-3 w-3 border-l-2 border-t-2 border-cyan-400" />
+                      <div className="absolute -right-1 -top-1 h-3 w-3 border-r-2 border-t-2 border-cyan-400" />
+                      <div className="absolute -bottom-1 -left-1 h-3 w-3 border-b-2 border-l-2 border-cyan-400" />
+                      <div className="absolute -bottom-1 -right-1 h-3 w-3 border-b-2 border-r-2 border-cyan-400" />
+                    </div>
+                  )}
 
                   {/* Info Label */}
                   <div className="pointer-events-auto absolute -top-14 left-0 min-w-[150px] rounded-lg border border-white/20 bg-slate-900/95 p-2 shadow-xl backdrop-blur-sm">
