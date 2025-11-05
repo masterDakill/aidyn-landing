@@ -2,9 +2,12 @@
 'use client'
 
 import { Suspense, useState } from 'react'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useLoader } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei'
 import { motion } from 'framer-motion'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import * as THREE from 'three'
 import { 
   Play, 
   Pause, 
@@ -28,6 +31,25 @@ import { useDashboardStore } from '@/stores/dashboardStore'
 function Dashboard3DScene() {
   const { residents, staff, heatmap, showHeatmap, selectedResident, setSelectedResident } = useDashboardStore()
 
+  // Load the AIDYN dashboard model (DRACO supported)
+  let aidynGltf: any = null
+  try {
+    aidynGltf = useLoader(GLTFLoader, '/assets/models/aidyn-dashboard.glb', (loader) => {
+      try {
+        const draco = new DRACOLoader()
+        draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
+        ;(loader as any).setDRACOLoader(draco)
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.info('DRACO loader setup failed for Dashboard3D', e)
+      }
+    })
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('[Dashboard3D] failed to load aidyn-dashboard.glb', e)
+    aidynGltf = null
+  }
+
   return (
     <>
       {/* Lighting */}
@@ -40,9 +62,14 @@ function Dashboard3DScene() {
         shadow-mapSize-height={2048}
       />
       <pointLight position={[0, 10, 0]} intensity={0.5} color="#00ffff" />
-      
+
       {/* Environment */}
       <Environment preset="city" />
+
+      {/* Render the AIDYN GLB if available */}
+      {aidynGltf?.scene ? (
+        <primitive object={aidynGltf.scene} scale={[1,1,1]} position={[0, -0.1, 0]} rotation={[0, Math.PI / 2, 0]} />
+      ) : null}
 
       {/* Residence Floor Plan - Optimized */}
       <ResidenceSceneOptimized />
