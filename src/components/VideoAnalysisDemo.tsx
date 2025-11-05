@@ -129,6 +129,86 @@ export default function VideoAnalysisDemo({
         }
       }
 
+      // Next prefer MediaPipe FaceDetection UMD from CDN (lightweight, fast)
+      try {
+        const loadScript = (src:string) => new Promise<void>((resolve, reject) => {
+          if (document.querySelector(`script[src="${src}"]`)) return resolve()
+          const s = document.createElement('script')
+          s.src = src
+          s.async = true
+          s.onload = () => resolve()
+          s.onerror = () => reject(new Error(`Failed to load script ${src}`))
+          document.head.appendChild(s)
+        })
+
+        // Load MediaPipe FaceDetection UMD
+        await loadScript('https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js')
+        // face_detection exposes window.FaceDetection
+        const MPFace = (window as any).FaceDetection
+        if (MPFace) {
+          const detector = new MPFace({
+            locateFile: (file:string) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`
+          })
+          detector.setOptions({
+            model: 'short',
+            minDetectionConfidence: 0.5
+          })
+
+          // attach onResults to update detections
+          detector.onResults((results:any) => {
+            if (!results || !results.detections) return
+            const mapped = results.detections.map((f:any, i:number) => {
+              const box = f.boundingBox || f.box || {x:0,y:0,width:0,height:0}
+              // MediaPipe provides normalized coordinates sometimes
+              const xPx = (box.x || box.xCenter || 0) * (videoRef.current?.videoWidth || 1)
+              const yPx = (box.y || box.yCenter || 0) * (videoRef.current?.videoHeight || 1)
+              const wPx = (box.width || (box.x || 0)) * (videoRef.current?.videoWidth || 1)
+              const hPx = (box.height || (box.y || 0)) * (videoRef.current?.videoHeight || 1)
+
+              // If boundingBox has topLeft and bottomRight
+              if (f.boundingBox && f.boundingBox.topLeft && f.boundingBox.bottomRight) {
+                const tl = f.boundingBox.topLeft
+                const br = f.boundingBox.bottomRight
+                const xp = tl[0]
+                const yp = tl[1]
+                const wp = br[0] - tl[0]
+                const hp = br[1] - tl[1]
+                return {
+                  id: `mp-${i}`,
+                  x: (xp / (videoRef.current?.videoWidth || 1)) * 100,
+                  y: (yp / (videoRef.current?.videoHeight || 1)) * 100,
+                  width: (wp / (videoRef.current?.videoWidth || 1)) * 100,
+                  height: (hp / (videoRef.current?.videoHeight || 1)) * 100,
+                  label: 'face',
+                  confidence: f.score || 0.9,
+                  status: 'normal'
+                }
+              }
+
+              return {
+                id: `mp-${i}`,
+                x: (xPx / (videoRef.current?.videoWidth || 1)) * 100,
+                y: (yPx / (videoRef.current?.videoHeight || 1)) * 100,
+                width: (wPx / (videoRef.current?.videoWidth || 1)) * 100,
+                height: (hPx / (videoRef.current?.videoHeight || 1)) * 100,
+                label: 'face',
+                confidence: f.score || 0.9,
+                status: 'normal'
+              }
+            })
+            setDetections(mapped)
+          })
+
+          detectorRef.current = { type: 'mediapipe', detector }
+          // eslint-disable-next-line no-console
+          console.info('Loaded MediaPipe FaceDetection (UMD)')
+          return
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.warn('MediaPipe load failed, falling back', e)
+      }
+
       // Fallback: try loading BlazeFace and tfjs via script tags (CDN UMD builds)
       try {
         const loadScript = (src:string) => new Promise<void>((resolve, reject) => {
