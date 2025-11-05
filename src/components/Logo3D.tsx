@@ -26,15 +26,24 @@ function AnimatedLogoMesh() {
 
   useFrame((state) => {
     if (groupRef.current) {
-      // Mouse-reactive rotation with smooth interpolation - INCREASED SENSITIVITY
-      const targetRotationY = state.clock.elapsedTime * 0.05 + mouseRef.current.x * 0.8
-      const targetRotationX = mouseRef.current.y * 0.6
+      // Mouse-reactive rotation with smooth interpolation - LIMITED SENSITIVITY & CLAMPED
+      const baseY = Math.sin(state.clock.elapsedTime * 0.02) * 0.05 // a gentle slow turn
+      const mouseYRotation = mouseRef.current.x * 0.18
+      const mouseXRotation = mouseRef.current.y * 0.12
 
-      groupRef.current.rotation.y += (targetRotationY - groupRef.current.rotation.y) * 0.08
-      groupRef.current.rotation.x += (targetRotationX - groupRef.current.rotation.x) * 0.08
+      const targetRotationY = baseY + mouseYRotation
+      const targetRotationX = mouseXRotation
 
-      // Floating effect - AMPLIFIED
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.25
+      // Clamp rotations to small angles to preserve legibility (±0.35 rad ~ 20deg)
+      const clamp = (v:number, a:number, b:number) => Math.max(a, Math.min(b, v))
+      const clampedY = clamp(targetRotationY, -0.35, 0.35)
+      const clampedX = clamp(targetRotationX, -0.25, 0.25)
+
+      groupRef.current.rotation.y += (clampedY - groupRef.current.rotation.y) * 0.06
+      groupRef.current.rotation.x += (clampedX - groupRef.current.rotation.x) * 0.06
+
+      // Floating effect - subtle
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.6) * 0.08
 
       // Scale on hover
       const targetScale = hovered ? 1.1 : 1
@@ -140,7 +149,7 @@ export default function Logo3D({
 
   return (
     <div className={className} style={{ width, height, position: 'relative' }}>
-      <Canvas>
+      <Canvas gl={{ alpha: true }} style={{ background: 'transparent' }}>
         <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={40} />
         
         {/* Lighting */}
@@ -160,10 +169,10 @@ export default function Logo3D({
             minPolarAngle={Math.PI / 3}
             maxPolarAngle={Math.PI / 1.5}
             autoRotate
-            autoRotateSpeed={0.8}
-            rotateSpeed={1.5}
+            autoRotateSpeed={0.28}
+            rotateSpeed={0.6}
             enableDamping
-            dampingFactor={0.05}
+            dampingFactor={0.08}
           />
         )}
       </Canvas>
