@@ -236,22 +236,29 @@ export default function VideoAnalysisDemo({
       resizeCanvas()
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // For each detection, clip region and draw blurred video frame
+      // For each detection, clip region and draw blurred video frame (ellipse for faces)
       detections.forEach((d) => {
         const x = (d.x / 100) * canvas.width
         const y = (d.y / 100) * canvas.height
         const w = (d.width / 100) * canvas.width
         const h = (d.height / 100) * canvas.height
 
-        const padX = Math.max(8, w * 0.08)
-        const padY = Math.max(8, h * 0.08)
+        const padX = Math.max(8, w * 0.14)
+        const padY = Math.max(8, h * 0.18)
+
+        // center and radii
+        const cx = x + w / 2
+        const cy = y + h / 2
+        const rx = Math.max(12, w / 2 + padX)
+        const ry = Math.max(12, h / 2 + padY)
 
         ctx.save()
         ctx.beginPath()
-        ctx.rect(x - padX, y - padY, w + padX * 2, h + padY * 2)
+        // ellipse clip gives a natural face-shaped mask
+        ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2)
         ctx.clip()
         try {
-          ;(ctx as any).filter = 'blur(8px)'
+          ;(ctx as any).filter = 'blur(10px)'
         } catch (e) {
           // ignore if filter not supported
         }
