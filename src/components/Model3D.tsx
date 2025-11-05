@@ -171,7 +171,7 @@ export default function Model3D({
 
         {/* Modèle 3D avec fallback loading */}
         <Suspense fallback={<LoadingFallback />}>
-          <Model 
+          <Model
             modelPath={modelPath}
             scale={scale}
             rotation={rotation}
@@ -181,6 +181,7 @@ export default function Model3D({
             scrollAnimation={scrollAnimation}
           />
         </Suspense>
+        <Preload all />
 
         {/* Ombres au sol */}
         {showShadows && (
