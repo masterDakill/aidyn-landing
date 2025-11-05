@@ -105,13 +105,50 @@ export default function VideoAnalysisDemo({
     setDetections(mockDetections || defaultDetections)
   }, [mockDetections])
 
-  // Privacy: draw blurred regions over detected boxes (lazy, client-side)
+  // Privacy: initialize detector and draw blurred regions over detected boxes (lazy)
+  const detectorRef = useRef<any>(null)
+  const detectionIntervalRef = useRef<number | null>(null)
+
   useEffect(() => {
     let mounted = true
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d') || null
     let videoW = 0
     let videoH = 0
+
+    async function initDetector() {
+      // Prefer native FaceDetector API if available
+      if ((window as any).FaceDetector) {
+        try {
+          detectorRef.current = new (window as any).FaceDetector({ fastMode: true, maxDetectedFaces: 10 })
+          // eslint-disable-next-line no-console
+          console.info('Using native FaceDetector API')
+          return
+        } catch (e) {
+          // continue to fallback
+        }
+      }
+
+      // Fallback: try dynamic import of BlazeFace (light) from CDN
+      try {
+        // Load tfjs backend and model dynamically
+        await import('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.9.0/dist/tf-backend-webgl.js')
+        const tf = await import('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js')
+        await tf.setBackend?.('webgl')
+        const blazefaceMod = await import('https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.js')
+        const model = await blazefaceMod.load()
+        detectorRef.current = { type: 'blazeface', model }
+        // eslint-disable-next-line no-console
+        console.info('Loaded BlazeFace fallback')
+        return
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.warn('BlazeFace dynamic import failed, fallback to no detector', e)
+      }
+
+      // Final fallback: no detector
+      detectorRef.current = null
+    }
 
     function resizeCanvas() {
       if (!canvas || !videoRef.current) return
@@ -122,10 +159,57 @@ export default function VideoAnalysisDemo({
       videoH = videoRef.current.videoHeight || canvas.height
     }
 
+    async function runDetection() {
+      if (!detectorRef.current || !videoRef.current) return
+      try {
+        if (detectorRef.current instanceof (window as any).FaceDetector) {
+          const faces = await detectorRef.current.detect(videoRef.current)
+          // Map to detections state
+          const mapped = faces.map((f:any, i:number) => {
+            const box = f.boundingBox
+            return {
+              id: `det-${i}`,
+              x: (box.x / (videoRef.current?.videoWidth || 1)) * 100,
+              y: (box.y / (videoRef.current?.videoHeight || 1)) * 100,
+              width: (box.width / (videoRef.current?.videoWidth || 1)) * 100,
+              height: (box.height / (videoRef.current?.videoHeight || 1)) * 100,
+              label: 'face',
+              confidence: f.score || 0.9,
+              status: 'normal'
+            }
+          })
+          if (mounted) setDetections(mapped)
+        } else if (detectorRef.current?.type === 'blazeface') {
+          const res = await detectorRef.current.model.estimateFaces(videoRef.current, false)
+          const mapped = res.map((r:any, i:number) => {
+            const topLeft = r.topLeft
+            const bottomRight = r.bottomRight
+            const xPx = topLeft[0]
+            const yPx = topLeft[1]
+            const wPx = bottomRight[0] - topLeft[0]
+            const hPx = bottomRight[1] - topLeft[1]
+            return {
+              id: `bf-${i}`,
+              x: (xPx / (videoRef.current?.videoWidth || 1)) * 100,
+              y: (yPx / (videoRef.current?.videoHeight || 1)) * 100,
+              width: (wPx / (videoRef.current?.videoWidth || 1)) * 100,
+              height: (hPx / (videoRef.current?.videoHeight || 1)) * 100,
+              label: 'face',
+              confidence: (r.probability && r.probability[0]) || 0.9,
+              status: 'normal'
+            }
+          })
+          if (mounted) setDetections(mapped)
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
     function draw() {
       if (!mounted || !canvas || !ctx || !videoRef.current) return
       // only draw when playing
-      if (!isPlaying) {
+      if (!isPlaying || !privacyEnabled) {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         rafRef.current = requestAnimationFrame(draw)
         return
@@ -165,6 +249,7 @@ export default function VideoAnalysisDemo({
       rafRef.current = requestAnimationFrame(draw)
     }
 
+    // When privacy enabled, initialize detector and start loops
     if (privacyEnabled) {
       // low-end guard
       const cores = (navigator as any).hardwareConcurrency || 4
@@ -173,22 +258,36 @@ export default function VideoAnalysisDemo({
         setPrivacyEnabled(false)
         return
       }
-      // lazy init during idle if possible
-      if ((window as any).requestIdleCallback) {
-        ;(window as any).requestIdleCallback(() => {
+
+      initDetector().then(() => {
+        // detection interval (200-400ms)
+        detectionIntervalRef.current = window.setInterval(() => {
+          void runDetection()
+        }, 300)
+
+        // start drawing loop lazily
+        if ((window as any).requestIdleCallback) {
+          ;(window as any).requestIdleCallback(() => {
+            rafRef.current = requestAnimationFrame(draw)
+          })
+        } else {
           rafRef.current = requestAnimationFrame(draw)
-        })
-      } else {
-        rafRef.current = requestAnimationFrame(draw)
-      }
+        }
+      })
     } else {
+      // stop loops
+      if (detectionIntervalRef.current) clearInterval(detectionIntervalRef.current)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
       if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height)
+      detectorRef.current = null
+      setDetections(mockDetections || defaultDetections)
     }
 
     return () => {
       mounted = false
+      if (detectionIntervalRef.current) clearInterval(detectionIntervalRef.current)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      detectorRef.current = null
     }
   }, [privacyEnabled, detections, isPlaying])
 
