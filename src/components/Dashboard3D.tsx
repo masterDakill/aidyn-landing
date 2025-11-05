@@ -288,6 +288,7 @@ export default function Dashboard3D() {
               <Suspense fallback={null}>
                 <Dashboard3DScene />
               </Suspense>
+              <Preload all />
             </Canvas>
 
             {/* Overlay Info */}
