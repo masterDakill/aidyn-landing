@@ -34,7 +34,32 @@ function Model({
   const [scrollY, setScrollY] = useState(0)
 
   // Charger le modèle GLTF/GLB - MUST be called unconditionally
-  const gltf = useLoader(GLTFLoader, modelPath)
+  // Support DRACO-compressed models by setting a DRACO loader via useLoader's loader modifier
+  let gltf
+  try {
+    gltf = useLoader(GLTFLoader, modelPath, (loader) => {
+      try {
+        // Dynamically set DRACO decoder path (CDN)
+        // Import DRACOLoader lazily to avoid build-time issues
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const { DRACOLoader } = require('three/examples/jsm/loaders/DRACOLoader')
+        const dracoLoader = new DRACOLoader()
+        dracoLoader.setDecoderConfig({ type: 'js' })
+        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
+        // Attach DRACO loader to GLTFLoader
+        ;(loader as any).setDRACOLoader(dracoLoader)
+      } catch (e) {
+        // If DRACO isn't available or fails, continue without it
+        // eslint-disable-next-line no-console
+        console.info('DRACO loader not configured or failed to load', e)
+      }
+    })
+  } catch (err) {
+    // Provide a graceful fallback UI in case of model loading errors
+    // eslint-disable-next-line no-console
+    console.error('GLTF load error for', modelPath, err)
+    gltf = null
+  }
 
   // Écouter le scroll de la page (uniquement côté client)
   useEffect(() => {
