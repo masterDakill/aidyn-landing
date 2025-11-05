@@ -2,7 +2,7 @@
 
 import { Suspense, useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Preload } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import * as THREE from 'three'
 
