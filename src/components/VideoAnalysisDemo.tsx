@@ -129,21 +129,39 @@ export default function VideoAnalysisDemo({
         }
       }
 
-      // Fallback: try dynamic import of BlazeFace (light) from CDN
+      // Fallback: try loading BlazeFace and tfjs via script tags (CDN UMD builds)
       try {
-        // Load tfjs backend and model dynamically
-        await import('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.9.0/dist/tf-backend-webgl.js')
-        const tf = await import('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js')
-        await tf.setBackend?.('webgl')
-        const blazefaceMod = await import('https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.js')
-        const model = await blazefaceMod.load()
-        detectorRef.current = { type: 'blazeface', model }
-        // eslint-disable-next-line no-console
-        console.info('Loaded BlazeFace fallback')
-        return
+        const loadScript = (src:string) => new Promise<void>((resolve, reject) => {
+          if (document.querySelector(`script[src="${src}"]`)) return resolve()
+          const s = document.createElement('script')
+          s.src = src
+          s.async = true
+          s.onload = () => resolve()
+          s.onerror = () => reject(new Error(`Failed to load script ${src}`))
+          document.head.appendChild(s)
+        })
+
+        // Load tfjs and backend then blazeface UMD builds
+        await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js')
+        await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.9.0/dist/tf-backend-webgl.js')
+        // set backend if available
+        if ((window as any).tf?.setBackend) {
+          try { await (window as any).tf.setBackend('webgl') } catch (e) { /* ignore */ }
+        }
+        await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.js')
+
+        // Access global blazeface loader
+        const globalBlaze = (window as any).blazeface || (window as any)['tfjsBlazeface'] || null
+        if (globalBlaze && typeof globalBlaze.load === 'function') {
+          const model = await globalBlaze.load()
+          detectorRef.current = { type: 'blazeface', model }
+          // eslint-disable-next-line no-console
+          console.info('Loaded BlazeFace (UMD) fallback')
+          return
+        }
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.warn('BlazeFace dynamic import failed, fallback to no detector', e)
+        console.warn('BlazeFace script load failed, fallback to no detector', e)
       }
 
       // Final fallback: no detector
