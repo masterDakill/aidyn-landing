@@ -34,7 +34,7 @@ function Dashboard3DScene() {
   // Load the AIDYN dashboard model (DRACO supported)
   let aidynGltf: any = null
   try {
-    aidynGltf = useLoader(GLTFLoader, '/assets/models/aidyn-dashboard.glb', (loader) => {
+    aidynGltf = useLoader(GLTFLoader, 'https://cdn.builder.io/o/assets%2F4db9e5299a5e4e3f8495bde095aca588%2F47b85673f6d147b08630ec4ed58d89c3?alt=media&token=ef195dc9-390c-4475-817d-b0e73e5ef8a3&apiKey=4db9e5299a5e4e3f8495bde095aca588', (loader) => {
       try {
         const draco = new DRACOLoader()
         draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
