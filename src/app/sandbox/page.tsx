@@ -15,9 +15,10 @@ export default function SandboxPage() {
   const params = useSearchParams()
   const modelParam = params?.get('model') || 'mason'
 
+  const ORIGIN = process.env.NEXT_PUBLIC_ASSET_ORIGIN || '/assets/models'
   const modelMap: Record<string,string> = {
-    aidyn: 'https://cdn.builder.io/o/assets%2F4db9e5299a5e4e3f8495bde095aca588%2F47b85673f6d147b08630ec4ed58d89c3?alt=media&token=ef195dc9-390c-4475-817d-b0e73e5ef8a3&apiKey=4db9e5299a5e4e3f8495bde095aca588',
-    mason: 'https://cdn.builder.io/o/assets%2F4db9e5299a5e4e3f8495bde095aca588%2F0a3acfa4dacc4ac99df1c6b083d9485d?alt=media&token=fe2a2d65-f4b6-43e5-9dea-c4dcf2708a91&apiKey=4db9e5299a5e4e3f8495bde095aca588'
+    aidyn: `${ORIGIN}/aidyn-dashboard.glb`,
+    mason: `${ORIGIN}/mason-sterling-logo-original.glb`
   }
 
   const modelPath = modelMap[modelParam] || modelMap['mason']
