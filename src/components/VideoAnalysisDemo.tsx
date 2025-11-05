@@ -49,7 +49,8 @@ export default function VideoAnalysisDemo({
   const [detections, setDetections] = useState<Detection[]>([])
   const [showOverlay, setShowOverlay] = useState(true)
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [privacyEnabled, setPrivacyEnabled] = useState(false)
+  const [privacyEnabled, setPrivacyEnabled] = useState(true)
+  const [privacyToggleDisabled, setPrivacyToggleDisabled] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const rafRef = useRef<number | null>(null)
 
