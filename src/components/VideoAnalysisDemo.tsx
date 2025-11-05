@@ -185,6 +185,19 @@ export default function VideoAnalysisDemo({
             <Eye className="inline h-3 w-3 mr-1" />
             Overlay
           </button>
+
+          {/* Privacy toggle - lazy, off by default */}
+          <button
+            onClick={() => setPrivacyEnabled(v => !v)}
+            className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all ${
+              privacyEnabled
+                ? 'border-pink-500/30 bg-pink-500/10 text-pink-300'
+                : 'border-slate-600 bg-slate-700/50 text-slate-400'
+            }`}
+            title="Activer le floutage des visages (privacy)"
+          >
+            🔒 Privacy
+          </button>
         </div>
       </div>
 
