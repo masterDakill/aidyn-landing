@@ -69,9 +69,9 @@ export default function Navigation() {
                 onClick={() => setIsOpen(false)}
                 className={clsx(
                   'px-4 py-2 text-sm font-semibold',
-                  scrolled 
-                    ? 'text-slate-600 hover:text-slate-900' 
-                    : 'text-slate-200 hover:text-white'
+                  scrolled
+                ? 'text-slate-700 hover:text-cyan-600'
+                : 'text-cyan-200 hover:text-white hover:bg-white/5'
                 )}
               >
                 {item.label}
@@ -125,7 +125,7 @@ export default function Navigation() {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={clsx(
-                    'block rounded-xl px-4 py-3 text-base font-semibold',
+                    'block rounded-md px-4 py-3 text-base font-semibold transition-colors',
                     scrolled
                       ? 'text-slate-900 hover:bg-slate-100'
                       : 'text-white hover:bg-white/10'
