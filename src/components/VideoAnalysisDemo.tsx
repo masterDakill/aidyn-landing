@@ -200,6 +200,13 @@ export default function VideoAnalysisDemo({
           onClick={togglePlay}
         />
 
+        {/* Privacy Canvas Overlay (for face blur) */}
+        <canvas
+          ref={(el) => { canvasRef.current = el }}
+          className="pointer-events-none absolute inset-0 h-full w-full"
+          style={{ display: privacyEnabled ? 'block' : 'none' }}
+        />
+
         {/* AI Detection Overlay */}
         {showOverlay && (
           <div className="pointer-events-none absolute inset-0">
