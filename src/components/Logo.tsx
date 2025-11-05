@@ -11,9 +11,9 @@ interface LogoProps {
   className?: string
 }
 
-export default function Logo({ 
+export default function Logo({
   variant = 'dark',
-  compact = false, 
+  compact = true,
   className
 }: LogoProps) {
   const size = compact ? 32 : 40
@@ -22,7 +22,7 @@ export default function Logo({
 
   return (
     <div className={clsx('inline-flex items-center gap-3', className)}>
-      {/* Logo image swapped by variant for better contrast */}
+      {/* Vector/PNG logo image. Background should be transparent in assets. */}
       <Image
         src={logoSrc}
         alt="AIDYN Logo"
@@ -32,7 +32,7 @@ export default function Logo({
         priority
       />
 
-      {/* Text - no animations */}
+      {/* Text - hidden by default to keep label off; use compact={false} to show */}
       {!compact && (
         <span
           className={clsx(
