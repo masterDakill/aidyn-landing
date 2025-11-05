@@ -78,7 +78,7 @@ export default function Navigation() {
             className="flex items-center gap-3"
             onClick={() => { setIsOpen(false); setActive('#hero') }}
           >
-            <Logo variant={scrolled ? 'light' : 'dark'} className="shrink-0" />
+            <Logo variant={scrolled ? 'light' : 'dark'} compact className="shrink-0" />
           </Link>
 
           {/* Desktop Menu - Ultra light, no animations */}
