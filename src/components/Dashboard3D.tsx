@@ -3,7 +3,7 @@
 
 import { Suspense, useState } from 'react'
 import { Canvas, useLoader } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera, Environment, Preload } from '@react-three/drei'
 import { motion } from 'framer-motion'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
