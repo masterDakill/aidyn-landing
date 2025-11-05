@@ -36,19 +36,33 @@ const nextConfig = {
         ],
       },
       {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
+      source: '/_next/static/:path*',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+    {
+      source: '/assets/models/:file*',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+        {
+          key: 'Content-Type',
+          value: 'model/gltf-binary',
+        },
+      ],
+    },
     ]
   },
   env: {
     SITE_NAME: 'AIDYN Technologies',
     SITE_URL: 'https://aidyn-tech.com',
+    NEXT_PUBLIC_ASSET_ORIGIN: '/assets/models'
   },
 }
 
