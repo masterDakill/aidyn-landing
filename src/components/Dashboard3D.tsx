@@ -238,6 +238,19 @@ export default function Dashboard3D() {
               shadows
               gl={{ antialias: true, alpha: false }}
               dpr={[1, 2]}
+              onCreated={(state) => {
+                try {
+                  const gl = state.gl
+                  const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
+                  const renderer = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'unknown'
+                  const vendor = debugInfo ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) : 'unknown'
+                  // eslint-disable-next-line no-console
+                  console.info('R3F Canvas created', { renderer, vendor, webgl2: !!(gl && (gl as any).getExtension), glContext: !!gl })
+                } catch (e) {
+                  // eslint-disable-next-line no-console
+                  console.warn('Error reading WebGL info', e)
+                }
+              }}
             >
               <PerspectiveCamera
                 makeDefault
