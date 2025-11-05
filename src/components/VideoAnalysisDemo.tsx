@@ -480,7 +480,12 @@ export default function VideoAnalysisDemo({
 
           {/* Privacy toggle - lazy, off by default */}
           <button
-            onClick={() => setPrivacyEnabled(v => !v)}
+            onClick={() => {
+              if (privacyToggleDisabled) return
+              setPrivacyToggleDisabled(true)
+              setPrivacyEnabled(v => !v)
+              setTimeout(() => setPrivacyToggleDisabled(false), 800)
+            }}
             className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all ${
               privacyEnabled
                 ? 'border-pink-500/30 bg-pink-500/10 text-pink-300'
