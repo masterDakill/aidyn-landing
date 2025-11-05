@@ -89,6 +89,8 @@ export function Model({
   })
 
   if (!gltf?.scene) {
+    // eslint-disable-next-line no-console
+    console.warn('[Model3D] fallback loaded for', modelPath)
     return (
       <mesh>
         <boxGeometry args={[1, 1, 1]} />
