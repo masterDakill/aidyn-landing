@@ -91,7 +91,7 @@ function Model({
     return (
       <mesh>
         <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color="red" wireframe />
+        <meshStandardMaterial color="#ef4444" metalness={0.3} roughness={0.9} />
       </mesh>
     )
   }
