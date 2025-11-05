@@ -22,9 +22,9 @@ interface Model3DProps {
   environmentPreset?: 'sunset' | 'dawn' | 'night' | 'warehouse' | 'forest' | 'apartment' | 'studio' | 'city' | 'park' | 'lobby'
 }
 
-function Model({ 
-  modelPath, 
-  scale = 1, 
+export function Model({
+  modelPath,
+  scale = 1,
   rotation = [0, 0, 0],
   position = [0, 0, 0],
   autoRotate = false,
