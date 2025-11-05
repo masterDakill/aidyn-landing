@@ -26,7 +26,7 @@ Déploiement pilote 2026 · Aucun changement matériel requis
 - ≥ 95% précision visée
 - 36–54k$ budget Phase 1
 - Déploiement pilote 2026
-- Auberge Boischatel (50 lits, Québec)
+- Site pilote (50 lits, Québec)
 
 ---
 
@@ -284,7 +284,7 @@ Alertes: Slack webhooks + SendGrid email
 
 **Budget:** 36-54k$ CAD
 **Timeline:** 4-6 mois (Mars - Août 2026)
-**Partenaire:** Auberge Boischatel (50 lits, Québec)
+**Partenaire:** Site pilote (50 lits, Québec)
 
 ---
 
