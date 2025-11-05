@@ -105,6 +105,93 @@ export default function VideoAnalysisDemo({
     setDetections(mockDetections || defaultDetections)
   }, [mockDetections])
 
+  // Privacy: draw blurred regions over detected boxes (lazy, client-side)
+  useEffect(() => {
+    let mounted = true
+    const canvas = canvasRef.current
+    const ctx = canvas?.getContext('2d') || null
+    let videoW = 0
+    let videoH = 0
+
+    function resizeCanvas() {
+      if (!canvas || !videoRef.current) return
+      const rect = videoRef.current.getBoundingClientRect()
+      canvas.width = Math.max(1, Math.floor(rect.width))
+      canvas.height = Math.max(1, Math.floor(rect.height))
+      videoW = videoRef.current.videoWidth || canvas.width
+      videoH = videoRef.current.videoHeight || canvas.height
+    }
+
+    function draw() {
+      if (!mounted || !canvas || !ctx || !videoRef.current) return
+      // only draw when playing
+      if (!isPlaying) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        rafRef.current = requestAnimationFrame(draw)
+        return
+      }
+
+      resizeCanvas()
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      // For each detection, clip region and draw blurred video frame
+      detections.forEach((d) => {
+        const x = (d.x / 100) * canvas.width
+        const y = (d.y / 100) * canvas.height
+        const w = (d.width / 100) * canvas.width
+        const h = (d.height / 100) * canvas.height
+
+        const padX = Math.max(8, w * 0.08)
+        const padY = Math.max(8, h * 0.08)
+
+        ctx.save()
+        ctx.beginPath()
+        ctx.rect(x - padX, y - padY, w + padX * 2, h + padY * 2)
+        ctx.clip()
+        try {
+          ;(ctx as any).filter = 'blur(8px)'
+        } catch (e) {
+          // ignore if filter not supported
+        }
+        try {
+          // draw full video scaled to canvas (clipped will keep region)
+          ctx.drawImage(videoRef.current as HTMLVideoElement, 0, 0, videoW, videoH, 0, 0, canvas.width, canvas.height)
+        } catch (e) {
+          // ignore draw errors
+        }
+        ctx.restore()
+      })
+
+      rafRef.current = requestAnimationFrame(draw)
+    }
+
+    if (privacyEnabled) {
+      // low-end guard
+      const cores = (navigator as any).hardwareConcurrency || 4
+      if (cores <= 2) {
+        // avoid enabling on very low-end devices
+        setPrivacyEnabled(false)
+        return
+      }
+      // lazy init during idle if possible
+      if ((window as any).requestIdleCallback) {
+        ;(window as any).requestIdleCallback(() => {
+          rafRef.current = requestAnimationFrame(draw)
+        })
+      } else {
+        rafRef.current = requestAnimationFrame(draw)
+      }
+    } else {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height)
+    }
+
+    return () => {
+      mounted = false
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [privacyEnabled, detections, isPlaying])
+
   // Video control handlers
   const togglePlay = () => {
     if (videoRef.current) {
