@@ -6,11 +6,6 @@ import { useSearchParams } from 'next/navigation'
 
 const Model3D = dynamic(() => import('@/components/Model3D'), { ssr: false })
 
-export const metadata = {
-  title: 'Sandbox 3D | AIDYN Technologies',
-  description: 'Espace expérimental 3D - Sandbox'
-}
-
 export default function SandboxPage() {
   const params = useSearchParams()
   const modelParam = params?.get('model') || 'mason'
