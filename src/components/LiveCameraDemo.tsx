@@ -26,7 +26,7 @@ const featuredVideos = [
   {
     id: '1',
     name: 'Salle à manger',
-    location: 'L\'Auberge Boischatel - RDC',
+    location: 'Site pilote - RDC',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/90b23098-4a77-416b-a1e4-a8e958735e88',
     detections: [
       {
@@ -70,7 +70,7 @@ const featuredVideos = [
   {
     id: '2',
     name: 'Corridor d\'entrée',
-    location: 'L\'Auberge Boischatel - RDC',
+    location: 'Site pilote - RDC',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/bdbed0c5-a0d0-4abd-b162-5226950739bb',
     detections: [
       {
@@ -165,7 +165,7 @@ export default function LiveCameraDemo() {
           </h2>
 
           <p className="mt-6 text-xl text-slate-300">
-            Vidéos réelles de <strong className="text-emerald-400">L'Auberge Boischatel</strong> avec 
+            Vidéos réelles de <strong className="text-emerald-400">Site pilote</strong> avec 
             détection IA simulée. Visualisez notre pipeline YOLOv8-Pose en action.
           </p>
 

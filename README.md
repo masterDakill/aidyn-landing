@@ -3,7 +3,7 @@
 ## Résumé / Overview
 
 - **Produit**: SerenaCare AI – plateforme de surveillance intelligente pour résidences privées pour aînés (RPA).
-- **Portée**: Mise de l'avant de la **Phase 1** du plan d'affaires 2025–2026 (fondations, pilote Auberge Boischatel, financement initial).
+- **Portée**: Mise de l'avant de la **Phase 1** du plan d'affaires 2025–2026 (fondations, pilote Site pilote, financement initial).
 - **Stack**: Next.js 14, TypeScript, Tailwind CSS, Framer Motion.
 - **Design**: Aligné sur les visuels fournis (gradients bleu nuit, cartes SerenaCare) avec une navigation en verre dépoli et un hero mobile-first.
 - **Contenu**: Textes marketing réécrits pour un ton web orienté clients et harmonisé avec la version en ligne.
@@ -113,7 +113,7 @@ npm run docker:down
 
 - **Objectifs KPI**: précision ≥95 %, réduction incidents ≥40 %, uptime &gt;99,5 %.
 - **Financement recherché**: Subventions MAPAQ (50 k$) et AGE-WELL (25 k$), alternatives CRSNG/PARI.
-- **Pilote Auberge Boischatel**: installation capteurs, SLA &lt;1 h, collecte incidents (50+), rapports mensuels.
+- **Pilote Site pilote**: installation capteurs, SLA &lt;1 h, collecte incidents (50+), rapports mensuels.
 - **Prochaines étapes**: certification CE/RoHS et Série Seed 300 k$ après pilote réussi.
 
 ## Accessibilité & conformité
@@ -124,7 +124,7 @@ npm run docker:down
 
 ## SEO & métadonnées
 
-- `src/app/layout.tsx` centralise désormais un titre, une description et des balises Open Graph/Twitter alignées sur SerenaCare AI Phase 1 (RPA, KPI ≥95 %, pilote Auberge Boischatel).
+- `src/app/layout.tsx` centralise désormais un titre, une description et des balises Open Graph/Twitter alignées sur SerenaCare AI Phase 1 (RPA, KPI ≥95 %, pilote Site pilote).
 - Les visuels d'aperçu pointent vers `public/images/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png` pour refléter le design final.
 - `src/lib/logger.ts` active les logs console structurés et prépare l'activation Sentry via `NEXT_PUBLIC_SENTRY_DSN`.
 
@@ -181,7 +181,7 @@ npm run docker:down
 ## English snapshot
 
 - **Product**: SerenaCare AI – intelligent safety platform for senior living facilities.
-- **Scope**: Highlights Business Plan Phase 1 (foundations, Auberge Boischatel pilot, grants strategy).
+- **Scope**: Highlights Business Plan Phase 1 (foundations, Site pilote pilot, grants strategy).
 - **Stack**: Next.js 14 + TypeScript + Tailwind + Framer Motion.
 - **Design**: Matches provided dark teal visuals with a glassmorphism navigation bar and mobile-first hero layout.
 - **Content**: Marketing copy refreshed to match the live site tone and highlight Phase 1 outcomes.
@@ -205,7 +205,7 @@ npm run verify
 
 ### SEO & metadata
 
-- `src/app/layout.tsx` defines the SerenaCare AI Phase 1 title, description, and Open Graph/Twitter images (senior living focus, ≥95 % KPI target, Auberge Boischatel pilot).
+- `src/app/layout.tsx` defines the SerenaCare AI Phase 1 title, description, and Open Graph/Twitter images (senior living focus, ≥95 % KPI target, Site pilote pilot).
 - Keep the preview artwork under `public/images/AIDYN_Hero_Dark_-_Variante_Optimise_Alternative.png`, or update the paths if a new asset ships.
 - `src/lib/logger.ts` keeps logs local by default and enables Sentry once `NEXT_PUBLIC_SENTRY_DSN` is provided.
 
@@ -257,7 +257,7 @@ npm run verify
 
 - KPI targets: ≥95% detection accuracy, ≥40% fewer incidents, &gt;99.5% uptime.
 - Funding: MAPAQ 50k CAD + AGE-WELL 25k CAD, alternative programs (NSERC Alliance, NRC IRAP).
-- Pilot: Auberge Boischatel (12 UniFi cameras, 8 Vayyar sensors, Jetson modules, SLA &lt;1 h).
+- Pilot: Site pilote (12 UniFi cameras, 8 Vayyar sensors, Jetson modules, SLA &lt;1 h).
 - Next steps: CE/RoHS certification and 300k CAD Seed round post-pilot.
 
 ### Phase 2 outlook

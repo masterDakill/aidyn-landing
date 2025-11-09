@@ -11,18 +11,20 @@ interface LogoProps {
   className?: string
 }
 
-export default function Logo({ 
+export default function Logo({
   variant = 'dark',
-  compact = false, 
+  compact = true,
   className
 }: LogoProps) {
   const size = compact ? 32 : 40
 
+  const logoSrc = variant === 'light' ? '/images/brand/aidyn-logo-dark.png' : '/images/brand/aidyn-logo-circle.png'
+
   return (
     <div className={clsx('inline-flex items-center gap-3', className)}>
-      {/* Logo 3D AIDYN - Image PNG */}
+      {/* Vector/PNG logo image. Background should be transparent in assets. */}
       <Image
-        src="/images/brand/aidyn-logo-circle.png"
+        src={logoSrc}
         alt="AIDYN Logo"
         width={size}
         height={size}
@@ -30,18 +32,18 @@ export default function Logo({
         priority
       />
 
-      {/* Text - no animations */}
+      {/* Text - hidden by default to keep label off; use compact={false} to show */}
       {!compact && (
-        <span 
+        <span
           className={clsx(
-            'text-lg font-bold',
+            'text-lg font-bold transition-colors',
             variant === 'light' ? 'text-slate-900' : 'text-white'
           )}
         >
           AIDYN
         </span>
       )}
-      
+
       {/* Fallback text for SEO */}
       <span className="sr-only">
         AIDYN Technologies - AI Vision UniFi

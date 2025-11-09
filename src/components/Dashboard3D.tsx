@@ -2,9 +2,13 @@
 'use client'
 
 import { Suspense, useState } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei'
+import { Canvas, useLoader } from '@react-three/fiber'
+import { OrbitControls, PerspectiveCamera, Environment, Preload } from '@react-three/drei'
 import { motion } from 'framer-motion'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
+import * as THREE from 'three'
+import type { GLTF } from 'three-stdlib'
 import { 
   Play, 
   Pause, 
@@ -28,6 +32,17 @@ import { useDashboardStore } from '@/stores/dashboardStore'
 function Dashboard3DScene() {
   const { residents, staff, heatmap, showHeatmap, selectedResident, setSelectedResident } = useDashboardStore()
 
+  // Load the AIDYN dashboard model (DRACO supported)
+  const ORIGIN = process.env.NEXT_PUBLIC_ASSET_ORIGIN || '/assets/models'
+  const aidynPath = `${ORIGIN}/aidyn-dashboard.glb`
+
+  // Hook must be called unconditionally - error handling via ErrorBoundary
+  const aidynGltf: GLTF = useLoader(GLTFLoader, aidynPath, (loader) => {
+    const draco = new DRACOLoader()
+    draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
+    loader.setDRACOLoader(draco)
+  })
+
   return (
     <>
       {/* Lighting */}
@@ -40,9 +55,14 @@ function Dashboard3DScene() {
         shadow-mapSize-height={2048}
       />
       <pointLight position={[0, 10, 0]} intensity={0.5} color="#00ffff" />
-      
+
       {/* Environment */}
       <Environment preset="city" />
+
+      {/* Render the AIDYN GLB if available */}
+      {aidynGltf?.scene ? (
+        <primitive object={aidynGltf.scene} scale={[1,1,1]} position={[0, -0.1, 0]} rotation={[0, Math.PI / 2, 0]} />
+      ) : null}
 
       {/* Residence Floor Plan - Optimized */}
       <ResidenceSceneOptimized />
@@ -238,6 +258,19 @@ export default function Dashboard3D() {
               shadows
               gl={{ antialias: true, alpha: false }}
               dpr={[1, 2]}
+              onCreated={(state) => {
+                try {
+                  const gl = state.gl.getContext()
+                  const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
+                  const renderer = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'unknown'
+                  const vendor = debugInfo ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) : 'unknown'
+                  // eslint-disable-next-line no-console
+                  console.info('R3F Canvas created', { renderer, vendor, glContext: !!gl })
+                } catch (e) {
+                  // eslint-disable-next-line no-console
+                  console.warn('Error reading WebGL info', e)
+                }
+              }}
             >
               <PerspectiveCamera
                 makeDefault
@@ -248,6 +281,7 @@ export default function Dashboard3D() {
               <Suspense fallback={null}>
                 <Dashboard3DScene />
               </Suspense>
+              <Preload all />
             </Canvas>
 
             {/* Overlay Info */}

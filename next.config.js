@@ -2,7 +2,61 @@
 const nextConfig = {
   experimental: {
     // Enable optimized package imports for better tree-shaking
-    optimizePackageImports: ['framer-motion', 'lucide-react'],
+    optimizePackageImports: [
+      'framer-motion',
+      'lucide-react',
+      '@react-three/fiber',
+      '@react-three/drei',
+      'three',
+      'zustand',
+    ],
+  },
+  // Webpack optimization for better code splitting
+  webpack: (config, { isServer }) => {
+    // Optimize bundle splitting
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        moduleIds: 'deterministic',
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            // Vendor chunk for node_modules
+            vendor: {
+              name: 'vendor',
+              chunks: 'all',
+              test: /node_modules/,
+              priority: 20,
+            },
+            // Three.js separate chunk (large library)
+            three: {
+              name: 'three',
+              test: /[\\/]node_modules[\\/](three|@react-three)[\\/]/,
+              chunks: 'all',
+              priority: 30,
+            },
+            // Framer Motion separate chunk
+            framer: {
+              name: 'framer',
+              test: /[\\/]node_modules[\\/](framer-motion)[\\/]/,
+              chunks: 'all',
+              priority: 25,
+            },
+            // Common components chunk
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+              priority: 10,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      }
+    }
+    return config
   },
   images: {
     domains: ['images.unsplash.com', 'via.placeholder.com'],
@@ -36,19 +90,33 @@ const nextConfig = {
         ],
       },
       {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
+      source: '/_next/static/:path*',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+    {
+      source: '/assets/models/:file*',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+        {
+          key: 'Content-Type',
+          value: 'model/gltf-binary',
+        },
+      ],
+    },
     ]
   },
   env: {
     SITE_NAME: 'AIDYN Technologies',
     SITE_URL: 'https://aidyn-tech.com',
+    NEXT_PUBLIC_ASSET_ORIGIN: '/assets/models'
   },
 }
 

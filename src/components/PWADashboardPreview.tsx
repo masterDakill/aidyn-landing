@@ -58,7 +58,7 @@ export default function PWADashboardPreview() {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-xl text-slate-400">
-            Système de suivi en temps réel déjà déployé à L&apos;Auberge Boischatel
+            Système de suivi en temps réel déjà déployé à Site pilote
           </p>
         </motion.div>
 

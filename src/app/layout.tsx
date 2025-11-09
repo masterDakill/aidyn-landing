@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import WebVitalsReporter from '@/components/WebVitalsReporter'
+import PWAInstaller from '@/components/PWAInstaller'
+import ResourcePreloader from '@/components/ResourcePreloader'
 import './globals.css'
 import { ToastProvider } from '@/components/Interactive/ToastNotifications'
 import BuilderRegistryProvider from '@/components/builder/BuilderRegistryProvider'
@@ -19,12 +21,25 @@ export const metadata: Metadata = {
   creator: 'Technologies AIDYN Inc.',
   publisher: 'Technologies AIDYN Inc.',
   robots: 'index, follow',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#06b6d4' },
+    { media: '(prefers-color-scheme: dark)', color: '#020617' },
+  ],
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'AIDYN',
+  },
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
-    title: 'AIDYN Technologies - SerenaCare AI',
-    description: 'Plateforme de surveillance intelligente pour résidences privées pour aînés',
     type: 'website',
     locale: 'fr_CA',
     url: siteUrl,
@@ -62,6 +77,8 @@ export default function RootLayout({
         <BuilderRegistryProvider>
           <ToastProvider>
             <WebVitalsReporter />
+            <ResourcePreloader />
+            <PWAInstaller />
             {children}
           </ToastProvider>
         </BuilderRegistryProvider>

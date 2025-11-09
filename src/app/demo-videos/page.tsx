@@ -12,15 +12,15 @@ const VideoAnalysisDemo = dynamic(
 
 export const metadata = {
   title: 'Démos Vidéo IA | AIDYN Technologies',
-  description: 'Démonstrations de détection IA en temps réel - L\'Auberge Boischatel'
+  description: 'Démonstrations de détection IA en temps réel - Site pilote'
 }
 
-// Videos from L'Auberge Boischatel
+// Videos from Site pilote
 const videos = [
   {
     id: '1',
     name: 'Salle à manger',
-    location: 'L\'Auberge Boischatel - RDC',
+    location: 'Site pilote - RDC',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/90b23098-4a77-416b-a1e4-a8e958735e88',
     detections: [
       {
@@ -64,7 +64,7 @@ const videos = [
   {
     id: '2',
     name: 'Porte principale - Extérieur',
-    location: 'L\'Auberge Boischatel - Entrée',
+    location: 'Site pilote - Entrée',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/beb6f1ba-f117-451f-8ded-e0537f04b597',
     detections: [
       {
@@ -84,7 +84,7 @@ const videos = [
   {
     id: '3',
     name: 'Corridor d\'entrée',
-    location: 'L\'Auberge Boischatel - RDC',
+    location: 'Site pilote - RDC',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/bdbed0c5-a0d0-4abd-b162-5226950739bb',
     detections: [
       {
@@ -116,7 +116,7 @@ const videos = [
   {
     id: '4',
     name: 'Salon 2e étage',
-    location: 'L\'Auberge Boischatel - 2e étage',
+    location: 'Site pilote - 2e étage',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/14058304-8a5e-4b2f-8c67-c56ea306b8c0',
     detections: [
       {
@@ -148,7 +148,7 @@ const videos = [
   {
     id: '5',
     name: 'Escalier côté Ouest',
-    location: 'L\'Auberge Boischatel - Nouvelle section',
+    location: 'Site pilote - Nouvelle section',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/81bc32bc-a9da-41a9-a611-491e2aaefded',
     detections: [
       {
@@ -168,7 +168,7 @@ const videos = [
   {
     id: '6',
     name: 'Salle à manger - Vue bureau infirmière',
-    location: 'L\'Auberge Boischatel - RDC',
+    location: 'Site pilote - RDC',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/6d2c61f7-8d05-4565-a4c4-063f2a8fe87e',
     detections: [
       {
@@ -200,7 +200,7 @@ const videos = [
   {
     id: '7',
     name: 'RDC - Nouvelle Partie',
-    location: 'L\'Auberge Boischatel - Extension',
+    location: 'Site pilote - Extension',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/eb953487-2e29-4f1e-964c-bd7c8c93a486',
     detections: [
       {
@@ -220,7 +220,7 @@ const videos = [
   {
     id: '8',
     name: 'Espace commun 2e étage',
-    location: 'L\'Auberge Boischatel - 2e étage',
+    location: 'Site pilote - 2e étage',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/a880008e-3ae5-46da-92f3-14dd166480ac',
     detections: [
       {
@@ -252,7 +252,7 @@ const videos = [
   {
     id: '9',
     name: 'Espace commun 1er étage',
-    location: 'L\'Auberge Boischatel - 1er étage',
+    location: 'Site pilote - 1er étage',
     url: 'https://page.gensparksite.com/get_upload_url/4996ebfd7c514957ee6b41ddb48a0efae9916bfa72c3ec877e0600698de8c041/default/dd93d773-b3ea-484e-81ae-3e1aa4c49b8d',
     detections: [
       {
@@ -307,7 +307,7 @@ export default function DemoVideosPage() {
               </h1>
 
               <p className="mt-6 text-xl text-slate-300">
-                Vidéos réelles de <strong className="text-emerald-400">L'Auberge Boischatel</strong> avec 
+                Vidéos réelles de <strong className="text-emerald-400">Site pilote</strong> avec 
                 overlay de détection IA simulée. Pipeline YOLOv8-Pose + FastAPI.
               </p>
 

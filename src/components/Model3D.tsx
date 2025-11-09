@@ -2,8 +2,9 @@
 
 import { Suspense, useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Preload } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import * as THREE from 'three'
 
 interface Model3DProps {
@@ -18,12 +19,13 @@ interface Model3DProps {
   cameraPosition?: [number, number, number]
   enableZoom?: boolean
   showShadows?: boolean
+  enableDraco?: boolean
   environmentPreset?: 'sunset' | 'dawn' | 'night' | 'warehouse' | 'forest' | 'apartment' | 'studio' | 'city' | 'park' | 'lobby'
 }
 
-function Model({ 
-  modelPath, 
-  scale = 1, 
+export function Model({
+  modelPath,
+  scale = 1,
   rotation = [0, 0, 0],
   position = [0, 0, 0],
   autoRotate = false,
@@ -33,8 +35,14 @@ function Model({
   const meshRef = useRef<THREE.Group>(null)
   const [scrollY, setScrollY] = useState(0)
 
-  // Charger le modèle GLTF/GLB - MUST be called unconditionally
-  const gltf = useLoader(GLTFLoader, modelPath)
+  // Charger le modèle GLTF/GLB - Hook must be called unconditionally
+  // Support DRACO-compressed models by setting a DRACO loader
+  const gltf = useLoader(GLTFLoader, modelPath, (loader) => {
+    const dracoLoader = new DRACOLoader()
+    dracoLoader.setDecoderConfig({ type: 'js' })
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
+    loader.setDRACOLoader(dracoLoader)
+  })
 
   // Écouter le scroll de la page (uniquement côté client)
   useEffect(() => {
@@ -63,10 +71,12 @@ function Model({
   })
 
   if (!gltf?.scene) {
+    // eslint-disable-next-line no-console
+    console.warn('[Model3D] fallback loaded for', modelPath)
     return (
       <mesh>
         <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color="red" wireframe />
+        <meshStandardMaterial color="#ef4444" metalness={0.3} roughness={0.9} />
       </mesh>
     )
   }
@@ -105,7 +115,7 @@ export default function Model3D({
   enableZoom = true,
   showShadows = true,
   environmentPreset = 'studio'
-}: Model3DProps) {
+}: Omit<Model3DProps, 'enableDraco'>) {
   return (
     <div className={`h-full w-full ${className}`}>
       <Canvas shadows={showShadows}>
@@ -128,7 +138,7 @@ export default function Model3D({
 
         {/* Modèle 3D avec fallback loading */}
         <Suspense fallback={<LoadingFallback />}>
-          <Model 
+          <Model
             modelPath={modelPath}
             scale={scale}
             rotation={rotation}
@@ -138,6 +148,7 @@ export default function Model3D({
             scrollAnimation={scrollAnimation}
           />
         </Suspense>
+        <Preload all />
 
         {/* Ombres au sol */}
         {showShadows && (
