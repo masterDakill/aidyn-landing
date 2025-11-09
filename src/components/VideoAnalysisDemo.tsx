@@ -112,7 +112,7 @@ export default function VideoAnalysisDemo({
   const [detections, setDetections] = useState<Detection[]>([])
   const [showOverlay, setShowOverlay] = useState(true)
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [privacyEnabled, setPrivacyEnabled] = useState(false)
+  const [privacyEnabled, setPrivacyEnabled] = useState(true)
   const [privacyToggleDisabled, setPrivacyToggleDisabled] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const rafRef = useRef<number | null>(null)
@@ -541,7 +541,7 @@ export default function VideoAnalysisDemo({
             Overlay
           </button>
 
-          {/* Privacy toggle - lazy, off by default */}
+          {/* Privacy toggle - enabled by default with debounce */}
           <button
             onClick={() => {
               if (privacyToggleDisabled) return

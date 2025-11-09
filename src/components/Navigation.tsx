@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import { Menu, X, ArrowRight, Sparkles } from 'lucide-react'
 
 import Logo from './Logo'
+import ThemeToggle from './ThemeToggle'
 
 const navItems = [
   { href: '#rpa-solution', label: 'Architecture' },
@@ -107,8 +108,9 @@ export default function Navigation() {
             })}
           </div>
 
-          {/* CTA Button - Simple */}
-          <div className="hidden lg:flex">
+          {/* Theme Toggle & CTA - Simple */}
+          <div className="hidden items-center gap-3 lg:flex">
+            <ThemeToggle />
             <Link
               href="#contact"
               className="rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 px-6 py-2.5 text-sm font-bold text-slate-950 shadow-lg"

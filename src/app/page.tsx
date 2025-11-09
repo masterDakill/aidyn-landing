@@ -8,15 +8,39 @@ import RpaSolution from '@/components/RpaSolution'
 import Features from '@/components/Features'
 import PhaseOne from '@/components/PhaseOne'
 
+// Loading component for better UX
+const ComponentLoader = () => (
+  <div className="flex min-h-[400px] items-center justify-center bg-slate-950/50">
+    <div className="h-8 w-8 animate-spin rounded-full border-4 border-cyan-500 border-t-transparent"></div>
+  </div>
+)
+
 // Below-the-fold components - lazy loaded with dynamic imports
-const Services = dynamic(() => import('@/components/Services'))
-const About = dynamic(() => import('@/components/About'))
-const Contact = dynamic(() => import('@/components/Contact'))
+const Services = dynamic(() => import('@/components/Services'), {
+  loading: ComponentLoader,
+})
+const About = dynamic(() => import('@/components/About'), {
+  loading: ComponentLoader,
+})
+const Contact = dynamic(() => import('@/components/Contact'), {
+  loading: ComponentLoader,
+})
 const Footer = dynamic(() => import('@/components/Footer'))
-const Innovation3D = dynamic(() => import('@/components/Innovation3D'))
-const RoadmapCommercial = dynamic(() => import('@/components/RoadmapCommercial'))
-const DashboardPWAPreview = dynamic(() => import('@/components/DashboardPWAPreview'))
-const LiveCameraDemo = dynamic(() => import('@/components/LiveCameraDemo'), { ssr: false })
+const Innovation3D = dynamic(() => import('@/components/Innovation3D'), {
+  loading: ComponentLoader,
+  ssr: false,
+})
+const RoadmapCommercial = dynamic(() => import('@/components/RoadmapCommercial'), {
+  loading: ComponentLoader,
+})
+const DashboardPWAPreview = dynamic(() => import('@/components/DashboardPWAPreview'), {
+  loading: ComponentLoader,
+  ssr: false,
+})
+const LiveCameraDemo = dynamic(() => import('@/components/LiveCameraDemo'), {
+  loading: ComponentLoader,
+  ssr: false,
+})
 
 // Floating components - loaded with SSR disabled for better performance
 const AskAidyn = dynamic(
