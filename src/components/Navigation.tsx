@@ -61,7 +61,7 @@ export default function Navigation() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+    <header className="fixed inset-x-0 top-0 z-[100] px-4 pt-4">
       {/* Announcement Banner - Simplifié sans animation */}
       <div className="mb-3 flex w-full justify-center">
         <div className="flex items-center gap-2 rounded-full border border-emerald-400/30 bg-gradient-to-r from-slate-950/90 to-slate-900/90 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-400 shadow-lg backdrop-blur-xl">

@@ -112,8 +112,8 @@ export default function VideoAnalysisDemo({
   const [detections, setDetections] = useState<Detection[]>([])
   const [showOverlay, setShowOverlay] = useState(true)
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [privacyEnabled, setPrivacyEnabled] = useState(true)
-  const [privacyToggleDisabled, setPrivacyToggleDisabled] = useState(false)
+  // Privacy is ALWAYS enabled - cannot be disabled (protection des résidents)
+  const privacyEnabled = true // CONSTANT - DO NOT CHANGE
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const rafRef = useRef<number | null>(null)
 
@@ -419,15 +419,8 @@ export default function VideoAnalysisDemo({
     }
 
     // When privacy enabled, initialize detector and start loops
+    // Privacy is ALWAYS enabled - no hardware checks, absolute guarantee
     if (privacyEnabled) {
-      // low-end guard
-      const cores = navigator.hardwareConcurrency || 4
-      if (cores <= 2) {
-        // avoid enabling on very low-end devices
-        setPrivacyEnabled(false)
-        return
-      }
-
       initDetector().then(() => {
         // detection interval (200-400ms)
         detectionIntervalRef.current = window.setInterval(() => {
@@ -541,23 +534,17 @@ export default function VideoAnalysisDemo({
             Overlay
           </button>
 
-          {/* Privacy toggle - enabled by default with debounce */}
-          <button
-            onClick={() => {
-              if (privacyToggleDisabled) return
-              setPrivacyToggleDisabled(true)
-              setPrivacyEnabled(v => !v)
-              setTimeout(() => setPrivacyToggleDisabled(false), 800)
-            }}
-            className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all ${
-              privacyEnabled
-                ? 'border-pink-500/30 bg-pink-500/10 text-pink-300'
-                : 'border-slate-600 bg-slate-700/50 text-slate-400'
-            }`}
-            title="Activer le floutage des visages (privacy)"
+          {/* Privacy - ALWAYS ACTIVE (cannot be disabled) */}
+          <div
+            className="flex items-center gap-2 rounded-lg border border-emerald-500/50 bg-emerald-500/20 px-3 py-1.5 text-xs font-bold shadow-lg shadow-emerald-500/20"
+            title="Protection de la vie privée TOUJOURS active - Les visages sont automatiquement floutés"
           >
-            🔒 Privacy
-          </button>
+            <div className="flex h-2 w-2">
+              <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+            </div>
+            <span className="text-emerald-300">🔒 Privacy Active</span>
+          </div>
         </div>
       </div>
 
@@ -573,12 +560,20 @@ export default function VideoAnalysisDemo({
           onClick={togglePlay}
         />
 
-        {/* Privacy Canvas Overlay (for face blur) */}
+        {/* Privacy Canvas Overlay (for face blur) - ALWAYS ACTIVE */}
         <canvas
           ref={(el) => { canvasRef.current = el }}
           className="pointer-events-none absolute inset-0 h-full w-full"
-          style={{ display: privacyEnabled ? 'block' : 'none' }}
         />
+
+        {/* Privacy Protection Watermark - PERMANENT */}
+        <div className="pointer-events-none absolute bottom-2 left-2 flex items-center gap-2 rounded-lg border border-emerald-500/50 bg-emerald-950/90 px-3 py-1.5 backdrop-blur-sm">
+          <div className="flex h-2 w-2">
+            <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+          </div>
+          <span className="text-xs font-bold text-emerald-300">🔒 Visages Protégés</span>
+        </div>
 
         {/* AI Detection Overlay */}
         {showOverlay && (
