@@ -4,6 +4,7 @@ import { Suspense, useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Preload } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import * as THREE from 'three'
 
 interface Model3DProps {
@@ -34,33 +35,14 @@ export function Model({
   const meshRef = useRef<THREE.Group>(null)
   const [scrollY, setScrollY] = useState(0)
 
-  // Charger le modèle GLTF/GLB - MUST be called unconditionally
-  // Support DRACO-compressed models by setting a DRACO loader via useLoader's loader modifier
-  let gltf
-  try {
-    gltf = useLoader(GLTFLoader, modelPath, (loader) => {
-      try {
-        // Dynamically set DRACO decoder path (CDN)
-        // Import DRACOLoader lazily to avoid build-time issues
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const { DRACOLoader } = require('three/examples/jsm/loaders/DRACOLoader')
-        const dracoLoader = new DRACOLoader()
-        dracoLoader.setDecoderConfig({ type: 'js' })
-        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
-        // Attach DRACO loader to GLTFLoader
-        ;(loader as any).setDRACOLoader(dracoLoader)
-      } catch (e) {
-        // If DRACO isn't available or fails, continue without it
-        // eslint-disable-next-line no-console
-        console.info('DRACO loader not configured or failed to load', e)
-      }
-    })
-  } catch (err) {
-    // Provide a graceful fallback UI in case of model loading errors
-    // eslint-disable-next-line no-console
-    console.error('GLTF load error for', modelPath, err)
-    gltf = null
-  }
+  // Charger le modèle GLTF/GLB - Hook must be called unconditionally
+  // Support DRACO-compressed models by setting a DRACO loader
+  const gltf = useLoader(GLTFLoader, modelPath, (loader) => {
+    const dracoLoader = new DRACOLoader()
+    dracoLoader.setDecoderConfig({ type: 'js' })
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
+    loader.setDRACOLoader(dracoLoader)
+  })
 
   // Écouter le scroll de la page (uniquement côté client)
   useEffect(() => {
@@ -132,23 +114,8 @@ export default function Model3D({
   cameraPosition = [0, 0, 5],
   enableZoom = true,
   showShadows = true,
-  enableDraco = true,
   environmentPreset = 'studio'
-}: Model3DProps) {
-  // Ensure DRACO decoder path is set when requested. This runs on client only.
-  useEffect(() => {
-    if (!enableDraco) return
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const { DRACOLoader } = require('three/examples/jsm/loaders/DRACOLoader')
-      if (DRACOLoader && typeof DRACOLoader.setDecoderPath === 'function') {
-        DRACOLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.warn('DRACOLoader not available to set decoder path', e)
-    }
-  }, [enableDraco])
+}: Omit<Model3DProps, 'enableDraco'>) {
   return (
     <div className={`h-full w-full ${className}`}>
       <Canvas shadows={showShadows}>

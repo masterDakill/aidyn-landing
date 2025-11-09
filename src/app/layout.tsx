@@ -23,8 +23,6 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: 'AIDYN Technologies - SerenaCare AI',
-    description: 'Plateforme de surveillance intelligente pour résidences privées pour aînés',
     type: 'website',
     locale: 'fr_CA',
     url: siteUrl,

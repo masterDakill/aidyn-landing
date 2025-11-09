@@ -6,8 +6,9 @@ import { Canvas, useLoader } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Environment, Preload } from '@react-three/drei'
 import { motion } from 'framer-motion'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import * as THREE from 'three'
+import type { GLTF } from 'three-stdlib'
 import { 
   Play, 
   Pause, 
@@ -32,25 +33,15 @@ function Dashboard3DScene() {
   const { residents, staff, heatmap, showHeatmap, selectedResident, setSelectedResident } = useDashboardStore()
 
   // Load the AIDYN dashboard model (DRACO supported)
-  let aidynGltf: any = null
-  try {
-    const ORIGIN = process.env.NEXT_PUBLIC_ASSET_ORIGIN || '/assets/models'
-    const aidynPath = `${ORIGIN}/aidyn-dashboard.glb`
-    aidynGltf = useLoader(GLTFLoader, aidynPath, (loader) => {
-      try {
-        const draco = new DRACOLoader()
-        draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
-        ;(loader as any).setDRACOLoader(draco)
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.info('DRACO loader setup failed for Dashboard3D', e)
-      }
-    })
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('[Dashboard3D] failed to load aidyn-dashboard.glb', e)
-    aidynGltf = null
-  }
+  const ORIGIN = process.env.NEXT_PUBLIC_ASSET_ORIGIN || '/assets/models'
+  const aidynPath = `${ORIGIN}/aidyn-dashboard.glb`
+
+  // Hook must be called unconditionally - error handling via ErrorBoundary
+  const aidynGltf: GLTF = useLoader(GLTFLoader, aidynPath, (loader) => {
+    const draco = new DRACOLoader()
+    draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
+    loader.setDRACOLoader(draco)
+  })
 
   return (
     <>
@@ -269,12 +260,12 @@ export default function Dashboard3D() {
               dpr={[1, 2]}
               onCreated={(state) => {
                 try {
-                  const gl = state.gl
+                  const gl = state.gl.getContext()
                   const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
                   const renderer = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'unknown'
                   const vendor = debugInfo ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) : 'unknown'
                   // eslint-disable-next-line no-console
-                  console.info('R3F Canvas created', { renderer, vendor, webgl2: !!(gl && (gl as any).getExtension), glContext: !!gl })
+                  console.info('R3F Canvas created', { renderer, vendor, glContext: !!gl })
                 } catch (e) {
                   // eslint-disable-next-line no-console
                   console.warn('Error reading WebGL info', e)

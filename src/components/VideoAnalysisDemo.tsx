@@ -3,17 +3,80 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Play, 
-  Pause, 
-  AlertTriangle, 
-  CheckCircle, 
+import {
+  Play,
+  Pause,
+  AlertTriangle,
+  CheckCircle,
   Eye,
   Activity,
   User,
   Clock,
   Maximize2
 } from 'lucide-react'
+
+// Type augmentations for external APIs
+interface FaceDetectorConstructor {
+  new (options?: { fastMode?: boolean; maxDetectedFaces?: number }): FaceDetector
+}
+
+interface FaceDetector {
+  detect(image: HTMLVideoElement): Promise<DetectedFace[]>
+}
+
+interface DetectedFace {
+  boundingBox: { x: number; y: number; width: number; height: number }
+  score?: number
+}
+
+interface MediaPipeResults {
+  detections: MediaPipeFace[]
+}
+
+interface MediaPipeFace {
+  boundingBox?: {
+    topLeft?: number[]
+    bottomRight?: number[]
+    x?: number
+    y?: number
+    width?: number
+    height?: number
+    xCenter?: number
+    yCenter?: number
+  }
+  box?: { x?: number; y?: number; width?: number; height?: number; xCenter?: number; yCenter?: number }
+  score?: number
+}
+
+interface BlazeFaceDetection {
+  topLeft: number[]
+  bottomRight: number[]
+  probability?: number[]
+}
+
+interface DetectorRef {
+  type: 'mediapipe' | 'blazeface'
+  detector?: { onResults: (callback: (results: MediaPipeResults) => void) => void; send: (data: { image: HTMLVideoElement }) => void }
+  model?: { estimateFaces: (video: HTMLVideoElement, returnTensors: boolean) => Promise<BlazeFaceDetection[]> }
+}
+
+declare global {
+  interface Window {
+    FaceDetector?: FaceDetectorConstructor
+    FaceDetection?: new (...args: unknown[]) => { onResults: (callback: (results: MediaPipeResults) => void) => void; send: (data: { image: HTMLVideoElement }) => void; setOptions: (options: unknown) => void }
+    tf?: {
+      setBackend: (backend: string) => Promise<void>
+    }
+    blazeface?: { load: () => Promise<DetectorRef['model']> }
+    tfjsBlazeface?: { load: () => Promise<DetectorRef['model']> }
+  }
+  interface Navigator {
+    hardwareConcurrency?: number
+  }
+  interface CanvasRenderingContext2D {
+    filter?: string
+  }
+}
 
 // Types
 interface Detection {
@@ -22,7 +85,7 @@ interface Detection {
   y: number // position y en pourcentage (0-100)
   width: number // largeur en pourcentage
   height: number // hauteur en pourcentage
-  label: 'resident' | 'staff' | 'visitor'
+  label: 'resident' | 'staff' | 'visitor' | 'face'
   confidence: number
   status: 'normal' | 'attention' | 'alert'
   name?: string
@@ -107,7 +170,7 @@ export default function VideoAnalysisDemo({
   }, [mockDetections])
 
   // Privacy: initialize detector and draw blurred regions over detected boxes (lazy)
-  const detectorRef = useRef<any>(null)
+  const detectorRef = useRef<DetectorRef | FaceDetector | null>(null)
   const detectionIntervalRef = useRef<number | null>(null)
 
   useEffect(() => {
@@ -119,9 +182,9 @@ export default function VideoAnalysisDemo({
 
     async function initDetector() {
       // Prefer native FaceDetector API if available
-      if ((window as any).FaceDetector) {
+      if (window.FaceDetector) {
         try {
-          detectorRef.current = new (window as any).FaceDetector({ fastMode: true, maxDetectedFaces: 10 })
+          detectorRef.current = new window.FaceDetector({ fastMode: true, maxDetectedFaces: 10 })
           // eslint-disable-next-line no-console
           console.info('Using native FaceDetector API')
           return
@@ -145,7 +208,7 @@ export default function VideoAnalysisDemo({
         // Load MediaPipe FaceDetection UMD
         await loadScript('https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js')
         // face_detection exposes window.FaceDetection
-        const MPFace = (window as any).FaceDetection
+        const MPFace = window.FaceDetection
         if (MPFace) {
           const detector = new MPFace({
             locateFile: (file:string) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`
@@ -156,9 +219,9 @@ export default function VideoAnalysisDemo({
           })
 
           // attach onResults to update detections
-          detector.onResults((results:any) => {
+          detector.onResults((results: MediaPipeResults) => {
             if (!results || !results.detections) return
-            const mapped = results.detections.map((f:any, i:number) => {
+            const mapped = results.detections.map((f: MediaPipeFace, i: number) => {
               const box = f.boundingBox || f.box || {x:0,y:0,width:0,height:0}
               // MediaPipe provides normalized coordinates sometimes
               const xPx = (box.x || box.xCenter || 0) * (videoRef.current?.videoWidth || 1)
@@ -180,9 +243,9 @@ export default function VideoAnalysisDemo({
                   y: (yp / (videoRef.current?.videoHeight || 1)) * 100,
                   width: (wp / (videoRef.current?.videoWidth || 1)) * 100,
                   height: (hp / (videoRef.current?.videoHeight || 1)) * 100,
-                  label: 'face',
+                  label: 'face' as const,
                   confidence: f.score || 0.9,
-                  status: 'normal'
+                  status: 'normal' as const
                 }
               }
 
@@ -192,9 +255,9 @@ export default function VideoAnalysisDemo({
                 y: (yPx / (videoRef.current?.videoHeight || 1)) * 100,
                 width: (wPx / (videoRef.current?.videoWidth || 1)) * 100,
                 height: (hPx / (videoRef.current?.videoHeight || 1)) * 100,
-                label: 'face',
+                label: 'face' as const,
                 confidence: f.score || 0.9,
-                status: 'normal'
+                status: 'normal' as const
               }
             })
             setDetections(mapped)
@@ -226,13 +289,13 @@ export default function VideoAnalysisDemo({
         await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js')
         await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.9.0/dist/tf-backend-webgl.js')
         // set backend if available
-        if ((window as any).tf?.setBackend) {
-          try { await (window as any).tf.setBackend('webgl') } catch (e) { /* ignore */ }
+        if (window.tf?.setBackend) {
+          try { await window.tf.setBackend('webgl') } catch (e) { /* ignore */ }
         }
         await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.js')
 
         // Access global blazeface loader
-        const globalBlaze = (window as any).blazeface || (window as any)['tfjsBlazeface'] || null
+        const globalBlaze = window.blazeface || window.tfjsBlazeface || null
         if (globalBlaze && typeof globalBlaze.load === 'function') {
           const model = await globalBlaze.load()
           detectorRef.current = { type: 'blazeface', model }
@@ -261,10 +324,10 @@ export default function VideoAnalysisDemo({
     async function runDetection() {
       if (!detectorRef.current || !videoRef.current) return
       try {
-        if (detectorRef.current instanceof (window as any).FaceDetector) {
+        if (window.FaceDetector && detectorRef.current instanceof window.FaceDetector) {
           const faces = await detectorRef.current.detect(videoRef.current)
           // Map to detections state
-          const mapped = faces.map((f:any, i:number) => {
+          const mapped = faces.map((f: DetectedFace, i: number) => {
             const box = f.boundingBox
             return {
               id: `det-${i}`,
@@ -272,15 +335,15 @@ export default function VideoAnalysisDemo({
               y: (box.y / (videoRef.current?.videoHeight || 1)) * 100,
               width: (box.width / (videoRef.current?.videoWidth || 1)) * 100,
               height: (box.height / (videoRef.current?.videoHeight || 1)) * 100,
-              label: 'face',
+              label: 'face' as const,
               confidence: f.score || 0.9,
-              status: 'normal'
+              status: 'normal' as const
             }
           })
           if (mounted) setDetections(mapped)
-        } else if (detectorRef.current?.type === 'blazeface') {
+        } else if (typeof detectorRef.current === 'object' && detectorRef.current !== null && 'type' in detectorRef.current && detectorRef.current.type === 'blazeface' && detectorRef.current.model) {
           const res = await detectorRef.current.model.estimateFaces(videoRef.current, false)
-          const mapped = res.map((r:any, i:number) => {
+          const mapped = res.map((r: BlazeFaceDetection, i: number) => {
             const topLeft = r.topLeft
             const bottomRight = r.bottomRight
             const xPx = topLeft[0]
@@ -293,9 +356,9 @@ export default function VideoAnalysisDemo({
               y: (yPx / (videoRef.current?.videoHeight || 1)) * 100,
               width: (wPx / (videoRef.current?.videoWidth || 1)) * 100,
               height: (hPx / (videoRef.current?.videoHeight || 1)) * 100,
-              label: 'face',
+              label: 'face' as const,
               confidence: (r.probability && r.probability[0]) || 0.9,
-              status: 'normal'
+              status: 'normal' as const
             }
           })
           if (mounted) setDetections(mapped)
@@ -339,7 +402,7 @@ export default function VideoAnalysisDemo({
         ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2)
         ctx.clip()
         try {
-          ;(ctx as any).filter = 'blur(10px)'
+          ctx.filter = 'blur(10px)'
         } catch (e) {
           // ignore if filter not supported
         }
@@ -358,7 +421,7 @@ export default function VideoAnalysisDemo({
     // When privacy enabled, initialize detector and start loops
     if (privacyEnabled) {
       // low-end guard
-      const cores = (navigator as any).hardwareConcurrency || 4
+      const cores = navigator.hardwareConcurrency || 4
       if (cores <= 2) {
         // avoid enabling on very low-end devices
         setPrivacyEnabled(false)
@@ -372,8 +435,8 @@ export default function VideoAnalysisDemo({
         }, 300)
 
         // start drawing loop lazily
-        if ((window as any).requestIdleCallback) {
-          ;(window as any).requestIdleCallback(() => {
+        if (window.requestIdleCallback) {
+          window.requestIdleCallback(() => {
             rafRef.current = requestAnimationFrame(draw)
           })
         } else {
