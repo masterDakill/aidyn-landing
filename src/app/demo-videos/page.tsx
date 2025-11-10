@@ -15,8 +15,28 @@ export const metadata = {
   description: 'Démonstrations de détection IA en temps réel - Site pilote'
 }
 
-// Videos from Site pilote
+// Videos from Site pilote + Sora AI Demo
 const videos = [
+  {
+    id: 'sora-1',
+    name: 'Démonstration Sora AI',
+    location: 'Vidéo générée par IA - OpenAI Sora',
+    url: '/videos/sora-demo-ai.mp4',
+    detections: [
+      {
+        id: '1',
+        x: 35,
+        y: 40,
+        width: 15,
+        height: 35,
+        label: 'visitor' as const,
+        confidence: 0.95,
+        status: 'normal' as const,
+        name: 'Personnage IA',
+        activity: 'Scène générée par IA'
+      }
+    ]
+  },
   {
     id: '1',
     name: 'Salle à manger',
